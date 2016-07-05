@@ -4,5 +4,5 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 fnmdfffw
-    return a.exec();
+    return a.exec();//qwe
 }
