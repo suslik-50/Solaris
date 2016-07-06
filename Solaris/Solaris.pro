@@ -11,7 +11,9 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    datebaseconnect.cpp
+    datebaseconnect.cpp \
+    xml.cpp
 
 HEADERS += \
-    datebaseconnect.h
+    datebaseconnect.h \
+    xml.h
