@@ -11,7 +11,12 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    datebaseconnect.cpp
+    datebaseconnect.cpp \
+    settingsdb.cpp\
+    function_to_date_base.cpp
 
 HEADERS += \
-    datebaseconnect.h
+    datebaseconnect.h \
+    settingsdb.h\
+    function_to_date_base.h
+
