@@ -39,6 +39,7 @@ QSqlDatabase DateBaseConnect::DBConnect()
         }
 
     }
+
     FileDateBase.setFileName(FileDb.ReadPuthDB()); // укзание путя для провеки существования файла базы данных
     if (!FileDateBase.exists()) // проверка на существование файла бд
     {
@@ -46,6 +47,7 @@ QSqlDatabase DateBaseConnect::DBConnect()
     }
     else
     {
+
     puthdb = FileDb.ReadPuthDB();// чтение путя к файлу базы данных
     Datebase.setDatabaseName(puthdb);//установление путя к файлу бд для подключения
     if (Datebase.open()) // открытие подключения к базе данных

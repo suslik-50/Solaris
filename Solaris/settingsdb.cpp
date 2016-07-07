@@ -16,7 +16,7 @@ SettingsDB::SettingsDB()
 void SettingsDB::CreatFile() // Функция создания файла с стандартными полями и указания значений по умолчанию
 {
     QSettings setting ("SettinDB.ini",QSettings::IniFormat);
-    setting.setValue("ConnectDB/Puth","DateBase.db");
+    setting.setValue("ConnectDB/Puth","DatаBase.db");
     setting.setValue("ConnectDB/UserName","");
     setting.setValue("ConnectDB/HostName","");
     setting.setValue("ConnectDB/Password","");
@@ -26,14 +26,14 @@ QString SettingsDB::ReadPuthDB() // Функция возращения путя
 {
     QString Puth;
     QSettings setting ("SettinDB.ini",QSettings::IniFormat);
-    Puth = setting.value("ConnectDB/PuthDB","DateBase.db").toString();
+    Puth = setting.value("ConnectDB/Puth","DataBase.db").toString();
     return Puth;
 }
 
 void SettingsDB::WritePuthDB(QString Puth) // Функция записи путя файла
 {
       QSettings setting ("SettinDB.ini",QSettings::IniFormat);
-        setting.setValue("ConnectDB/PuthDB",Puth);
+        setting.setValue("ConnectDB/Puth",Puth);
 }
 
 
