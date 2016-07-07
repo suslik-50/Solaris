@@ -56,7 +56,6 @@ QSqlDatabase DateBaseConnect::DBConnect()
     else {
         cout<<"[-]Нет соединения с базой данных"<<endl;
         cout<<"[!]Проверте настройки подключения к базе данных в файле 'SettinDB.ini' "<<endl;
-
     }
   }
 }

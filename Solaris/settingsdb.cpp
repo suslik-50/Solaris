@@ -18,8 +18,8 @@ void SettingsDB::CreatFile() // Функция создания файла с с
     QSettings setting ("SettinDB.ini",QSettings::IniFormat);
     setting.setValue("ConnectDB/Puth","DateBase.db");
     setting.setValue("ConnectDB/UserName","");
-    setting.setValue("Connect/HostName","");
-    setting.setValue("Connect/Password","");
+    setting.setValue("ConnectDB/HostName","");
+    setting.setValue("ConnectDB/Password","");
 }
 
 QString SettingsDB::ReadPuthDB() // Функция возращения путя файла базы данных
