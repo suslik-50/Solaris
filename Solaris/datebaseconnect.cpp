@@ -5,6 +5,7 @@
  */
 #include "datebaseconnect.h"
 #include "QSql"
+#include <functiondb.h>
 #include <iostream>
 #include<qfile.h>
 #include <settingsdb.h>
@@ -24,7 +25,7 @@ QSqlDatabase DateBaseConnect::DBConnect()
         cout<<"[!] Файл будит создан автоматически"<<endl; //
         cout<<"[!] В файле вписаны настройки по умолчанию"<<endl;
         FileDb.CreatFile();//вызов функции для автоматичекого создания файла с настройками
-        cout<<"[!] Изменить стандартный путь к базе данных '"<<(FileDb.ReadPuthDB()).toStdString()<<"' Да/Нет(y/n)"<<endl;
+        cout<<"[?] Изменить стандартный путь к базе данных '"<<(FileDb.ReadPuthDB()).toStdString()<<"' Да/Нет(Y/N)"<<endl;
         string otvet; //  переменная для ответа
         cin>>otvet; // ввод ответа
         if (otvet=="y"||otvet=="Y") // определение ответа
@@ -44,6 +45,18 @@ QSqlDatabase DateBaseConnect::DBConnect()
     if (!FileDateBase.exists()) // проверка на существование файла бд
     {
           cout<<"[-]Нет фала базы данных по указанному пути '"<<(FileDb.ReadPuthDB()).toStdString()<<"'"<<endl;
+          cout<<"[?]Создать базу данных(пустую) Да/Нет(Y/N)"<<endl;
+          string otvet; //  переменная для ответа
+          cin>>otvet; // ввод ответа
+          if (otvet=="y"||otvet=="Y") // определение ответа
+          {
+              puthdb = FileDb.ReadPuthDB();// чтение путя к файлу базы данных
+              Datebase.setDatabaseName(puthdb);//установление путя к файлу бд для подключения
+              Datebase.open();
+              functiondb Fdb(Datebase);
+              Fdb.creat_db();
+              return Datebase;
+          }
     }
     else
     {

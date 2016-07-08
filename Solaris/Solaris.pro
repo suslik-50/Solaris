@@ -12,11 +12,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     datebaseconnect.cpp \
-    settingsdb.cpp\
-    function_to_date_base.cpp
+    settingsdb.cpp \
+    functiondb.cpp
 
 HEADERS += \
     datebaseconnect.h \
-    settingsdb.h\
-    function_to_date_base.h
+    settingsdb.h \
+    functiondb.h
 
