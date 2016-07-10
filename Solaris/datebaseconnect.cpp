@@ -32,15 +32,13 @@ QSqlDatabase DateBaseConnect::DBConnect()
         {
          cout<<"[!] Путь файла Базаы дынных '"<<(FileDb.ReadPuthDB()).toStdString()<<"' "<<endl;
          cout<<"[!] Введите новый путь к файлу базы данных"<<endl;
-        string newputh;
+         string newputh;
          cin>>newputh; // внесениение в переменню нового путя
          QString NewPuth =QString::fromStdString(newputh); // Переменная для записи путя
          FileDb.WritePuthDB(NewPuth); // функция записи нового путя заданного пользователем в файл
          cout<<"[!] Новый путь к файлу бд'"<<(FileDb.ReadPuthDB()).toStdString()<<"'"<<endl;
         }
-
     }
-
     FileDateBase.setFileName(FileDb.ReadPuthDB()); // укзание путя для провеки существования файла базы данных
     if (!FileDateBase.exists()) // проверка на существование файла бд
     {
@@ -52,15 +50,14 @@ QSqlDatabase DateBaseConnect::DBConnect()
           {
               puthdb = FileDb.ReadPuthDB();// чтение путя к файлу базы данных
               Datebase.setDatabaseName(puthdb);//установление путя к файлу бд для подключения
-              Datebase.open();
-              functiondb Fdb(Datebase);
-              Fdb.creat_db();
+              Datebase.open(); // открытие базы данных
+              functiondb Fdb(Datebase); // создание объекта для работы с бд
+              Fdb.creat_db(); // вызов функции создания бд
               return Datebase;
           }
     }
     else
     {
-
     puthdb = FileDb.ReadPuthDB();// чтение путя к файлу базы данных
     Datebase.setDatabaseName(puthdb);//установление путя к файлу бд для подключения
     if (Datebase.open()) // открытие подключения к базе данных

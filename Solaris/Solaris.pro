@@ -18,5 +18,6 @@ SOURCES += main.cpp \
 HEADERS += \
     datebaseconnect.h \
     settingsdb.h \
-    functiondb.h
+    functiondb.h \
+    structur.h
 

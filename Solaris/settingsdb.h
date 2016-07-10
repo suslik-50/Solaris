@@ -2,6 +2,7 @@
 #define SETTINGSDB_H
 #include <QString>
 
+
 class SettingsDB
 {
 public:

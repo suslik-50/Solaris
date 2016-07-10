@@ -3,7 +3,7 @@
 #include<iostream>
 #include <datebaseconnect.h>
 #include<functiondb.h>
-
+#include <structur.h>
 
 int main(int argc, char *argv[])
 {
@@ -11,10 +11,12 @@ int main(int argc, char *argv[])
     QSqlDatabase Test;
     DateBaseConnect test;
     Test=test.DBConnect();
-   // functiondb fn(Test);
-    //fn.insert_to_orbit(35,6.0,1.0);
-    //fn.read_orbit();
-
-    //fn.read_sputnik();
+    functiondb fn(Test);
+  //  fn.update_to_sputnik("sputnik1",1,44.1,4.0);
+        satellite sputnik;
+        orbit orbita;
+    //    sputnik = fn.get_sputnuk(1);
+       // sputnik=fn.get_sputnuk("sputnik1");
+       // orbita = fn.get_orbit(1);
     return a.exec();
 }
