@@ -451,7 +451,87 @@ orbit functiondb::get_orbit(char num,int number)//возращает данны�
          cout<<"[-]"<<endl;
     }
 }
-
+///
+/// \brief functiondb::delete_orbit
+/// \param num
+///
+void functiondb::delete_orbit(int num) // удаляет обиту
+{
+    QSqlQuery query;
+    int id;
+    query.prepare("SELECT ID_ORBIT FROM ORBIT where NUMBER_ORBIT=:NUM;"); // айди орбиты
+    query.bindValue(":NUM",num);
+    if(query.exec())
+    {
+        QSqlRecord rec = query.record();
+        while(query.next())
+        {
+            id=query.value(rec.indexOf("ID_ORBIT")).toInt();
+        }
+    }
+    query.prepare("UPDATE SATELLITE SET ORBIT_ID='' where ORBIT_ID=:ID;"); // сброс орбиты у спутника
+    query.bindValue(":ID",id);
+    if(query.exec())
+    {
+    }
+    query.prepare("DELETE FROM DATA_CORRECTION_ORBIT where ORBIT_ID=:ID;"); // удаление данных корректировки
+    query.bindValue(":ID",id);
+    if(query.exec())
+     {
+         query.prepare("DELETE FROM ORBIT where ID_ORBIT=:ID;"); // удаление орбиты
+         query.bindValue(":ID",id);
+         if(query.exec())
+         {
+            cout<<"[+] Данные об орбите удалены."<< endl;
+         }
+         else
+         {
+            cout<<"[-] Сбой.  Данные все о орбите не удалены."<< endl;
+         }
+     }
+     else
+     {
+        cout<<"[-] Сбой. Данные о орбите не удалены."<< endl;
+     }
+}
+///
+/// \brief functiondb::delete_sputnik
+/// \param name
+///
+void functiondb::delete_sputnik(QString name)
+{
+    QSqlQuery query;
+    int id;
+    query.prepare("SELECT ID_SATELLITE FROM SATELLITE where NAME_SATELLITE=:name_s;"); // поиск айди спутника
+    query.bindValue(":name_s",name);
+    if(query.exec())
+    {
+        QSqlRecord rec = query.record();
+        while(query.next())
+        {
+            id=query.value(rec.indexOf("ID_SATELLITE")).toInt();
+        }
+    }
+    query.prepare("DELETE FROM SATELLITE where NAME_SATELLITE=:name_s;"); // удаление спутника
+    query.bindValue(":name_s",name);
+     if(query.exec())
+     {
+         query.prepare("DELETE FROM DATE_CORRECTION_SUN_PANEL where SATELLITE_ID=:set_id;"); // удаление данных корректировки
+         query.bindValue(":set_id",id);
+         if(query.exec())
+         {
+            cout<<"[+] Данные о спутнике удалены."<< endl;
+         }
+         else
+         {
+            cout<<"[-] Сбой.  Данные о спутнике не удалены."<< endl;
+         }
+     }
+     else
+     {
+        cout<<"[-] Сбой. Данные о спутнике не удалены."<< endl;
+     }
+}
 
 
 ///
