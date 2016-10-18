@@ -17,8 +17,6 @@ SOURCES += main.cpp \
     timejd.cpp \
     earth_pos.cpp \
     potoc_sun.cpp \
-    potoc_salleter.cpp \
-    ed_vector_salleter.cpp \
     corners_solar_battery.cpp \
     setting.cpp \
     drain_parametrs_solar_battery.cpp \
@@ -37,8 +35,6 @@ HEADERS += \
     earth_pos.h \
     potoc_sun.h \
     structur.h \
-    potoc_salleter.h \
-    ed_vector_salleter.h \
     corners_solar_battery.h \
     setting.h \
     drain_parametrs_solar_battery.h \

@@ -10,18 +10,16 @@
 #include <structur.h>
 #include <setting.h>
 #include <command_parser.h>
-
 class TelnetSocketThread : public QThread
 {
     Q_OBJECT
     Q_PROPERTY(bool access READ access WRITE setAccess NOTIFY accessChanged)
     Q_PROPERTY(bool auntofic READ auntofic WRITE setAuntofic NOTIFY auntoficChanged)
-  QString login, password;
+    QString login, password;
     QByteArray bytes;
     main_module *main;
     int num = 0;
 private:setting file_setting;
-//private:command_parser parser_cmd;
 private:void parser(QString coomand);
 public: TelnetSocketThread(int ID, QObject *parent, main_module *main_m);
     void run();
@@ -30,6 +28,7 @@ public: TelnetSocketThread(int ID, QObject *parent, main_module *main_m);
     {
         return m_auntofic;
     }
+
 
 signals:
     void error(QTcpSocket::SocketError socketerror);
@@ -40,8 +39,9 @@ signals:
 
 public slots:
     void readyRead();
-    void disconnected();  
+    void disconnected();
     void setAccess(bool access);
+    void Message_slot(QString message);
 
     void setAuntofic(bool auntofic)
     {
@@ -59,10 +59,6 @@ private:
     bool m_auntofic;
 };
 
-struct auntofication
-{
-    QString login;
-    QString password;
-};
+
 
 #endif // TELNETSOCKETTHREAD_H

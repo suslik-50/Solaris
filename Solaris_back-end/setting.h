@@ -15,8 +15,6 @@ public:double Get_replay_sun();
 public:void Set_replay_sun(double replay);
 public:bool Get_qdebug_salleter();
 public:void Set_qdebug_salleter(bool y_n);
-public:int Get_touch_salleter();
-public:void Set_touch_salleter(int touch);
 public:int Get_replay_salleter();
 public:void Set_replay_salleter(int replay);
 public:bool Get_corners_solar_batter_qdebug();

@@ -24,8 +24,8 @@ public:
     bool insert_to_sun(double x, double y, double z, double time_uts);
     void update_to_sun(double x, double y, double z, double time_uts);
     bool inset_to_satellite(QString name, double time_uts, double a,
-                          double e, double i, double ark_per,
-                          double dolgota, double m);
+                            double e, double i, double ark_per,
+                            double dolgota, double m);
     void update_to_satellite(QString name, double time_uts, double a,
                              double e, double i, double ark_per,
                              double dolgota, double m, QString editor);

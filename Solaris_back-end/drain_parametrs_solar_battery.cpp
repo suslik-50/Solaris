@@ -15,6 +15,7 @@ int drain_parametrs_solar_battery::count_drain()
 void drain_parametrs_solar_battery::clear()
 {
     data_sbs.clear();
+
 }
 
 void drain_parametrs_solar_battery::run()
@@ -22,26 +23,42 @@ void drain_parametrs_solar_battery::run()
     exec();
 }
 
-void drain_parametrs_solar_battery::data(solar_battery_salleter salleter_data)
+void drain_parametrs_solar_battery::deletedata(QString name)
 {
-    bool t_f=false;
-    if (data_sbs.empty())
-    {
-        data_sbs<<salleter_data;
+
+    foreach (QString key, data_sbs.keys()) {
+        if (key == name){
+            data_sbs.remove(key);
+        }
     }
-    else
-    {
-        for(int i=0;i<data_sbs.size();i++)
-        {
-          if (data_sbs[i].name==salleter_data.name)
-            {
-                data_sbs[i]=salleter_data;
+}
+
+void drain_parametrs_solar_battery::data(double a,double b,double time,QString name)
+{
+    solar_battery_salleter salleter_data ;
+    salleter_data.a=a;
+    salleter_data.b=b;
+    salleter_data.time=time;
+    salleter_data.name=name;
+    bool t_f=false;
+    if (data_sbs.empty()){
+        data_sbs.insert(name,salleter_data);
+    }
+    else{
+
+        foreach (QString key, data_sbs.keys()) {
+            if (key == name){
+                data_sbs.remove(key);
+                data_sbs.insert(name,salleter_data);
                 t_f=true;
+                emit new_data();
             }
         }
+
         if (t_f==false)
         {
-            data_sbs<<salleter_data;
+            data_sbs.insert(name,salleter_data);
+            emit new_data();
         }
     }
 }
@@ -49,17 +66,6 @@ void drain_parametrs_solar_battery::data(solar_battery_salleter salleter_data)
 void drain_parametrs_solar_battery::get_data()
 {
 
-    solar_battery_salleter slr;
-    slr.a = 0.100000001;
-    slr.b = 0.100000011;
-    slr.name = "satel-1";
-    slr.time = 111111111;
-    data_sbs.append(slr);
-    slr.a = 0.200000002;
-    slr.b = 0.200000022;
-    slr.name = "Satel-2";
-    slr.time = 222222222;
-    data_sbs.append(slr);
 
     emit data_solar_battery(data_sbs);
     data_sbs.clear();

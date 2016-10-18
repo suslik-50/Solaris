@@ -1,4 +1,5 @@
 #include "potoc_salleter2.h"
+#include <QDateTime>
 
 
 potoc_salleter2::potoc_salleter2()
@@ -10,31 +11,28 @@ potoc_salleter2::potoc_salleter2()
 
 double potoc_salleter2:: EccAnom(double M, double e) /// E - эксентрическая аномалия
 {
-      const int maxit = 15;
-      int i=0;
-      const double eps = 100.0*8;
-      double E, f;
-      // начальное значение
-      M = Modulo(M, 2.0*pi);
-      if (e<0.8) E=M; else E=pi;
-      do {
+    const int maxit = 15;
+    int i=0;
+    const double eps = 100.0*8;
+    double E, f;
+    // начальное значение
+    M = Modulo(M, 2.0*pi);
+    if (e<0.8) E=M; else E=pi;
+    do {
         f = E - e*sin(E) - M;
         E = E - f / ( 1.0 - e*cos(E) );
         if (i==maxit) {
-          break;
+            break;
         }
-      }
-      while (fabs(f) > eps);
-      return E;
+    }
+    while (fabs(f) > eps);
+    return E;
 }
 
 double potoc_salleter2::Getdvu(double t)
 {
     double del_dvu; // dΩ/dt
     double dvu;
-    //double T=2*pi*sqrt(pow(a,3)/r);
-    //Js=1082.63*pow(10,-6)Коэффициент при второй зональной гармонике разложения геопотенциала в ряд по сферическим функциям .
-    //del_dvu=(-3/2)*(2*pi/T)*pow((Re/a),2)*(Ji/pow((1-pow(e,2)),2))*cos(i);
     del_dvu = (-9.964 / pow((1 - pow(e,2)),2)) * pow((Re/a),3.5) * cos(i);
     dvu = dvu0 + (del_dvu * (t-t0));
     return dvu;
@@ -62,7 +60,7 @@ void potoc_salleter2::Additional_variables()
     Qx = (-cos(dvu)*sin(urp))-(sin(dvu)*cos(urp)*cos(i));//
     Qy = (-sin(dvu)*sin(urp))+(cos(dvu)*cos(urp)*cos(i));//
     Qz = cos(urp)*sin(i);
-
+    /*
     double kontrolsum,kontrolsum2,kontrolsum3;
     kontrolsum = (Px*Px)+(Py*Py)+(Pz*Pz); //  контрольные суммы для проверки вычислений
     kontrolsum2 = (Qx*Qx)+(Qy*Qy)+(Qz*Qz);//
@@ -94,6 +92,7 @@ void potoc_salleter2::Additional_variables()
         }
         emit kontrol_sum(3);
     }
+    */
 
 }
 
@@ -152,10 +151,10 @@ void potoc_salleter2::slotNextValue()
     t = QDateTime::currentDateTime().toTime_t(); // время в UTC
     timejd time;
     n = sqrt((E_n)/(pow(a,3))); // средние движение (необходимо для M)
-    t = time.convert_date(t); //первод в dj
-    M = n*(t-t0); //получение M(средняя аномалия)
-    dvu = Getdvu(t); // Получение долготы восходящего узла
-    urp = Geturp(t);//угловое расстояние перицента
+    tjd = time.convert_date(t,7); //первод в dj
+    M = n*(tjd-time.convert_date(t0,7)); //получение M(средняя аномалия)
+    dvu = Getdvu(tjd); // Получение долготы восходящего узла
+    urp = Geturp(tjd);//угловое расстояние перицента
     Additional_variables(); // вычисление дополнительных пременных для конечных результатов
     E = EccAnom(M,e);//получение E-эксцентрическая аномалия (методом приближения)
     r = a*(1-(e*E));//радиус
@@ -166,7 +165,7 @@ void potoc_salleter2::slotNextValue()
     z = (Pz*oe)+(Qz*on); // z
 
     if (qdebag)
-    {
+    {   qDebug()<<name<<"-name";
         qDebug()<<x<<"x";
         qDebug()<<y<<"y";
         qDebug()<<z<<"z";
@@ -191,9 +190,9 @@ void potoc_salleter2::slotNextValue()
         qDebug()<<vx<<"vx-скорость по x";
         qDebug()<<vy<<"vy-скорость по y";
         qDebug()<<vz<<"vz-скорость по z";
-        qDebug()<<V<<"v-скорость";
-  }
-
+        qDebug()<<V<< "v-скорость";
+    }
+    // перевод в орбитальные координвты
     double px,py,pz,qx,qy,qz,rx,ry,rz;
     px=cos(urp)*cos(dvu)-sin(urp)*sin(dvu)*cos(i);
     py=(cos(urp)*sin(dvu)+sin(urp)*cos(dvu)*cos(i))*cos(e)-sin(urp)*sin(i)*sin(e);
@@ -240,9 +239,6 @@ void potoc_salleter2::slotNextValue()
                 VC[ii][j] += A[ii][k] * B[k][j];
         }
 
-
-
-
     salleter.x=C[0][0];
     salleter.y=C[1][0];
     salleter.z=C[2][0];
@@ -251,7 +247,6 @@ void potoc_salleter2::slotNextValue()
     salleter.vz=VC[2][0];
 
     emit  data(salleter,t,name); // отправляет сигнал что данные обновились
-
 }
 
 
