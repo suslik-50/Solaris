@@ -17,8 +17,6 @@ SOURCES += main.cpp \
     timejd.cpp \
     earth_pos.cpp \
     potoc_sun.cpp \
-    potoc_salleter.cpp \
-    ed_vector_salleter.cpp \
     corners_solar_battery.cpp \
     setting.cpp \
     drain_parametrs_solar_battery.cpp \
@@ -28,17 +26,13 @@ SOURCES += main.cpp \
     telnetserver.cpp \
     telnetsocketthread.cpp \
     command_parser.cpp \
-    potoc_salleter2.cpp \
-    tcpserver.cpp \
-    tcpsocketthread.cpp
+    potoc_salleter2.cpp
 
 HEADERS += \
     timejd.h \
     earth_pos.h \
     potoc_sun.h \
     structur.h \
-    potoc_salleter.h \
-    ed_vector_salleter.h \
     corners_solar_battery.h \
     setting.h \
     drain_parametrs_solar_battery.h \
@@ -48,6 +42,4 @@ HEADERS += \
     telnetserver.h \
     telnetsocketthread.h \
     command_parser.h \
-    potoc_salleter2.h \
-    tcpserver.h \
-    tcpsocketthread.h
+    potoc_salleter2.h

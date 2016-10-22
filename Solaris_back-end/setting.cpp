@@ -3,15 +3,15 @@
 
 QSettings setting_o ("setting.ini",QSettings::IniFormat);
 setting::setting()
-{
-     QFile FileConnectDB;
-     FileConnectDB.setFileName("setting.ini");
-     if (!FileConnectDB.exists())
-     {
-         CreatFile();
-     }
+{ // проверяет если файл настроек, если нету создает
+    QFile FileConnectDB;
+    FileConnectDB.setFileName("setting.ini");
+    if (!FileConnectDB.exists())
+    {
+        CreatFile();
+    }
 }
-
+// создает файл настроек
 void setting::CreatFile()// Функция создания файла с стандартными полями и указания значений по умолчанию
 {
     setting_o.setValue("ConnectDB/Puth","DatаBase.db");
@@ -19,7 +19,6 @@ void setting::CreatFile()// Функция создания файла с ста
     setting_o.setValue("ConnectDB/HostName","");
     setting_o.setValue("ConnectDB/Password","");
     setting_o.setValue("potoc_salleter/qdebug","false");
-    setting_o.setValue("potoc_salleter/touch","10");
     setting_o.setValue("potoc_salleter/replay","3");
     setting_o.setValue("potoc_sun/qdebug","false");
     setting_o.setValue("potoc_sun/replay","5");
@@ -30,8 +29,8 @@ void setting::CreatFile()// Функция создания файла с ста
 
 bool setting::Get_qdebug_sun()
 {
-     bool y_n=setting_o.value("potoc_sun/qdebug","false").toBool();
-     return y_n;
+    bool y_n=setting_o.value("potoc_sun/qdebug","false").toBool();
+    return y_n;
 }
 
 void setting::Set_qdebug_sun(bool y_n)
@@ -41,35 +40,24 @@ void setting::Set_qdebug_sun(bool y_n)
 
 double setting::Get_replay_sun()
 {
-   double replay=setting_o.value("potoc_sun/replay","5").toDouble();
-   return replay;
+    double replay=setting_o.value("potoc_sun/replay","5").toDouble();
+    return replay;
 }
 
 void setting::Set_replay_sun(double replay)
 {
-     setting_o.setValue("potoc_sun/replay",replay);
+    setting_o.setValue("potoc_sun/replay",replay);
 }
 
 bool setting::Get_qdebug_salleter()
 {
-  bool y_n=setting_o.value("potoc_salleter/qdebug","false").toBool();
-  return y_n;
+    bool y_n=setting_o.value("potoc_salleter/qdebug","false").toBool();
+    return y_n;
 }
 
 void setting::Set_qdebug_salleter(bool y_n)
 {
     setting_o.setValue("potoc_salleter/qdebug",y_n);
-}
-
-int setting::Get_touch_salleter()
-{
- int touch=setting_o.value("potoc_salleter/touch","10").toInt();
- return touch;
-}
-
-void setting::Set_touch_salleter(int touch)
-{
- setting_o.setValue("potoc_salleter/touch",touch);
 }
 
 int setting::Get_replay_salleter()
@@ -91,10 +79,8 @@ bool setting::Get_corners_solar_batter_qdebug()
 
 void setting::Set_corners_solar_battery_qdebug(bool y_n)
 {
-     setting_o.setValue("corners_solar_battery/qdebug",y_n);
+    setting_o.setValue("corners_solar_battery/qdebug",y_n);
 }
-
-
 
 void setting::CreateFile_DB() // Функция создания файла с стандартными полями и указания значений по умолчанию
 {
@@ -109,7 +95,7 @@ QString setting::ReadPuthDB() // Функция возращения путя ф
 
 void setting::WritePuthDB(QString Puth) // Функция записи путя файла
 {
-      setting_o.setValue("ConnectDB/Puth",Puth);
+    setting_o.setValue("ConnectDB/Puth",Puth);
 }
 
 void setting::Set_telnet_port(int port)

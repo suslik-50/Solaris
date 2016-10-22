@@ -1,8 +1,9 @@
 #ifndef STRUCTUR_H
 #define STRUCTUR_H
 #include <QString>
-#include <QDateTime>
+#include<QDateTime>
 using namespace std;
+
 
 
 
@@ -13,6 +14,7 @@ struct sun
     double z;
 };
 
+
 struct vector_s
 {
     double x;
@@ -21,6 +23,13 @@ struct vector_s
     double vx;
     double vy;
     double vz;
+
+    double x_orb;
+    double y_orb;
+    double z_orb;
+    double vx_orb;
+    double vy_orb;
+    double vz_orb;
 };
 
 struct solar_battery_salleter

@@ -19,111 +19,61 @@ void functiondb::creat_db()  // функция создания базы дан�
 {
     QSqlQuery query;
 
-    // Создание таблицы "СОЛНЦЕ"
-    QString sct="CREATE TABLE SUN ("
-    "ID_SUN       INTEGER PRIMARY KEY AUTOINCREMENT"
-    "                     NOT NULL,"
-    "SUN_X        DOUBLE,"
-    "SUN_Y        DOUBLE,"
-    "SUN_Z        DOUBLE,"
-    "SUN_TIME_UTS DOUBLE"
-    ");";
-
     //Создание таблицы "СПУТНИК"
     QString sss="CREATE TABLE SATELLITE ("
-    "ID_SATELLITE INTEGER PRIMARY KEY AUTOINCREMENT"
-    "                     NOT NULL,"
-    "STL_NAME     STRING (100), "
-    "STL_TIME_UTS DOUBLE,"
-    "STL_A        DOUBLE,"
-    "STL_E        DOUBLE,"
-    "STL_I        DOUBLE,"
-    "STL_ARK_PER  DOUBLE,"
-    "STL_DOLGOTA  DOUBLE,"
-    "STL_M        DOUBLE"
-    ");";
+                "ID_SATELLITE INTEGER PRIMARY KEY AUTOINCREMENT"
+                "                     NOT NULL,"
+                "STL_NAME     STRING (100), "
+                "STL_TIME_UTS DOUBLE,"
+                "STL_A        DOUBLE,"
+                "STL_E        DOUBLE,"
+                "STL_I        DOUBLE,"
+                "STL_ARK_PER  DOUBLE,"
+                "STL_DOLGOTA  DOUBLE,"
+                "STL_M        DOUBLE"
+                ");";
 
     //Создание таблицы "КОРРЕКТИРОВКА СПУТНИКА"
     QString scs="CREATE TABLE CORRECT_SATELLITE ("
-    "ID_CORRECT_SATELLITE INTEGER       PRIMARY KEY AUTOINCREMENT"
-    "                                   NOT NULL,"
-    "SATELLITE_ID         INTEGER       REFERENCES SATELLITE (ID_SATELLITE),"
-    "C_TIME_UTS           DOUBLE,"
-    "C_A                  DOUBLE,"
-    "C_E                  DOUBLE,"
-    "C_I                  DOUBLE,"
-    "C_ARK_PER            DOUBLE,"
-    "C_DOLGOTA            DOUBLE,"
-    "C_M                  DOUBLE,"
-    "EDITOR               STRING [30]"
-    ");";
-    QString sca=
-              "CREATE TABLE AUTHORIZATION ("
-                  "ID_AUTHORIZATION INTEGER     PRIMARY KEY AUTOINCREMENT"
-                  "                              NOT NULL,"
-                  "LOGIN            STRING (30),"
-                  "PASSWORD         STRING (30),"
-                  "SOLL_PASSWORD    VARCHAR"
-              ");";
+                "ID_CORRECT_SATELLITE INTEGER       PRIMARY KEY AUTOINCREMENT"
+                "                                   NOT NULL,"
+                "SATELLITE_ID         INTEGER       REFERENCES SATELLITE (ID_SATELLITE),"
+                "C_TIME_UTS           DOUBLE,"
+                "C_A                  DOUBLE,"
+                "C_E                  DOUBLE,"
+                "C_I                  DOUBLE,"
+                "C_ARK_PER            DOUBLE,"
+                "C_DOLGOTA            DOUBLE,"
+                "C_M                  DOUBLE,"
+                "EDITOR               STRING [30]"
+                ");";
 
-    if (query.exec(sct))
+        if (query.exec(sss))
         {
-            cout<<"[+] Cозданна таблица 'СОЛНЦЕ'"<<endl;
-            if (query.exec(sss))
+            cout<<"[+] Cозданна таблица 'СПУТНИК'"<<endl;
+            if(query.exec(scs))
             {
-                cout<<"[+] Cозданна таблица 'СПУТНИК'"<<endl;
-                if(query.exec(scs))
-                {
-                    cout<<"[+] Cозданна таблица 'КОРРЕКТИРОВКА СПУТНИКА'"<<endl;
-                    if (query.exec(sca))
-                    {
-                        cout<<"[+] Cозданна таблица 'АВТОРИЗАЦИЯ'"<<endl;
-                    }
-                    else
-                    {
-                        cout<<"[-] Не созданна таблица 'АВТОРИЗАЦИЯ'"<<endl;
-                    }
-                }
-                else
-                {
-                    cout<<"[-] Не cозданна таблица корректировка 'СПУТНИК'"<<endl;
-                }
+                cout<<"[+] Cозданна таблица 'КОРРЕКТИРОВКА СПУТНИКА'"<<endl;
             }
             else
             {
-                cout<<"[-] Не cозданна таблица 'СПУТНИК'"<<endl;
+                cout<<"[-] Не cозданна таблица корректировка 'СПУТНИК'"<<endl;
             }
         }
         else
         {
-            cout<<"[-] Не созданна таблица 'СОЛНЦЕ'"<<endl;
+            cout<<"[-] Не cозданна таблица 'СПУТНИК'"<<endl;
         }
 
+
+
 }
 
-bool functiondb::insert_to_sun(double x, double y,
-                               double z, double time_uts) // Функция добавления данных в таблицу СОЛНЦЕ
-{
-    QSqlQuery query;
-    query.prepare("INSERT INTO SUN (SUN_X, SUN_Y, SUN_Z, SUN_TIME_UTS) "
-                   "VALUES(:SUN_X, :SUN_Y, :SUN_Z, :SUN_TIME_UTS)");
-    query.bindValue(":SUN_X",x);
-    query.bindValue(":SUN_Y",y);
-    query.bindValue(":SUN_Z",z);
-    query.bindValue(":SUN_TIME_UTS",time_uts);
-    if (query.exec())
-    {
-        cout<<"[+] Данные добавлены в таблицу солнца"<<endl;
-    }
-    else
-    {
-        cout<<"[-] Данные не добавлены в таблицу солнца"<<endl;
-    }
-}
+
 
 bool functiondb::inset_to_satellite(QString name, double time_uts, double a,
-                                  double e, double i, double ark_per,
-                                  double dolgota, double m)
+                                    double e, double i, double ark_per,
+                                    double dolgota, double m)
 {
     QSqlQuery query;
     query.prepare("SELECT STL_NAME FROM SATELLITE WHERE STL_NAME=:name;"); // Поиск одинаковой записи
@@ -138,11 +88,11 @@ bool functiondb::inset_to_satellite(QString name, double time_uts, double a,
     if (NAME!=name)
     {
         query.prepare("INSERT INTO SATELLITE (STL_NAME, STL_TIME_UTS, "
-                                     "STL_A, STL_E, STL_I, STL_ARK_PER, "
-                                     "STL_DOLGOTA, STL_M) VALUES (:STL_NAME, "
-                                     ":STL_TIME_UTS, :STL_A, "
-                                     ":STL_E, :STL_I, :STL_ARK_PER, "
-                                     ":STL_DOLGOTA, :STL_M)");
+                      "STL_A, STL_E, STL_I, STL_ARK_PER, "
+                      "STL_DOLGOTA, STL_M) VALUES (:STL_NAME, "
+                      ":STL_TIME_UTS, :STL_A, "
+                      ":STL_E, :STL_I, :STL_ARK_PER, "
+                      ":STL_DOLGOTA, :STL_M)");
         query.bindValue(":STL_NAME",name);
         query.bindValue(":STL_TIME_UTS",time_uts);
         query.bindValue(":STL_A",a);
@@ -162,7 +112,7 @@ bool functiondb::inset_to_satellite(QString name, double time_uts, double a,
                     id=query.value(rec.indexOf("ID_SATELLITE")).toInt();
                 }
                 insert_to_correct_satellite(id, time_uts, // Добавление данных в корректировку данных
-                                               a, e, i, ark_per, dolgota, m, "Человек");
+                                            a, e, i, ark_per, dolgota, m, "Человек");
             }
             cout<<"[+] Данные добавлены в таблицу 'СПУТНИК'"<<endl;
             return true;
@@ -200,60 +150,42 @@ void functiondb::update_to_satellite(QString name, double time_uts, double a,
         }
         if (insert_to_correct_satellite(id, time_uts, a, e ,i, ark_per, dolgota, m, editor))
         {
-             QSqlQuery query2;
-             query2.prepare("UPDATE SATELLITE SET STL_NAME=:STL_NAME, "
-                            "STL_TIME_UTS=:STL_TIME_UTS, STL_A=:STL_A, STL_E=:STL_E,"
-                            "STL_I=:STL_I, STL_ARK_PER=:STL_ARK_PER, STL_DOLGOTA=:STL_DOLGOTA,"
-                            "STL_M=:STL_M WHERE STL_NAME =:STL_NAME;");
+            QSqlQuery query2;
+            query2.prepare("UPDATE SATELLITE SET STL_NAME=:STL_NAME, "
+                           "STL_TIME_UTS=:STL_TIME_UTS, STL_A=:STL_A, STL_E=:STL_E,"
+                           "STL_I=:STL_I, STL_ARK_PER=:STL_ARK_PER, STL_DOLGOTA=:STL_DOLGOTA,"
+                           "STL_M=:STL_M WHERE STL_NAME =:STL_NAME;");
 
-             query2.bindValue(":STL_NAME",name);
-             query2.bindValue(":STL_TIME_UTS",time_uts);
-             query2.bindValue(":STL_A",a);
-             query2.bindValue(":STL_E",e);
-             query2.bindValue(":STL_I",i);
-             query2.bindValue(":STL_ARK_PER",ark_per);
-             query2.bindValue(":STL_DOLGOTA",dolgota);
-             query2.bindValue(":STL_M",m);
-             if(query2.exec())
-             {
-                 cout<<"[+] Данные в таблице  'спутник' обновлены"<<endl;
-             }
-             else
-             {
-                 cout<<"[-] Данные в таблице  'спутник' не обновлены"<<endl;
-             }
+            query2.bindValue(":STL_NAME",name);
+            query2.bindValue(":STL_TIME_UTS",time_uts);
+            query2.bindValue(":STL_A",a);
+            query2.bindValue(":STL_E",e);
+            query2.bindValue(":STL_I",i);
+            query2.bindValue(":STL_ARK_PER",ark_per);
+            query2.bindValue(":STL_DOLGOTA",dolgota);
+            query2.bindValue(":STL_M",m);
+            if(query2.exec())
+            {
+                cout<<"[+] Данные в таблице  'спутник' обновлены"<<endl;
+            }
+            else
+            {
+                cout<<"[-] Данные в таблице  'спутник' не обновлены"<<endl;
+            }
         }
-         else
+        else
         {
-                cout<<"[-] Данные не добавлены в таблицу 'КОРРЕКТИРОВКА СПУТНИКА'";
+            cout<<"[-] Данные не добавлены в таблицу 'КОРРЕКТИРОВКА СПУТНИКА'";
         }
     }
     else
     {
-     cout<<"[-] Ошибка"<<endl;
+        cout<<"[-] Ошибка"<<endl;
     }
 }
 
 
-void functiondb::update_to_sun(double x, double y, double z, double time_uts) // Функция изменения данных таблицы 'СОЛНЦЕ'
-{
 
-           QSqlQuery query2;
-           query2.prepare("UPDATE SUN SET SUN_X=:SUN_X, SUN_Y=:SUN_Y, SUN_Z=:SUN_Z, SUN_TIME_UTS=:SUN_TIME_UTS"
-                          " WHERE SUN_TIME_UTS=:SUN_TIME_UTS;");
-           query2.bindValue(":SUN_X", x);
-           query2.bindValue(":SUN_Y", y);
-           query2.bindValue(":SUN_Z", z);
-           query2.bindValue(":SUN_TIME_UTS", time_uts);
-           if (query2.exec())
-           {
-                cout<<"[+] Обновление данных солнца прошло успешно"<<endl;
-           }
-           else
-           {
-                 cout<<"[-] Обновление данных солнца не удалость"<<endl;
-           }
-}
 
 bool functiondb::insert_to_correct_satellite(int satellite_id, double time_uts, double a,
                                              double e, double i, double ark_per,
@@ -283,8 +215,8 @@ bool functiondb::insert_to_correct_satellite(int satellite_id, double time_uts, 
     }
     else
     {
-       cout<<"[-] Данные не добавлены в таблицу "<<endl;
-       return false;
+        cout<<"[-] Данные не добавлены в таблицу "<<endl;
+        return false;
     }
 }
 
@@ -311,7 +243,7 @@ satellite functiondb::get_satellite(int id) // Возращает данные �
             sputnik.stl_dolgota=query.value(rec.indexOf("STL_DOLGOTA")).toDouble();
             sputnik.stl_m=query.value(rec.indexOf("STL_M")).toDouble();
         }
-/*
+        /*
         cout << "Айди спуника:     " << sputnik.id_satellite << endl;
         cout << "Имя спутника:     " << sputnik.stl_name.toStdString() << endl;
         cout << "X:                " << sputnik.stl_x << endl;
@@ -360,18 +292,7 @@ satellite functiondb::get_satellite(QString name ) // Возращает дан�
             sputnik.stl_dolgota=query.value(rec.indexOf("STL_DOLGOTA")).toDouble();
             sputnik.stl_m=query.value(rec.indexOf("STL_M")).toDouble();
         }
-        cout << "Айди спуника:     " << sputnik.id_satellite << endl;
-        cout << "Имя спутника:     " << sputnik.stl_name.toStdString() << endl;
-        cout << "Время:            " << sputnik.stl_time_uts<< endl;
-        cout << "Большая полуось:  " << sputnik.stl_a << endl;
-        cout << "Экцентрисистент:  " << sputnik.stl_e << endl;
-        cout << "Наклое:           " << sputnik.stl_i << endl;
-        cout << "Аргумент перегея: " << sputnik.stl_ark_per << endl;
-        cout << "Долгота:          " << sputnik.stl_dolgota << endl;
-        cout << "Средняя аномалия: " << sputnik.stl_m << endl;
-
         return sputnik;
-
     }
     else
     {
@@ -415,24 +336,24 @@ void functiondb::delete_satellite(QString name) // Удаление данных
     }
     query.prepare("DELETE FROM SATELLITE where STL_NAME=:name_s;"); // удаление спутника
     query.bindValue(":name_s",name);
-     if(query.exec())
-     {
-         cout<<"[+] Cпутник удалены."<< endl;
-         query.prepare("DELETE FROM CORRECT_SATELLITE where SATELLITE_ID=:set_id;"); // удаление данных корректировки
-         query.bindValue(":set_id",id);
-         if(query.exec())
-         {
+    if(query.exec())
+    {
+        cout<<"[+] Cпутник удалены."<< endl;
+        query.prepare("DELETE FROM CORRECT_SATELLITE where SATELLITE_ID=:set_id;"); // удаление данных корректировки
+        query.bindValue(":set_id",id);
+        if(query.exec())
+        {
             cout<<"[+] Данные о спутнике удалены."<< endl;
-         }
-         else
-         {
+        }
+        else
+        {
             cout<<"[-] Сбой.  Данные о спутнике не удалены."<< endl;
-         }
-     }
-     else
-     {
+        }
+    }
+    else
+    {
         cout<<"[-] Сбой. Данные о спутнике не удалены."<< endl;
-     }
+    }
 }
 
 void functiondb::read_satellite() //служебная фукция для отладки

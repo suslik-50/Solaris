@@ -20,10 +20,10 @@ public:corners_solar_battery();
 public slots:
     void  run();
     void position_salleter(vector_s salleter,double time,QString name_s);
-    void position_sun(sun s);
+    void position_sun(double x,double y,double z,double t);
     void debug(bool y_n);
-  signals:
-    void data ( solar_battery_salleter);
+signals:
+    void data (double a,double b,double time,QString name);
 };
 
 

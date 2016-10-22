@@ -27,16 +27,17 @@ private:Earth_pos pos;
 public:potoc_sun();
 public:sun sun_pull(double t );
 private:double MeanObliquity (double Mjd_TT);
-public slots:
+private slots:
     void slotNextValue();
     void sunposition();
+public slots:
     void run();
     void debug(bool y_n);
     void upreplay(int i);
-    void stop();
-    void start();
+    void timerstop();
+    void timerstart();
 signals:
-     void positionsun(sun,double);
+    void positionsun(double x,double y,double z,double t);
 };
 
 #endif // POTOC_SUN_H
