@@ -26,7 +26,9 @@ SOURCES += main.cpp \
     telnetserver.cpp \
     telnetsocketthread.cpp \
     command_parser.cpp \
-    potoc_salleter2.cpp
+    potoc_salleter2.cpp \
+    tcpserver.cpp \
+    tcpsocketthread.cpp
 
 HEADERS += \
     timejd.h \
@@ -42,4 +44,6 @@ HEADERS += \
     telnetserver.h \
     telnetsocketthread.h \
     command_parser.h \
-    potoc_salleter2.h
+    potoc_salleter2.h \
+    tcpserver.h \
+    tcpsocketthread.h
