@@ -3,7 +3,6 @@
 command_parser::command_parser(main_module &man_m)
 {
     module=&man_m;
-
 }
 QByteArray command_parser::command(QString cmd)
 {

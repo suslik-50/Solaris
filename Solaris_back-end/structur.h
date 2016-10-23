@@ -4,16 +4,12 @@
 #include<QDateTime>
 using namespace std;
 
-
-
-
 struct sun
 {
     double x;
     double y;
     double z;
 };
-
 
 struct vector_s
 {
