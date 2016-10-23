@@ -20,7 +20,7 @@ void TelnetServer::StartServer()
     }
     else
     {
-        qDebug() << "[+] Telnet Server is start";
+        qDebug() << "[+] Telnet Server started";
     }
 }
 

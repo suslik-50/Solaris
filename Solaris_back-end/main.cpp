@@ -6,6 +6,7 @@
 #include <drain_parametrs_solar_battery.h>
 #include <main_module.h>
 #include <telnetserver.h>
+#include <tcpserver.h>
 #include <potoc_salleter2.h>
 #include <earth_pos.h>
 #include <corners_solar_battery.h>
@@ -55,20 +56,23 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     DateBaseConnect connect;
     connect.DBConnect();
-    potoc_sun s;
+    potoc_sun sun;
     QThread thread1;
-    QObject::connect(&thread1,SIGNAL(started()),&s,SLOT(run()));
+    QObject::connect(&thread1,SIGNAL(started()),&sun,SLOT(run()));
     thread1.start();
 
 
     drain_parametrs_solar_battery c_s_b;
     c_s_b.start();
-    main_module main_ma(s,c_s_b);
+    main_module main_ma(sun,c_s_b);
     main_ma.start();
 
 
     TelnetServer server(&main_ma);
     server.StartServer();
+
+    TcpServer servertcp(&c_s_b);
+    servertcp.StartServer();
 
     return a.exec();
 

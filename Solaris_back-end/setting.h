@@ -24,6 +24,8 @@ public:QString ReadPuthDB();
 public:void WritePuthDB(QString Puth);
 public:void Set_telnet_port(int port);
 public:int Get_telnet_port();
+public:void Set_tcp_port(int port);
+public:int Get_tcp_port();
 public:bool Get_qdebug_main_modul();
 public:void Set_qdebug_main_modul(bool y_n);
 };

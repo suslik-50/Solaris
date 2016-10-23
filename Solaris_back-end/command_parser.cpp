@@ -323,6 +323,27 @@ QByteArray command_parser::command(QString cmd)
         else{
             bytes.append("Команда не найдена\r\n");
         }
+
+    }else if (shortList.first()=="tcp")
+    {
+        if (shortList.size()>1){
+            if (shortList[1]=="port")
+            {
+                if (shortList.size()>2 || shortList[2].toInt() ){
+                    file_setting.Set_tcp_port(shortList[2].toInt());
+                    bytes.append("Порт tcp изменен на "+shortList[2]+"\r\n");
+                }
+                else{
+                    bytes.append("Команда не найдена\r\n");
+                }
+            }else
+            {
+                bytes.append("Команда не найдена\r\n");
+            }
+        }
+        else{
+            bytes.append("Команда не найдена\r\n");
+        }
     } else if (shortList.first()=="delete"){
         if (shortList.size()>=4){
             if (shortList[1]=="potoc" && shortList[2]=="salleter"){
@@ -374,6 +395,7 @@ QByteArray command_parser::command(QString cmd)
         bytes.append("delete potoc salleter <name>-удаление потока из памяти и удаление всех данных из оперативной памяти потока \n\r");
         bytes.append("delete data salleter <name>-удаление спутника из базы дынных\n\r");
         bytes.append("telnet port <int>-Изменит порт подключения по telnet,изменения вступят всилу только после перезарузки программы \n\r"); //+
+        bytes.append("tcp port <int>-Изменит порт подключения по tcp,изменения вступят всилу только после перезарузки программы \n\r");
     }
     else
     {

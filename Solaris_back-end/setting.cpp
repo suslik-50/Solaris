@@ -24,6 +24,7 @@ void setting::CreatFile()// Функция создания файла с ста
     setting_o.setValue("potoc_sun/replay","5");
     setting_o.setValue("corners_solar_battery/qdebug","flase");
     setting_o.setValue("telnet/port","8085");
+    setting_o.setValue("tcp/port","1234");
     setting_o.setValue("main_modul/qdebug","false");
 }
 
@@ -106,6 +107,17 @@ void setting::Set_telnet_port(int port)
 int setting::Get_telnet_port()
 {
     int port = setting_o.value("telnet/port","8085").toInt();
+    return port;
+}
+
+void setting::Set_tcp_port(int port)
+{
+    setting_o.setValue("tcp/port",port);
+}
+
+int setting::Get_tcp_port()
+{
+    int port = setting_o.value("tcp/port","8085").toInt();
     return port;
 }
 

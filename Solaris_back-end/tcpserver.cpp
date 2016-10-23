@@ -9,13 +9,14 @@ TcpServer::TcpServer(drain_parametrs_solar_battery *darin_p)
 
 void TcpServer::StartServer()
 {
-    if(!this->listen(QHostAddress::Any, 1234))
+    port=file_setting.Get_tcp_port();
+    if(!this->listen(QHostAddress::Any, port))
     {
-        qDebug() << "[-] Could not start server";
+        qDebug() << "[-] Tcp Server not start server";
     }
     else
     {
-        qDebug() << "[+] Listening...";
+        qDebug() << "[+] Tcp Server started";
     }
 }
 

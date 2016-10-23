@@ -8,13 +8,15 @@
 #include "tcpsocketthread.h"
 #include "main_module.h"
 #include "drain_parametrs_solar_battery.h"
+#include <setting.h>
 
 class TcpServer : public QTcpServer
 {
     Q_OBJECT
 public:TcpServer(drain_parametrs_solar_battery *darin_p);
-
-    void StartServer();
+private:setting file_setting;
+private:int port;
+public:void StartServer();
 signals:
 
 public slots:
