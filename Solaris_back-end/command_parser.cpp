@@ -115,7 +115,6 @@ QByteArray command_parser::command(QString cmd)
                 {
                     bytes.append("Установлено повторение выичесление местоположения спутника каждые-"+shortList[2]+"сек.\r\n");
                     module->replay_salleter(shortList[2].toInt());
-
                 }else if (shortList[1]=="sun"){
                     bytes.append("Установлено повторение выичесление местоположения солнца каждые-"+shortList[2]+"сек.\r\n");
                     module->replay_sun(shortList[2].toInt());
@@ -126,7 +125,7 @@ QByteArray command_parser::command(QString cmd)
                 }
             }
             else{
-                bytes.append("Введите число\r\n");
+                bytes.append("Третие значение должно быть типа Integer\r\n");
             }
         }
         else{
@@ -234,12 +233,47 @@ QByteArray command_parser::command(QString cmd)
                 QString name;
                 double time_ut,a,e,i,ark_per,dolgot;
                 name=shortList[2];
-                time_ut=shortList[3].toDouble();
-                a=shortList[4].toDouble();
-                e=shortList[5].toDouble();
-                i=shortList[6].toDouble();
-                ark_per=shortList[7].toDouble();
-                dolgot=shortList[8].toDouble();
+                if (shortList[3].toDouble()){
+                    time_ut=shortList[3].toDouble();
+                }
+                else {
+                    bytes.append("Неврно указынный параметр время, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[4].toDouble()){
+                    a=shortList[4].toDouble();
+                }
+                else{
+                    bytes.append("Неврно указынный параметр большая полуось, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[5].toDouble()){
+                    e=shortList[5].toDouble();
+                }else
+                {
+                    bytes.append("Неврно указынный параметр эксонтриситет, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[6].toDouble()){
+                    i=shortList[6].toDouble();
+                }else
+                {
+                    bytes.append("Неврно указынный параметр угол наклона орбиты, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[7].toDouble()){
+                    ark_per=shortList[7].toDouble();
+                }else
+                {
+                    bytes.append("Неврно указынный параметр аргумент перригея, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[8].toDouble()){
+                    dolgot=shortList[8].toDouble();
+                }else{
+                    bytes.append("Неврно указынный параметр долгота восходящего узла, необходим тип double\r\n");
+                    return bytes;
+                }
                 int otvet=module->updata_salleter(a,e,i,dolgot,ark_per,time_ut,name);
                 if (otvet==0){
                     bytes.append("Спутник данные спутника "+name+" обновлены\r\n");
@@ -262,13 +296,54 @@ QByteArray command_parser::command(QString cmd)
                 QString name;
                 double time_ut,a,e,i,ark_per,dolgot,m;
                 name=shortList[2];
-                time_ut=shortList[3].toDouble();
-                a=shortList[4].toDouble();
-                e=shortList[5].toDouble();
-                i=shortList[6].toDouble();
-                ark_per=shortList[7].toDouble();
-                dolgot=shortList[8].toDouble();
-                m=shortList[9].toDouble();
+                if (shortList[3].toDouble()){
+                    time_ut=shortList[3].toDouble();
+                }
+                else {
+                    bytes.append("Неврно указынный параметр время, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[4].toDouble()){
+                    a=shortList[4].toDouble();
+                }
+                else{
+                    bytes.append("Неврно указынный параметр большая полуось, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[5].toDouble()){
+                    e=shortList[5].toDouble();
+                }else
+                {
+                    bytes.append("Неврно указынный параметр эксонтриситет, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[6].toDouble()){
+                    i=shortList[6].toDouble();
+                }else
+                {
+                    bytes.append("Неврно указынный параметр угол наклона орбиты, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[7].toDouble()){
+                    ark_per=shortList[7].toDouble();
+                }else
+                {
+                    bytes.append("Неврно указынный параметр аргумент перригея, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[8].toDouble()){
+                    dolgot=shortList[8].toDouble();
+                }else{
+                    bytes.append("Неврно указынный параметр долгота восходящего узла, необходим тип double\r\n");
+                    return bytes;
+                }
+                if (shortList[9].toDouble()){
+                    m=shortList[9].toDouble();
+                }
+                else{
+                    bytes.append("Неврно указынный m, необходим тип double\r\n");
+                    return bytes;
+                }
                 module->new_salleter(name,time_ut,a,e,i,ark_per,dolgot,m);
                 bytes.append("Спутник добавлен в бд и запущен\r\n");
             }
@@ -281,13 +356,54 @@ QByteArray command_parser::command(QString cmd)
                 QString name;
                 double time_ut,a,e,i,ark_per,dolgot,m;
                 name=shortList[2];
-                time_ut=shortList[3].toDouble();
-                a=shortList[4].toDouble();
-                e=shortList[5].toDouble();
-                i=shortList[6].toDouble();
-                ark_per=shortList[7].toDouble();
-                dolgot=shortList[8].toDouble();
-                m=shortList[9].toDouble();
+                if (shortList[3].toDouble()){
+                    time_ut=shortList[3].toDouble();
+                }
+                else {
+                    bytes.append("Неврно указынный параметр время, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[4].toDouble()){
+                    a=shortList[4].toDouble();
+                }
+                else{
+                    bytes.append("Неврно указынный параметр большая полуось, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[5].toDouble()){
+                    e=shortList[5].toDouble();
+                }else
+                {
+                    bytes.append("Неврно указынный параметр эксонтриситет, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[6].toDouble()){
+                    i=shortList[6].toDouble();
+                }else
+                {
+                    bytes.append("Неврно указынный параметр угол наклона орбиты, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[7].toDouble()){
+                    ark_per=shortList[7].toDouble();
+                }else
+                {
+                    bytes.append("Неврно указынный параметр аргумент перригея, необходим тип double\r\n");
+                    return bytes;
+                }
+                if(shortList[8].toDouble()){
+                    dolgot=shortList[8].toDouble();
+                }else{
+                    bytes.append("Неврно указынный параметр долгота восходящего узла, необходим тип double\r\n");
+                    return bytes;
+                }
+                if (shortList[9].toDouble()){
+                    m=shortList[9].toDouble();
+                }
+                else{
+                    bytes.append("Неврно указынный m, необходим тип double\r\n");
+                    return bytes;
+                }
                 int otvet=module->set_new_salleter_to_date_base(name,time_ut,a,e,i,ark_per,dolgot,m);
                 if (otvet==0){
                     bytes.append("Спутник добавлен в бд и запущен\r\n");
@@ -308,9 +424,14 @@ QByteArray command_parser::command(QString cmd)
         if (shortList.size()>1){
             if (shortList[1]=="port")
             {
-                if (shortList.size()>2 || shortList[2].toInt() ){
-                    file_setting.Set_telnet_port(shortList[2].toInt());
-                    bytes.append("Порт telnet изменен на "+shortList[2]+"\r\n");
+                if (shortList.size()>2){
+                    if(shortList[2].toInt()){
+                        file_setting.Set_telnet_port(shortList[2].toInt());
+                        bytes.append("Порт telnet изменен на "+shortList[2]+"\r\n");
+                    }
+                    else{
+                        bytes.append("Третие значение должнобыть типа Integer, Порт\r\n");
+                    }
                 }
                 else{
                     bytes.append("Команда не найдена\r\n");
@@ -329,9 +450,13 @@ QByteArray command_parser::command(QString cmd)
         if (shortList.size()>1){
             if (shortList[1]=="port")
             {
-                if (shortList.size()>2 || shortList[2].toInt() ){
-                    file_setting.Set_tcp_port(shortList[2].toInt());
-                    bytes.append("Порт tcp изменен на "+shortList[2]+"\r\n");
+                if (shortList.size()>2){
+                    if(shortList[2].toInt()){
+                        file_setting.Set_tcp_port(shortList[2].toInt());
+                        bytes.append("Порт tcp изменен на "+shortList[2]+"\r\n");
+                    }else{
+                        bytes.append("Третие значение должнобыть типа Integer, Порт\r\n");
+                    }
                 }
                 else{
                     bytes.append("Команда не найдена\r\n");
