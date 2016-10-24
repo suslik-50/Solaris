@@ -17,7 +17,7 @@ void main_module::run()
     exec();
 }
 
-void main_module::start_all_salleter()
+int main_module::start_all_salleter()
 {
     int koll_sputnik;
     koll_sputnik=dbf.count_record_satellite();
@@ -30,18 +30,25 @@ void main_module::start_all_salleter()
 
             for (int i=0;i<koll_sputnik;i++)
             {
+<<<<<<< HEAD
 
                 //
                 sputnik=dbf.get_satellite(id_salleter[i]);
 
                 ///
 
+=======
+                sputnik=dbf.get_satellite(id_salleter[i]);
+>>>>>>> origin/master
                 L_potoc_sallete.insert(sputnik.stl_name, new potoc_salleter2);
                 L_potoc_sallete.value(sputnik.stl_name)->load_data(sputnik.stl_a,sputnik.stl_e,sputnik.stl_i,sputnik.stl_dolgota,sputnik.stl_ark_per,sputnik.stl_time_uts,sputnik.stl_name);
                 L_corners_solar_battery.insert(sputnik.stl_name, new corners_solar_battery);
                 T_potoc.insert(sputnik.stl_name,new QThread);
+<<<<<<< HEAD
                 ///
 
+=======
+>>>>>>> origin/master
                 // связывающие сигналы (основные)
                 QObject::connect(L_potoc_sallete.value(sputnik.stl_name),SIGNAL(data(vector_s,double,QString)),L_corners_solar_battery.value(sputnik.stl_name),SLOT(position_salleter(vector_s,double,QString)));
                 QObject::connect(sun_potoc,SIGNAL(positionsun(double,double,double,double)),L_corners_solar_battery.value(sputnik.stl_name),SLOT(position_sun(double,double,double,double)));
@@ -54,7 +61,11 @@ void main_module::start_all_salleter()
                 QObject::connect(T_potoc.value(sputnik.stl_name),SIGNAL(started()),L_potoc_sallete.value(sputnik.stl_name),SLOT(run()));
                 QObject::connect(T_potoc.value(sputnik.stl_name),SIGNAL(started()),L_corners_solar_battery.value(sputnik.stl_name),SLOT(run()));
                 T_potoc.value(sputnik.stl_name)->start();
+<<<<<<< HEAD
 
+=======
+                return 0;
+>>>>>>> origin/master
             }
         }
     }
@@ -65,8 +76,13 @@ void main_module::start_all_salleter()
             QObject::connect(this,SIGNAL(start_all_salleter_signal()),value,SLOT(StartTimer()));
         }
         start_all_salleter_signal();
+<<<<<<< HEAD
         emit messageslots("Все спутники запущены");
+=======
+        return 1;
+>>>>>>> origin/master
     }
+    return 0;
 }
 
 
@@ -101,7 +117,11 @@ void main_module::replay_salleter(double replay)
 }
 
 
+<<<<<<< HEAD
 void main_module::new_salleter(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota, double m)
+=======
+int main_module::new_salleter(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota, double m)
+>>>>>>> origin/master
 {
 
     satellite sputnik;
@@ -127,10 +147,21 @@ void main_module::new_salleter(QString name, double time_uts, double a, double e
         QObject::connect(T_potoc.value(sputnik.stl_name),SIGNAL(started()),L_potoc_sallete.value(sputnik.stl_name),SLOT(run()));
         QObject::connect(T_potoc.value(sputnik.stl_name),SIGNAL(started()),L_corners_solar_battery.value(sputnik.stl_name),SLOT(run()));
         T_potoc.value(sputnik.stl_name)->start();
+<<<<<<< HEAD
     }
 }
 
 void main_module::stop_salleter(QString name)
+=======
+        return 0;
+    }
+    else {
+        return 1;
+    }
+}
+
+int main_module::stop_salleter(QString name)
+>>>>>>> origin/master
 {
     bool s_t=false;
     foreach ( potoc_salleter2* value , L_potoc_sallete.values())
@@ -139,9 +170,15 @@ void main_module::stop_salleter(QString name)
             QObject::connect(this,SIGNAL(stop_salleter_signal()),value,SLOT(StopTimer()));
             emit stop_salleter_signal();
             QObject::disconnect(this,SIGNAL(stop_salleter_signal()),value,SLOT(StopTimer()));
+<<<<<<< HEAD
             emit messageslots("поток спутника"+name+"остановлен");
             s_t =true;
+=======
+            s_t =true;
+            return 0;
+>>>>>>> origin/master
             break;
+
         }
 
     }
@@ -150,15 +187,24 @@ void main_module::stop_salleter(QString name)
     {
         if(qdebug){
             qDebug()<<"Поток спутника-"<<name<<" не найден";
+<<<<<<< HEAD
             messageslots("Поток спутника-"+name+" не найден");
         }
        emit messageslots("Поток спутника-"+name+" не найден");
+=======
+        }
+        return 1;
+>>>>>>> origin/master
     }
-
+    return 0;
 }
 
 
+<<<<<<< HEAD
 void main_module::start_salleter(QString name)
+=======
+int main_module::start_salleter(QString name)
+>>>>>>> origin/master
 {
     bool s_t=false;
 
@@ -168,23 +214,40 @@ void main_module::start_salleter(QString name)
             QObject::connect(this,SIGNAL(start_salleter_signal()),value,SLOT(StartTimer()));
             emit start_salleter_signal();
             QObject::disconnect(this,SIGNAL(start_salleter_signal()),value,SLOT(StartTimer()));
+<<<<<<< HEAD
             emit messageslots("поток спутника"+name+"запущен");
             s_t =true;
+=======
+            s_t =true;
+            return 0;
+>>>>>>> origin/master
             break;
         }
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     if ( s_t==false)
     {
         if(qdebug){
             qDebug()<<"Поток спутника-"<<name<<" не найден";
         }
+<<<<<<< HEAD
         emit messageslots("поток спутника"+name+"не найден");
+=======
+        return 1;
+>>>>>>> origin/master
     }
+    return 1;
 }
 
+<<<<<<< HEAD
 void main_module::updata_salleter(double a, double e, double i, double dvu, double urp, double t0, QString name)
+=======
+int main_module::updata_salleter(double a, double e, double i, double dvu, double urp, double t0, QString name)
+>>>>>>> origin/master
 {
     bool s_t=false;
 
@@ -196,7 +259,11 @@ void main_module::updata_salleter(double a, double e, double i, double dvu, doub
             if(qdebug){
                 qDebug()<<"Поток спутника-"<<name<<"данные потока обновлены";
             }
+<<<<<<< HEAD
              emit messageslots("Поток спутника-"+name+"данные потока обновлены");
+=======
+            return 0;
+>>>>>>> origin/master
             break;
         }
     }
@@ -205,8 +272,13 @@ void main_module::updata_salleter(double a, double e, double i, double dvu, doub
         if(qdebug){
             qDebug()<<"Поток спутника-"<<name<<" не найден";
         }
+<<<<<<< HEAD
        emit  messageslots("Поток спутника-"+name+" не найден");
+=======
+        return 1;
+>>>>>>> origin/master
     }
+    return 1;
 }
 
 void main_module::stop_sun()
@@ -215,7 +287,10 @@ void main_module::stop_sun()
     if(qdebug){
         qDebug()<<"Поток вычисления местоположения солнца остановленны , данные не будут обновляться";
     }
+<<<<<<< HEAD
    emit messageslots("Поток вычисления местоположения солнца остановленны , данные не будут обновляться");
+=======
+>>>>>>> origin/master
 }
 
 void main_module::start_sun()
@@ -227,18 +302,26 @@ void main_module::start_sun()
    emit messageslots("Поток вычисления местоположения солнца запущен");
 }
 
-void main_module::stop_all_salleter()
+int main_module::stop_all_salleter()
 {
     foreach ( potoc_salleter2* value , L_potoc_sallete.values())
     {
         QObject::connect(this,SIGNAL(stop_all_salleter_signal()),value,SLOT(StopTimer()));
     }
+<<<<<<< HEAD
     stop_all_salleter_signal();
+=======
+>>>>>>> origin/master
 
     if(qdebug){
         qDebug()<<"Все потоки вычесления спутника остановлены";
     }
+<<<<<<< HEAD
     emit messageslots("Все потоки вычесления спутника остановлены");
+=======
+    stop_all_salleter_signal();
+    return 0;
+>>>>>>> origin/master
 }
 
 
@@ -276,13 +359,20 @@ solar_battery_salleter main_module::get_value_corners_salleter(QString name)
         if(qdebug){
             qDebug()<<"Углы спутника "<<name<<" не найдены";
         }
+<<<<<<< HEAD
         emit  messageslots("Углы спутника "+name+" не найдены");
+=======
+>>>>>>> origin/master
     }
     return corners;
 }
 
-void main_module::value_all_potoc()
+
+
+
+int main_module::set_new_salleter_to_date_base(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota, double m)
 {
+<<<<<<< HEAD
     if (sun_potoc->wait()!=true)
     {
         if(qdebug){
@@ -364,11 +454,23 @@ void main_module::set_new_salleter_to_date_base(QString name, double time_uts, d
     }
     else
     {
+=======
+
+    if ( dbf.inset_to_satellite(name,time_uts,a,e,i,ark_per,dolgota,m)){
+        if(qdebug){
+            qDebug()<<"Спутник добавлен в бд";
+        }
+        return 0;
+    }
+    else
+    {
+>>>>>>> origin/master
         if(qdebug)
         {
             qDebug()<<"Ошибка!!!";
             qDebug()<<"Спутник не добавлен в бд";
         }
+<<<<<<< HEAD
       emit  messageslots("Ошибка!!!");
      emit   messageslots("Спутник не добавлен в бд");
     }
@@ -378,9 +480,52 @@ void main_module::delete_potoc_salleter(QString name)
 {
     bool t_f=false;
 
+=======
+        return 1;
+    }
+}
+
+int main_module::delete_potoc_salleter(QString name)
+{
+    bool t_f=false;
+    foreach (QString key, L_potoc_sallete.keys()) {
+
+        if (key==name){
+            stop_salleter(name);
+            L_potoc_sallete.value(key)->quit();
+            L_potoc_sallete.value(key)->wait();
+            L_potoc_sallete.value(key)->terminate();
+            L_potoc_sallete.value(key)->wait();
+            drain->deletedata(key);
+            L_potoc_sallete.remove(key);
+            t_f=true;
+            return 0;
+            break;
+        }
+    }
+
+    if (t_f==false){
+        return 1;
+    }
+    return 0;
+}
+
+int main_module::delete_salleter_form_dataBase(QString name)
+{
+    delete_potoc_salleter(name);
+    if (name==dbf.get_satellite(name).stl_name){
+        dbf.delete_satellite(name);
+        return 0;
+    }
+    else{
+        return 1;
+    }
+}
+>>>>>>> origin/master
 
     foreach (QString key, L_potoc_sallete.keys()) {
 
+<<<<<<< HEAD
         if (key==name){
             stop_salleter(name);
             L_potoc_sallete.value(key)->terminate();
@@ -411,3 +556,5 @@ void main_module::delete_salleter_form_dataBase(QString name)
 }
 
 
+=======
+>>>>>>> origin/master

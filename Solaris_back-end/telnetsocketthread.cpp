@@ -7,6 +7,7 @@
 void TelnetSocketThread::parser(QString command)
 {
     command_parser parser_cmd(*main);
+
     socket->write(parser_cmd.command(command));
 
 }
@@ -15,7 +16,10 @@ TelnetSocketThread::TelnetSocketThread(int ID, QObject *parent, main_module *mai
 {
     this->socketDescriptor = ID;
     main=main_m;  
+<<<<<<< HEAD
     connect(main,SIGNAL(messageslots(QString)),this,SLOT(Message_slot(QString)));
+=======
+>>>>>>> origin/master
 }
 
 void TelnetSocketThread::run()

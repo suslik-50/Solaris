@@ -1,6 +1,5 @@
 #include "drain_parametrs_solar_battery.h"
 
-#include <QDebug>
 
 drain_parametrs_solar_battery::drain_parametrs_solar_battery()
 {
@@ -24,6 +23,7 @@ void drain_parametrs_solar_battery::run()
 }
 
 void drain_parametrs_solar_battery::deletedata(QString name)
+<<<<<<< HEAD
 {
 
     foreach (QString key, data_sbs.keys()) {
@@ -35,6 +35,19 @@ void drain_parametrs_solar_battery::deletedata(QString name)
 
 void drain_parametrs_solar_battery::data(double a,double b,double time,QString name)
 {
+=======
+{
+
+    foreach (QString key, data_sbs.keys()) {
+        if (key == name){
+            data_sbs.remove(key);
+        }
+    }
+}
+
+void drain_parametrs_solar_battery::data(double a,double b,double time,QString name)
+{
+>>>>>>> origin/master
     solar_battery_salleter salleter_data ;
     salleter_data.a=a;
     salleter_data.b=b;
@@ -65,9 +78,11 @@ void drain_parametrs_solar_battery::data(double a,double b,double time,QString n
 
 void drain_parametrs_solar_battery::get_data()
 {
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/master
     emit data_solar_battery(data_sbs);
-    data_sbs.clear();
 }
 

@@ -14,12 +14,15 @@ struct sun
     double z;
 };
 
+<<<<<<< HEAD
 struct sun2
 {
     double x;
     double y;
     double z;
 };
+=======
+>>>>>>> origin/master
 
 struct vector_s
 {
@@ -29,6 +32,13 @@ struct vector_s
     double vx;
     double vy;
     double vz;
+
+    double x_orb;
+    double y_orb;
+    double z_orb;
+    double vx_orb;
+    double vy_orb;
+    double vz_orb;
 };
 
 struct solar_battery_salleter

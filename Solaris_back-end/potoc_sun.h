@@ -27,9 +27,10 @@ private:Earth_pos pos;
 public:potoc_sun();
 public:sun sun_pull(double t );
 private:double MeanObliquity (double Mjd_TT);
-public slots:
+private slots:
     void slotNextValue();
     void sunposition();
+public slots:
     void run();
     void debug(bool y_n);
     void upreplay(int i);

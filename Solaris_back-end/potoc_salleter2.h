@@ -46,6 +46,7 @@ public:potoc_salleter2();
 private:double EccAnom(double M,double e);
 private:double Getdvu(double t);
 private:double Geturp(double t);
+private:void OrbitalCoordinat();
 public:QString Getname();
 public:void load_data(double aa,double ee,double ii, double dvudvu,double urpurp,double TT0,QString name);
 private:void Additional_variables();
@@ -56,7 +57,10 @@ private:double Frac (double x)
 private:double Modulo (double x, double y)
     {
         return y*Frac(x/y);
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     }
 public slots:
     void update (double aa,double ee,double ii, double dvudvu,double urpurp,double TT0);

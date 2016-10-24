@@ -19,6 +19,7 @@ void functiondb::creat_db()  // функция создания базы дан�
 {
     QSqlQuery query;
 
+<<<<<<< HEAD
     // Создание таблицы "СОЛНЦЕ"
     QString sct="CREATE TABLE SUN ("
                 "ID_SUN       INTEGER PRIMARY KEY AUTOINCREMENT"
@@ -29,6 +30,8 @@ void functiondb::creat_db()  // функция создания базы дан�
                 "SUN_TIME_UTS DOUBLE"
                 ");";
 
+=======
+>>>>>>> origin/master
     //Создание таблицы "СПУТНИК"
     QString sss="CREATE TABLE SATELLITE ("
                 "ID_SATELLITE INTEGER PRIMARY KEY AUTOINCREMENT"
@@ -57,6 +60,7 @@ void functiondb::creat_db()  // функция создания базы дан�
                 "C_M                  DOUBLE,"
                 "EDITOR               STRING [30]"
                 ");";
+<<<<<<< HEAD
     QString sca=
             "CREATE TABLE AUTHORIZATION ("
             "ID_AUTHORIZATION INTEGER     PRIMARY KEY AUTOINCREMENT"
@@ -69,12 +73,16 @@ void functiondb::creat_db()  // функция создания базы дан�
     if (query.exec(sct))
     {
         cout<<"[+] Cозданна таблица 'СОЛНЦЕ'"<<endl;
+=======
+
+>>>>>>> origin/master
         if (query.exec(sss))
         {
             cout<<"[+] Cозданна таблица 'СПУТНИК'"<<endl;
             if(query.exec(scs))
             {
                 cout<<"[+] Cозданна таблица 'КОРРЕКТИРОВКА СПУТНИКА'"<<endl;
+<<<<<<< HEAD
                 if (query.exec(sca))
                 {
                     cout<<"[+] Cозданна таблица 'АВТОРИЗАЦИЯ'"<<endl;
@@ -83,6 +91,8 @@ void functiondb::creat_db()  // функция создания базы дан�
                 {
                     cout<<"[-] Не созданна таблица 'АВТОРИЗАЦИЯ'"<<endl;
                 }
+=======
+>>>>>>> origin/master
             }
             else
             {
@@ -99,8 +109,8 @@ void functiondb::creat_db()  // функция создания базы дан�
         cout<<"[-] Не созданна таблица 'СОЛНЦЕ'"<<endl;
     }
 
-}
 
+<<<<<<< HEAD
 bool functiondb::insert_to_sun(double x, double y,
                                double z, double time_uts) // Функция добавления данных в таблицу СОЛНЦЕ
 {
@@ -119,7 +129,12 @@ bool functiondb::insert_to_sun(double x, double y,
     {
         cout<<"[-] Данные не добавлены в таблицу солнца"<<endl;
     }
+=======
+
+>>>>>>> origin/master
 }
+
+
 
 bool functiondb::inset_to_satellite(QString name, double time_uts, double a,
                                     double e, double i, double ark_per,
@@ -235,9 +250,8 @@ void functiondb::update_to_satellite(QString name, double time_uts, double a,
 }
 
 
-void functiondb::update_to_sun(double x, double y, double z, double time_uts) // Функция изменения данных таблицы 'СОЛНЦЕ'
-{
 
+<<<<<<< HEAD
     QSqlQuery query2;
     query2.prepare("UPDATE SUN SET SUN_X=:SUN_X, SUN_Y=:SUN_Y, SUN_Z=:SUN_Z, SUN_TIME_UTS=:SUN_TIME_UTS"
                    " WHERE SUN_TIME_UTS=:SUN_TIME_UTS;");
@@ -254,6 +268,8 @@ void functiondb::update_to_sun(double x, double y, double z, double time_uts) //
         cout<<"[-] Обновление данных солнца не удалость"<<endl;
     }
 }
+=======
+>>>>>>> origin/master
 
 bool functiondb::insert_to_correct_satellite(int satellite_id, double time_uts, double a,
                                              double e, double i, double ark_per,
@@ -361,7 +377,6 @@ satellite functiondb::get_satellite(QString name ) // Возращает дан�
             sputnik.stl_m=query.value(rec.indexOf("STL_M")).toDouble();
         }
         return sputnik;
-
     }
     else
     {

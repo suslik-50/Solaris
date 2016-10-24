@@ -3,17 +3,26 @@
 command_parser::command_parser(main_module &man_m)
 {
     module=&man_m;
+<<<<<<< HEAD
 
 }
+=======
+>>>>>>> origin/master
 
+}
 QByteArray command_parser::command(QString cmd)
 {
     QStringList shortList = cmd.split(' ');
+<<<<<<< HEAD
     bytes="";
+=======
+    QByteArray bytes;
+>>>>>>> origin/master
     if (shortList.first()=="start")
     {
         if (shortList.size()>1){
             if (shortList[1]=="all")
+<<<<<<< HEAD
             {
                 if (shortList.size()>2){
                     if (shortList[2]=="salleter")
@@ -49,6 +58,51 @@ QByteArray command_parser::command(QString cmd)
             {
                 module->start_sun();
             }
+=======
+            {
+                if (shortList.size()>2){
+                    if (shortList[2]=="salleter")
+                    {
+                        int otvet=module->start_all_salleter();
+                        if (otvet==0){
+                            bytes.append("Старт вычисления всех потоков спутника\r\n");
+                        }
+                        if(otvet==1){
+                            bytes.append("Старт вычисления всех потоков спутник, данные взяты из памяти\r\n");
+                        }
+                    }
+                    else
+                    {
+                        bytes.append("Команда не найдена\r\n");
+                    }
+                }
+                else
+                {
+                    bytes.append("Команда не найдена\r\n");
+
+                }
+            }
+            else if (shortList[1]=="salleter")
+            {
+                if (shortList.size()>2){
+                    int otvet=module->start_salleter(shortList[2]);
+                    if(otvet==0){
+                        bytes.append("Старт вычеслений спутника "+shortList[2]+"r\n");
+                    }
+                    if(otvet==1){
+                        bytes.append("Поток спутника не найден "+shortList[2]+"r\n");
+                    }
+                }
+                else{
+                    bytes.append("Введите имя спутника\r\n");
+                }
+            }
+            else if (shortList[1]=="sun")
+            {
+                module->start_sun();
+                bytes.append("Поток вычисления местоположения солнца запущен\r\n");
+            }
+>>>>>>> origin/master
             else
             {
                 bytes.append("Команда не найдена\r\n");
@@ -67,8 +121,16 @@ QByteArray command_parser::command(QString cmd)
                 if (shortList.size()>2){
                     if (shortList[2]=="salleter")
                     {
+<<<<<<< HEAD
                         bytes.append("Остановка вычисления всех потоков спутника\r\n");
                         module->stop_all_salleter();
+=======
+
+                        int otvet =module->stop_all_salleter();
+                        if (otvet==0){
+                            bytes.append("Остановка вычисления всех потоков спутника\r\n");
+                        }
+>>>>>>> origin/master
                     }
                     else{
                         bytes.append("Команда не найдена\r\n");
@@ -86,8 +148,13 @@ QByteArray command_parser::command(QString cmd)
             }
             else if (shortList[1]=="sun")
             {
+<<<<<<< HEAD
 
                 module->stop_sun();
+=======
+                module->stop_sun();
+                bytes.append("Поток вычисления местоположения солнца остановлен\r\n");
+>>>>>>> origin/master
             }
             else
             {
@@ -204,17 +271,27 @@ QByteArray command_parser::command(QString cmd)
                     a.setNum(s.a);
                     b.setNum(s.b);
                     bytes.append("Углы спутника "+s.name+" a-"+a+", b-"+b+"\r\n");
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/master
                 }
                 else{
                     bytes.append("Имя спутника не задано\r\n");
                 }
+<<<<<<< HEAD
             }
             else {
                 bytes.append("Команда не найдена\r\n");
 
             }
+=======
+            }
+            else {
+                bytes.append("Команда не найдена\r\n");
+            }
+>>>>>>> origin/master
         }
         else
         {
@@ -233,10 +310,21 @@ QByteArray command_parser::command(QString cmd)
                 i=shortList[6].toDouble();
                 ark_per=shortList[7].toDouble();
                 dolgot=shortList[8].toDouble();
+<<<<<<< HEAD
                 module->updata_salleter(a,e,i,dolgot,ark_per,time_ut,name);
                 bytes.append("Спутник данные спутника"+name+"обновлены\r\n");
             }
 
+=======
+                int otvet=module->updata_salleter(a,e,i,dolgot,ark_per,time_ut,name);
+                if (otvet==0){
+                    bytes.append("Спутник данные спутника "+name+" обновлены\r\n");
+                }else
+                    if (otvet==1){
+                        bytes.append("Спутник данные спутника "+name+" не найдены\r\n");
+                    }
+            }
+>>>>>>> origin/master
             else{
                 bytes.append("Недостаточно переменных\r\n");
             }
@@ -277,13 +365,21 @@ QByteArray command_parser::command(QString cmd)
                 ark_per=shortList[7].toDouble();
                 dolgot=shortList[8].toDouble();
                 m=shortList[9].toDouble();
+<<<<<<< HEAD
                 module->set_new_salleter_to_date_base(name,time_ut,a,e,i,ark_per,dolgot,m);
                 bytes.append("Спутник добавлен в бд и запущен\r\n");
+=======
+                int otvet=module->set_new_salleter_to_date_base(name,time_ut,a,e,i,ark_per,dolgot,m);
+                if (otvet==0){
+                    bytes.append("Спутник добавлен в бд и запущен\r\n");
+                }else
+                    if(otvet==1){
+                        bytes.append("Спутник не добавлен в бд\r\n");
+                    }
+>>>>>>> origin/master
             }
             else{
                 bytes.append("Недостаточно переменных\r\n");
-
-
             }
         }
         else {
@@ -305,6 +401,7 @@ QByteArray command_parser::command(QString cmd)
             {
                 bytes.append("Команда не найдена\r\n");
             }
+<<<<<<< HEAD
         }
         else{
             bytes.append("Команда не найдена\r\n");
@@ -325,11 +422,44 @@ QByteArray command_parser::command(QString cmd)
             bytes.append("Команда не найдена++\r\n");
         }
       }
+=======
+        }
+>>>>>>> origin/master
         else{
             bytes.append("Команда не найдена--\r\n");
         }
+<<<<<<< HEAD
      }
     ///
+=======
+    } else if (shortList.first()=="delete"){
+        if (shortList.size()>=4){
+            if (shortList[1]=="potoc" && shortList[2]=="salleter"){
+                int otvet=module->delete_potoc_salleter(shortList[3]);
+                if (otvet==0){
+                    bytes.append("Поток спутника "+shortList[3]+" отсановлен и удален из памяти\r\n");
+                }else
+                    if(otvet==1){
+                        bytes.append("Поток спутника "+shortList[3]+" не найден\r\n");
+                    }
+            }
+
+            if (shortList[1]=="data" && shortList[2]=="salleter"){
+                int otvet=module->delete_salleter_form_dataBase(shortList[3]);
+                if (otvet==0){
+                    bytes.append("Данные спутника "+shortList[3]+" удален \r\n");
+                }else
+                    if(otvet==1){
+                        bytes.append("Данные спутника "+shortList[3]+" не найдены \r\n");
+                    }
+            }
+
+        }
+        else{
+            bytes.append("Команда не найдена--\r\n");
+        }
+    }
+>>>>>>> origin/master
     else if (shortList.first()=="help")
     {
         bytes.append("Доступные команды\r\n");
