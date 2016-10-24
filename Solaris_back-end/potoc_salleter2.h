@@ -57,6 +57,10 @@ private:double Frac (double x)
 private:double Modulo (double x, double y)
     {
         return y*Frac(x/y);
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
     }
 public slots:
     void update (double aa,double ee,double ii, double dvudvu,double urpurp,double TT0);

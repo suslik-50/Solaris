@@ -41,6 +41,7 @@ public slots:
     void readyRead();
     void disconnected();
     void setAccess(bool access);
+    void Message_slot(QString message);
 
     void setAuntofic(bool auntofic)
     {

@@ -116,6 +116,43 @@ void potoc_salleter2::Additional_variables()
     Qx = (-cos(dvu)*sin(urp))-(sin(dvu)*cos(urp)*cos(i));//
     Qy = (-sin(dvu)*sin(urp))+(cos(dvu)*cos(urp)*cos(i));//
     Qz = cos(urp)*sin(i);
+<<<<<<< HEAD
+    /*
+    double kontrolsum,kontrolsum2,kontrolsum3;
+    kontrolsum = (Px*Px)+(Py*Py)+(Pz*Pz); //  контрольные суммы для проверки вычислений
+    kontrolsum2 = (Qx*Qx)+(Qy*Qy)+(Qz*Qz);//
+    kontrolsum3 = (Qx*Px)+(Qy*Py)+(Qz*Pz);//
+
+    if (kontrolsum!=1)
+    {
+        if (qdebag)
+        {
+        qDebug()<<" ОШИБКА !!! контрольная сумма 1="<<kontrolsum;
+        }
+        emit kontrol_sum(1);
+    }
+
+    if (kontrolsum2!=1)
+    {
+        if (qdebag)
+        {
+        qDebug()<<" ОШИБКА !!! контрольная сумма 2="<<kontrolsum2;
+        }
+        emit kontrol_sum(2);
+    }
+
+    if (kontrolsum3!=0)
+    {
+        if (qdebag)
+        {
+        qDebug()<<" ОШИБКА !!! контрольная сумма 3="<<kontrolsum3;
+        }
+        emit kontrol_sum(3);
+    }
+    */
+
+=======
+>>>>>>> origin/master
 }
 
 void potoc_salleter2::update(double aa, double ee, double ii, double dvudvu, double urpurp, double TT0)
@@ -212,6 +249,64 @@ void potoc_salleter2::slotNextValue()
         qDebug()<<vx<<"vx-скорость по x";
         qDebug()<<vy<<"vy-скорость по y";
         qDebug()<<vz<<"vz-скорость по z";
+<<<<<<< HEAD
+        qDebug()<<V<< "v-скорость";
+    }
+    // перевод в орбитальные координвты
+    double px,py,pz,qx,qy,qz,rx,ry,rz;
+    px=cos(urp)*cos(dvu)-sin(urp)*sin(dvu)*cos(i);
+    py=(cos(urp)*sin(dvu)+sin(urp)*cos(dvu)*cos(i))*cos(e)-sin(urp)*sin(i)*sin(e);
+    pz=(cos(urp)*sin(dvu)+sin(urp)*cos(dvu)*cos(i))*cos(e)+sin(urp)*sin(i)*cos(e);
+    qx=-sin(urp)*cos(dvu)-cos(urp)*sin(dvu)*cos(i);
+    qy=(-sin(urp)*sin(dvu)+cos(urp)*cos(dvu)*cos(i))*cos(e)-cos(urp)*sin(i)*sin(e);
+    qz=(-sin(urp)*sin(dvu)+cos(urp)*cos(dvu)*cos(i))*sin(e)+cos(urp)*sin(i)*cos(e);
+    rx=sin(dvu)*sin(i);
+    ry=-cos(dvu)*sin(i)*cos(e)-cos(i)*sin(e);
+    rz=cos(i)*cos(e)-sin(i)*cos(dvu)*sin(e);
+
+
+    double A[3][3],B[3][1],C[3][1],VC[3][1];
+    A[0][0]=px;
+    A[0][1]=py;
+    A[0][2]=pz;
+    A[1][0]=qx;
+    A[1][1]=qy;
+    A[1][2]=qz;
+    A[2][0]=rx;
+    A[2][1]=ry;
+    A[2][2]=rz;
+    B[0][0]=x;
+    B[1][0]=y;
+    B[2][0]=z;
+
+    for(int ii = 0; ii < 3; ii++)
+        for(int j = 0; j < 1; j++)
+        {
+            C[ii][j] = 0;
+            for(int k = 0; k < 3; k++)
+                C[ii][j] += A[ii][k] * B[k][j];
+        }
+
+    B[0][0]=vx;
+    B[1][0]=vy;
+    B[2][0]=vz;
+
+    for(int ii = 0; ii < 3; ii++)
+        for(int j = 0; j < 1; j++)
+        {
+            VC[ii][j] = 0;
+            for(int k = 0; k < 3; k++)
+                VC[ii][j] += A[ii][k] * B[k][j];
+        }
+
+    salleter.x=C[0][0];
+    salleter.y=C[1][0];
+    salleter.z=C[2][0];
+    salleter.vx=VC[0][0];
+    salleter.vy=VC[1][0];
+    salleter.vz=VC[2][0];
+
+=======
         qDebug()<<V<<"v-скорость";
     }
     salleter.x=x;
@@ -221,6 +316,7 @@ void potoc_salleter2::slotNextValue()
     salleter.vy=vy;
     salleter.vz=vz;
     OrbitalCoordinat();
+>>>>>>> origin/master
     emit  data(salleter,t,name); // отправляет сигнал что данные обновились
 }
 

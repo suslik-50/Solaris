@@ -22,9 +22,12 @@ void corners_solar_battery::cornes()
     if (San.x!=0 && sputnik.x!=0 )
     {
         /*
+<<<<<<< HEAD
+=======
          *
          Вхождение в тень
          //
+>>>>>>> origin/master
         Координаты и компоненты скорости применяются при вычислении ортов орбитальной системы координат
         (ОСК) er, etau, en, которые потом используются при вычислении единичного вектора направления на
         Солнце в ОСК S. Если в геоцентрической инерциальной экваториальной системе координат единичный
@@ -53,13 +56,36 @@ void corners_solar_battery::cornes()
         a=atan(sinA/cosA);
         b=atan2(sinB,cosB)*180*PI;
         */
+<<<<<<< HEAD
+=======
         ///
         a=San.x;
         b=sputnik.x;
         ///
+>>>>>>> origin/master
+
+        a=San.x;
+        b=sputnik.x;
 
 
+<<<<<<< HEAD
 
+        if (false)
+        {
+            qDebug()<<name<<"-имя спутника";
+            qDebug()<<a<<"-угол а(альфа)";
+            qDebug()<<b<<"-угол б(бетта)";
+            qDebug()<<QDateTime::fromTime_t(time).time();
+            qDebug()<<QDateTime::fromTime_t(time).date();
+        }
+
+        solar_battery_salleter salleter_data;
+        salleter_data.a=a;
+        salleter_data.b=b;
+        salleter_data.name=name;
+        salleter_data.time=time;
+
+=======
         if (qdebug)
         {
             qDebug()<<name<<"-имя спутника";
@@ -75,6 +101,7 @@ void corners_solar_battery::cornes()
         salleter_data.name=name;
         salleter_data.time=time;
 
+>>>>>>> origin/master
         emit data (salleter_data.a,salleter_data.b,salleter_data.time,salleter_data.name); // сигнал с новыми данными
     }
 }

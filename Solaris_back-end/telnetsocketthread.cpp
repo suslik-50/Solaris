@@ -16,6 +16,10 @@ TelnetSocketThread::TelnetSocketThread(int ID, QObject *parent, main_module *mai
 {
     this->socketDescriptor = ID;
     main=main_m;  
+<<<<<<< HEAD
+    connect(main,SIGNAL(messageslots(QString)),this,SLOT(Message_slot(QString)));
+=======
+>>>>>>> origin/master
 }
 
 void TelnetSocketThread::run()
@@ -33,6 +37,7 @@ void TelnetSocketThread::run()
 
     QByteArray data("Введите команду \r\n");
     socket->write(data);
+    Message_slot("Все команды help");
     setAccess(false);
     exec();
 }
@@ -40,6 +45,15 @@ void TelnetSocketThread::run()
 bool TelnetSocketThread::access() const
 {
     return m_access;
+}
+
+void TelnetSocketThread::Message_slot(QString message)
+{
+    qDebug()<<message;
+    QByteArray ba;
+    ba+=(message+"\r\n");
+    socket->write(ba);
+    ba.clear();
 }
 
 void TelnetSocketThread::readyRead()
