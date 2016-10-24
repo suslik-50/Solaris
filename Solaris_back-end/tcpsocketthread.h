@@ -22,7 +22,7 @@ public slots:
     void get();
     void readyRead();
     void disconnected();
-    void sendClient(QMap<QString,solar_battery_salleter> data_sbs);
+    void sendClient(QList<solar_battery_salleter> data);
 
 private:
     QTcpSocket *socket;

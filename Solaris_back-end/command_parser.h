@@ -7,10 +7,6 @@
 class command_parser
 {
     main_module *module;
-<<<<<<< HEAD
-    QByteArray bytes;
-=======
->>>>>>> origin/master
 private:setting file_setting;
 public: command_parser(main_module &man_m);
 public: QByteArray command(QString cmd);

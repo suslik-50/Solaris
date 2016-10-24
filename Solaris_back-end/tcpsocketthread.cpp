@@ -21,8 +21,8 @@ void TcpSocketThread::run()
 
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()),Qt::DirectConnection);
     connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()),Qt::DirectConnection);
-    connect(drain_, SIGNAL(data_solar_battery(QMap<QString,solar_battery_salleter>)),
-            this, SLOT(sendClient(QMap<QString,solar_battery_salleter>)));
+    connect(drain_, SIGNAL(data_solar_battery(QList<solar_battery_salleter>)),
+            this, SLOT(sendClient(QList<solar_battery_salleter>)));
 
     qDebug() << socketDescriptor << " Client connected";
 
@@ -39,20 +39,18 @@ void TcpSocketThread::get()
    drain_->get_data();
 }
 
-void TcpSocketThread::sendClient(QMap<QString, solar_battery_salleter> data_sbs)
+void TcpSocketThread::sendClient(QList<solar_battery_salleter> data)
 {
 
     QStringList list;
-    foreach (QString key, data_sbs.keys())
-    {
-        QDateTime date;
-        QString time;
-        date.setTime_t(data_sbs[key].time);
-        time = date.toString("yy/MM/dd:hh:mm:ss");
-        qDebug() << data_sbs[key].a;
-        list.append(data_sbs[key].name + "," + QString::number(data_sbs[key].a) + "," +
-                    QString::number(data_sbs[key].b) + "," + time);
+    for (int i = 0; i < data.length(); ++i) {
+        list.append(data[i].name+ "," + QString::number(data[i].a)+ ","+
+                    QString::number(data[i].b)+ "," + QString::number(data[i].time));
     }
+
+    //list.append(QString::number(2)+ "," + QString::number(22)+ ","+ QString::number(222)+ "," + QString::number(2222));
+
+
     QByteArray  arrBlock;
     QDataStream out(&arrBlock, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_5);
@@ -60,6 +58,7 @@ void TcpSocketThread::sendClient(QMap<QString, solar_battery_salleter> data_sbs)
     out.device()->seek(0);
     out << quint16(arrBlock.size() - sizeof(quint16));
     socket->write(arrBlock);
+    qDebug()<< "Ok";
     list.clear();
 }
 
@@ -79,7 +78,9 @@ void TcpSocketThread::readyRead()
         if (socket->bytesAvailable() < m_nNextBlockSize) {
             break;
         }
+
         in >> id >> massage;
+        //sendClient(str);
         m_nNextBlockSize = 0;
     }
 }
