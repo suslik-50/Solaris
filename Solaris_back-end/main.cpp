@@ -6,7 +6,7 @@
 #include <drain_parametrs_solar_battery.h>
 #include <main_module.h>
 #include <telnetserver.h>
-#include <tcpserver.h>
+//#include <tcpserver.h>
 #include <potoc_salleter2.h>
 #include <earth_pos.h>
 #include <corners_solar_battery.h>
@@ -35,19 +35,19 @@ int main(int argc, char *argv[])
     TelnetServer server(&main_ma);
     server.StartServer();
 
-    TcpServer servertcp(&c_s_b);
-    servertcp.StartServer();
+   // TcpServer servertcp(&c_s_b);
+    //servertcp.StartServer();
 
-#ifdef Q_OS_OSX
+//#ifdef Q_OS_OSX
 
-         if (getppid() != 1 && daemon(0, 0) == -1) {
-         }
-         #else
-         if (daemon(0, 0) == -1) {
-         }
+//         if (getppid() != 1 && daemon(0, 0) == -1) {
+//         }
+//         #else
+//         if (daemon(0, 0) == -1) {
+//         }
 
 
-#endif
+//#endif
 
 #ifdef Q_OS_LINUX
 
