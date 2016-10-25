@@ -7,16 +7,22 @@
 #include <QDataStream>
 #include <structur.h>
 #include "drain_parametrs_solar_battery.h"
+#include <main_module.h>
+#include <QTimer>
+#include <QMap>
 
 class TcpSocketThread : public QThread
 {
     Q_OBJECT
+    main_module *main;
+    QTimer* timer;
 public:
-    explicit TcpSocketThread(int ID, drain_parametrs_solar_battery *darin_p);
+    explicit TcpSocketThread(int ID, drain_parametrs_solar_battery *darin_p, main_module *main_m);
 
     void run();
 signals:
     void error(QTcpSocket::SocketError socketerror);
+    void getDatadreain();
 
 public slots:
     void get();
@@ -29,6 +35,7 @@ private:
     int socketDescriptor;
     quint16 m_nNextBlockSize;
     drain_parametrs_solar_battery *drain_;
+    void pars(QString com);
 };
 
 #endif // TCPSOCKETTHREAD_H

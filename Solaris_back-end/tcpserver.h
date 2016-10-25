@@ -13,7 +13,8 @@
 class TcpServer : public QTcpServer
 {
     Q_OBJECT
-public:TcpServer(drain_parametrs_solar_battery *darin_p);
+    main_module *main;
+public:TcpServer(drain_parametrs_solar_battery *darin_p, main_module *man_m);
 private:setting file_setting;
 private:int port;
 public:void StartServer();

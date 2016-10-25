@@ -64,5 +64,6 @@ void drain_parametrs_solar_battery::data(double a,double b,double time,QString n
 void drain_parametrs_solar_battery::get_data()
 {
     emit data_solar_battery(data_sbs);
+    //data_sbs.clear();
 }
 

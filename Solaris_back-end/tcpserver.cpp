@@ -2,9 +2,10 @@
 #include <QTimer>
 
 
-TcpServer::TcpServer(drain_parametrs_solar_battery *darin_p)
+TcpServer::TcpServer(drain_parametrs_solar_battery *darin_p, main_module *man_m)
 {
     drain = darin_p;
+    main = man_m;
 }
 
 void TcpServer::StartServer()
@@ -28,8 +29,11 @@ void TcpServer::get()
 void TcpServer::incomingConnection(qintptr socketDescriptor)
 {
     qDebug() << socketDescriptor << " Connecting...";
-    TcpSocketThread *thread = new TcpSocketThread(socketDescriptor, drain);
-    connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
+    TcpSocketThread *thread = new TcpSocketThread(socketDescriptor, drain, main);
     thread->start();
+    connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
+    this->moveToThread(thread);
+    thread->start();
+
 }
 

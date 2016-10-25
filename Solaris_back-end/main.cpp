@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     TelnetServer server(&main_ma);
     server.StartServer();
 
-    TcpServer servertcp(&c_s_b);
+    TcpServer servertcp(&c_s_b, &main_ma);
     servertcp.StartServer();
 
 #ifdef Q_OS_OSX

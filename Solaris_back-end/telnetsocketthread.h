@@ -10,6 +10,7 @@
 #include <structur.h>
 #include <setting.h>
 #include <command_parser.h>
+
 class TelnetSocketThread : public QThread
 {
     Q_OBJECT
@@ -32,16 +33,13 @@ public: TelnetSocketThread(int ID, QObject *parent, main_module *main_m);
 
 signals:
     void error(QTcpSocket::SocketError socketerror);
-
     void accessChanged(bool access);
-
     void auntoficChanged(bool auntofic);
 
 public slots:
     void readyRead();
     void disconnected();
     void setAccess(bool access);
-
     void setAuntofic(bool auntofic)
     {
         if (m_auntofic == auntofic)
