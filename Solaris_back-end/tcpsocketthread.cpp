@@ -8,9 +8,6 @@ TcpSocketThread::TcpSocketThread(int ID, drain_parametrs_solar_battery *darin_p,
     drain_ = darin_p;
     main=main_m;
 
-//    timer = new QTimer(0);
-//    connect(timer, SIGNAL(timeout()), this, SLOT(get()));
-//    timer->start(5000);
 }
 
 
@@ -73,11 +70,10 @@ void TcpSocketThread::sendClient(QMap<QString,solar_battery_salleter> data_sbs)
 
 void TcpSocketThread::pars(QString com)
 {
-//    QByteArray  arr;
-//    command_parser parser_cmd(*main);
-//    arr = parser_cmd.command(com);
-//    QString str(arr);
-    QString str;
+    QByteArray  arr;
+    command_parser parser_cmd(*main);
+    arr = parser_cmd.command(com);
+    QString str(arr);
     QStringList list;
     list.append(com);
     str = "config";
@@ -98,7 +94,7 @@ void TcpSocketThread::readyRead()
     in.setVersion(QDataStream::Qt_4_5);
     for (;;)
     {
-        if (!m_nNextBlockSize) { // ???????? ?? ?????? ???????
+        if (!m_nNextBlockSize) {
             if (socket->bytesAvailable() < sizeof(quint16)) {
                 break;
             }
