@@ -47,9 +47,14 @@ int main_module::start_all_salleter()
                 QObject::connect(T_potoc.value(sputnik.stl_name),SIGNAL(started()),L_potoc_sallete.value(sputnik.stl_name),SLOT(run()));
                 QObject::connect(T_potoc.value(sputnik.stl_name),SIGNAL(started()),L_corners_solar_battery.value(sputnik.stl_name),SLOT(run()));
                 T_potoc.value(sputnik.stl_name)->start();
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
             }
             return 0;
         }
+
     }
     else{
 
