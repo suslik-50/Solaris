@@ -15,7 +15,7 @@ CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefau
 DEFINES       = -DQT_QML_DEBUG -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I../Solaris_back-end -I. -I../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I../../../Qt2/5.7/clang_64/mkspecs/macx-clang -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib
+INCPATH       = -I../Solaris_back-end -I. -I../../../Qt2/boost_1_62_0/include -I../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I../../../Qt2/5.7/clang_64/mkspecs/macx-clang -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib
 QMAKE         = /Users/ruslannuriev/Qt2/5.7/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = Solaris_back-end1.0.0
 DISTDIR = /Users/ruslannuriev/Documents/Solaris/build-Solaris_back-end-Desktop_Qt_5_7_0_clang_64bit-Debug/.tmp/Solaris_back-end1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -stdlib=libc++ -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -Wl,-rpath,/Users/ruslannuriev/Qt2/5.7/clang_64/lib
-LIBS          = $(SUBLIBS) -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib -framework QtSql -framework QtCore -framework DiskArbitration -framework IOKit -framework QtNetwork 
+LIBS          = $(SUBLIBS) -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib -L/Users/ruslannuriev/Qt2/boost_1_62_0/libs -framework QtSql -framework QtCore -framework DiskArbitration -framework IOKit -framework QtNetwork 
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -63,7 +63,8 @@ SOURCES       = ../Solaris_back-end/main.cpp \
 		../Solaris_back-end/command_parser.cpp \
 		../Solaris_back-end/potoc_salleter2.cpp \
 		../Solaris_back-end/tcpserver.cpp \
-		../Solaris_back-end/tcpsocketthread.cpp moc_potoc_sun.cpp \
+		../Solaris_back-end/tcpsocketthread.cpp \
+		../Solaris_back-end/command_parser2.cpp moc_potoc_sun.cpp \
 		moc_corners_solar_battery.cpp \
 		moc_drain_parametrs_solar_battery.cpp \
 		moc_main_module.cpp \
@@ -88,6 +89,7 @@ OBJECTS       = main.o \
 		potoc_salleter2.o \
 		tcpserver.o \
 		tcpsocketthread.o \
+		command_parser2.o \
 		moc_potoc_sun.o \
 		moc_corners_solar_battery.o \
 		moc_drain_parametrs_solar_battery.o \
@@ -269,7 +271,8 @@ DIST          = ../../../Qt2/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../Solaris_back-end/command_parser.h \
 		../Solaris_back-end/potoc_salleter2.h \
 		../Solaris_back-end/tcpserver.h \
-		../Solaris_back-end/tcpsocketthread.h ../Solaris_back-end/main.cpp \
+		../Solaris_back-end/tcpsocketthread.h \
+		../Solaris_back-end/command_parser2.h ../Solaris_back-end/main.cpp \
 		../Solaris_back-end/timejd.cpp \
 		../Solaris_back-end/earth_pos.cpp \
 		../Solaris_back-end/potoc_sun.cpp \
@@ -284,7 +287,8 @@ DIST          = ../../../Qt2/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../Solaris_back-end/command_parser.cpp \
 		../Solaris_back-end/potoc_salleter2.cpp \
 		../Solaris_back-end/tcpserver.cpp \
-		../Solaris_back-end/tcpsocketthread.cpp
+		../Solaris_back-end/tcpsocketthread.cpp \
+		../Solaris_back-end/command_parser2.cpp
 QMAKE_TARGET  = Solaris_back-end
 DESTDIR       = 
 TARGET        = Solaris_back-end
@@ -633,8 +637,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../Solaris_back-end/timejd.h ../Solaris_back-end/earth_pos.h ../Solaris_back-end/potoc_sun.h ../Solaris_back-end/structur.h ../Solaris_back-end/corners_solar_battery.h ../Solaris_back-end/setting.h ../Solaris_back-end/drain_parametrs_solar_battery.h ../Solaris_back-end/main_module.h ../Solaris_back-end/databaseconnect.h ../Solaris_back-end/functiondb.h ../Solaris_back-end/telnetserver.h ../Solaris_back-end/telnetsocketthread.h ../Solaris_back-end/command_parser.h ../Solaris_back-end/potoc_salleter2.h ../Solaris_back-end/tcpserver.h ../Solaris_back-end/tcpsocketthread.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Solaris_back-end/main.cpp ../Solaris_back-end/timejd.cpp ../Solaris_back-end/earth_pos.cpp ../Solaris_back-end/potoc_sun.cpp ../Solaris_back-end/corners_solar_battery.cpp ../Solaris_back-end/setting.cpp ../Solaris_back-end/drain_parametrs_solar_battery.cpp ../Solaris_back-end/main_module.cpp ../Solaris_back-end/databaseconnect.cpp ../Solaris_back-end/functiondb.cpp ../Solaris_back-end/telnetserver.cpp ../Solaris_back-end/telnetsocketthread.cpp ../Solaris_back-end/command_parser.cpp ../Solaris_back-end/potoc_salleter2.cpp ../Solaris_back-end/tcpserver.cpp ../Solaris_back-end/tcpsocketthread.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Solaris_back-end/timejd.h ../Solaris_back-end/earth_pos.h ../Solaris_back-end/potoc_sun.h ../Solaris_back-end/structur.h ../Solaris_back-end/corners_solar_battery.h ../Solaris_back-end/setting.h ../Solaris_back-end/drain_parametrs_solar_battery.h ../Solaris_back-end/main_module.h ../Solaris_back-end/databaseconnect.h ../Solaris_back-end/functiondb.h ../Solaris_back-end/telnetserver.h ../Solaris_back-end/telnetsocketthread.h ../Solaris_back-end/command_parser.h ../Solaris_back-end/potoc_salleter2.h ../Solaris_back-end/tcpserver.h ../Solaris_back-end/tcpsocketthread.h ../Solaris_back-end/command_parser2.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Solaris_back-end/main.cpp ../Solaris_back-end/timejd.cpp ../Solaris_back-end/earth_pos.cpp ../Solaris_back-end/potoc_sun.cpp ../Solaris_back-end/corners_solar_battery.cpp ../Solaris_back-end/setting.cpp ../Solaris_back-end/drain_parametrs_solar_battery.cpp ../Solaris_back-end/main_module.cpp ../Solaris_back-end/databaseconnect.cpp ../Solaris_back-end/functiondb.cpp ../Solaris_back-end/telnetserver.cpp ../Solaris_back-end/telnetsocketthread.cpp ../Solaris_back-end/command_parser.cpp ../Solaris_back-end/potoc_salleter2.cpp ../Solaris_back-end/tcpserver.cpp ../Solaris_back-end/tcpsocketthread.cpp ../Solaris_back-end/command_parser2.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -682,7 +686,7 @@ moc_potoc_sun.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObjec
 		../Solaris_back-end/timejd.h \
 		../Solaris_back-end/potoc_sun.h \
 		../../../Qt2/5.7/clang_64/bin/moc
-	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/potoc_sun.h -o moc_potoc_sun.cpp
+	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/potoc_sun.h -o moc_potoc_sun.cpp
 
 moc_corners_solar_battery.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -698,7 +702,7 @@ moc_corners_solar_battery.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/He
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qsettings.h \
 		../Solaris_back-end/corners_solar_battery.h \
 		../../../Qt2/5.7/clang_64/bin/moc
-	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/corners_solar_battery.h -o moc_corners_solar_battery.cpp
+	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/corners_solar_battery.h -o moc_corners_solar_battery.cpp
 
 moc_drain_parametrs_solar_battery.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -715,7 +719,7 @@ moc_drain_parametrs_solar_battery.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.fram
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qmap.h \
 		../Solaris_back-end/drain_parametrs_solar_battery.h \
 		../../../Qt2/5.7/clang_64/bin/moc
-	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/drain_parametrs_solar_battery.h -o moc_drain_parametrs_solar_battery.cpp
+	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/drain_parametrs_solar_battery.h -o moc_drain_parametrs_solar_battery.cpp
 
 moc_main_module.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -760,7 +764,7 @@ moc_main_module.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObj
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../Solaris_back-end/main_module.h \
 		../../../Qt2/5.7/clang_64/bin/moc
-	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/main_module.h -o moc_main_module.cpp
+	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/main_module.h -o moc_main_module.cpp
 
 moc_telnetserver.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -844,7 +848,7 @@ moc_telnetserver.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QOb
 		../Solaris_back-end/command_parser.h \
 		../Solaris_back-end/telnetserver.h \
 		../../../Qt2/5.7/clang_64/bin/moc
-	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/telnetserver.h -o moc_telnetserver.cpp
+	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/telnetserver.h -o moc_telnetserver.cpp
 
 moc_telnetsocketthread.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -927,7 +931,7 @@ moc_telnetsocketthread.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Heade
 		../Solaris_back-end/command_parser.h \
 		../Solaris_back-end/telnetsocketthread.h \
 		../../../Qt2/5.7/clang_64/bin/moc
-	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/telnetsocketthread.h -o moc_telnetsocketthread.cpp
+	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/telnetsocketthread.h -o moc_telnetsocketthread.cpp
 
 moc_potoc_salleter2.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -948,7 +952,7 @@ moc_potoc_salleter2.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../Solaris_back-end/potoc_salleter2.h \
 		../../../Qt2/5.7/clang_64/bin/moc
-	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/potoc_salleter2.h -o moc_potoc_salleter2.cpp
+	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/potoc_salleter2.h -o moc_potoc_salleter2.cpp
 
 moc_tcpserver.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -1001,7 +1005,7 @@ moc_tcpserver.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObjec
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../Solaris_back-end/tcpserver.h \
 		../../../Qt2/5.7/clang_64/bin/moc
-	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/tcpserver.h -o moc_tcpserver.cpp
+	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/tcpserver.h -o moc_tcpserver.cpp
 
 moc_tcpsocketthread.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -1051,7 +1055,7 @@ moc_tcpsocketthread.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../Solaris_back-end/tcpsocketthread.h \
 		../../../Qt2/5.7/clang_64/bin/moc
-	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/tcpsocketthread.h -o moc_tcpsocketthread.cpp
+	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/tcpsocketthread.h -o moc_tcpsocketthread.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1149,7 +1153,12 @@ main.o: ../Solaris_back-end/main.cpp ../../../Qt2/5.7/clang_64/lib/QtCore.framew
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qsslpresharedkeyauthenticator.h \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qsslsocket.h \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtnetworkversion.h \
-		../Solaris_back-end/command_parser.h
+		../Solaris_back-end/command_parser.h \
+		../Solaris_back-end/tcpserver.h \
+		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
+		../Solaris_back-end/tcpsocketthread.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDataStream \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Solaris_back-end/main.cpp
 
 timejd.o: ../Solaris_back-end/timejd.cpp ../Solaris_back-end/timejd.h \
@@ -1664,6 +1673,855 @@ tcpsocketthread.o: ../Solaris_back-end/tcpsocketthread.cpp ../Solaris_back-end/t
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../Solaris_back-end/command_parser.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tcpsocketthread.o ../Solaris_back-end/tcpsocketthread.cpp
+
+command_parser2.o: ../Solaris_back-end/command_parser2.cpp ../Solaris_back-end/command_parser2.h \
+		../Solaris_back-end/main_module.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QThread \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QList \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../Solaris_back-end/setting.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QSettings \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qsettings.h \
+		../Solaris_back-end/potoc_salleter2.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../Solaris_back-end/structur.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../Solaris_back-end/timejd.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../Solaris_back-end/corners_solar_battery.h \
+		../Solaris_back-end/potoc_sun.h \
+		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/drain_parametrs_solar_battery.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QMap \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		../Solaris_back-end/functiondb.h \
+		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/QSql \
+		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/QSqlRecord \
+		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QVariant \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		../Solaris_back-end/databaseconnect.h \
+		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt2/boost_1_62_0/include/boost/program_options.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/options_description.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/config.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/user.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/select_compiler_config.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/nvcc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/gcc_xml.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/cray.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/common_edg.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/comeau.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/pathscale.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/intel.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/visualc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/gcc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/clang.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/digitalmars.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/kai.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/sgi_mipspro.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/compaq_cxx.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/greenhills.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/codegear.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/borland.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/metrowerks.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/sunpro_cc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/hp_acc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/mpw.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/vacpp.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/compiler/pgi.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/select_stdlib_config.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/stdlib/stlport.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/stdlib/libcomo.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/no_tr1/utility.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/stdlib/roguewave.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/stdlib/libcpp.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/stdlib/libstdcpp3.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/stdlib/sgi.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/stdlib/msl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/posix_features.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/stdlib/vacpp.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/stdlib/modena.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/stdlib/dinkumware.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/select_platform_config.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/linux.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/bsd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/solaris.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/irix.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/hpux.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/cygwin.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/win32.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/beos.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/macos.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/aix.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/amigaos.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/qnxnto.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/vxworks.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/symbian.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/cray.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/platform/vms.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/suffix.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/version.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/auto_link.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/errors.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/value_semantic.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/any.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_index.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_index/stl_type_index.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_index/type_index_facade.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/static_assert.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/detail/workaround.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/throw_exception.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/exception/exception.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/current_function.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/core/demangle.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_const.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/integral_constant.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_reference.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_lvalue_reference.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_rvalue_reference.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_volatile.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/remove_cv.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/remove_reference.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/value_wknd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/static_cast.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/workaround.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/integral.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/msvc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/eti.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/int.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/int_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/adl_barrier.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/adl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/intel.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/gcc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/nttp_decl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/nttp.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/cat.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/config/config.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/integral_wrapper.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/integral_c_tag.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/static_constant.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/na_spec.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/lambda_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/void_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/na.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/bool.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/bool_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/na_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/ctps.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/lambda.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/ttp.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/lambda_arity_param.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/template_arity_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/arity.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/dtp.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/params.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/preprocessor.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/comma_if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/punctuation/comma_if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/control/if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/control/iif.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/logical/bool.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/facilities/empty.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/punctuation/comma.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repeat.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/repeat.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/debug/error.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/detail/auto_rec.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/detail/dmc/auto_rec.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/tuple/eat.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/inc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/arithmetic/inc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/enum.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/limits/arity.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/logical/and.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/logical/bitand.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/identity.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/facilities/identity.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/empty.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/filter_params.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/sub.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/tuple.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/arithmetic/sub.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/arithmetic/dec.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/control/while.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/list/fold_left.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/list/detail/edg/fold_left.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/control/expr_iif.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/list/adt.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/detail/is_binary.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/detail/check.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/logical/compl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/list/detail/dmc/fold_left.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/tuple/elem.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/facilities/expand.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/facilities/overload.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/variadic/size.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/tuple/rem.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/facilities/is_1.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/facilities/is_empty.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/facilities/is_empty_variadic.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/punctuation/is_begin_parens.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/punctuation/detail/is_begin_parens.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/facilities/detail/is_empty.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/detail/split.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/tuple/size.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/variadic/elem.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/list/detail/fold_left.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/list/fold_right.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/list/detail/edg/fold_right.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/list/detail/fold_right.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/list/reverse.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/control/detail/edg/while.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/control/detail/msvc/while.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/control/detail/dmc/while.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/control/detail/while.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/arithmetic/add.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/overload_resolution.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/lambda_support.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/yes_no.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/arrays.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/tuple/to_list.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/list/for_each_i.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/for.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/detail/edg/for.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/detail/msvc/for.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/detail/dmc/for.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/detail/for.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/or.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/nested_type_wknd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/include_preprocessed.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/compiler.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/stringize.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/logical_op.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/ext_params.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/dec.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_signed.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_integral.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_enum.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/intrinsics.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/detail/config.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_same.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_void.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/add_reference.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_arithmetic.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_floating_point.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_convertible.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/detail/yes_no_type.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_array.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_abstract.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_class.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_union.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_scalar.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_pointer.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_member_pointer.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_member_function_pointer.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/detail/is_mem_fun_pointer_tester.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_function.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/detail/is_function_ptr_tester.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_polymorphic.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/add_lvalue_reference.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/add_rvalue_reference.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/declval.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/make_signed.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/conditional.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_unsigned.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/add_const.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/add_volatile.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/identity.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_index/detail/stl_register_class.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_index/ctti_type_index.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_index/detail/compile_time_type_info.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_index/detail/ctti_register_class.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/decay.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/remove_bounds.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/remove_extent.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/add_pointer.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/utility/enable_if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/core/enable_if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function1.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/detail/maybe_include.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function_template.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/detail/prologue.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/no_tr1/functional.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function_base.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/assert.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/integer.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/integer_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/limits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/cstdint.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/integer_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/has_trivial_copy.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_pod.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_copy_constructible.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_constructible.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_destructible.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_default_constructible.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_base_and_derived.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/noncopyable.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/core/noncopyable.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/has_trivial_destructor.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/composite_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/ref.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/core/ref.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/utility/addressof.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/core/addressof.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/alignment_of.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function_equal.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mem_fn.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/bind/mem_fn.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/get_pointer.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/no_tr1/memory.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/bind/mem_fn_template.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/bind/mem_fn_vw.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/bind/mem_fn_cc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/enum.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/enum.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/enum_params.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/enum_params.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/detail/no_exceptions_support.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/core/no_exceptions_support.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/move/utility_core.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/move/detail/config_begin.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/move/detail/workaround.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/move/core.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/move/detail/type_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/move/detail/meta_utils.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/move/detail/meta_utils_core.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/move/detail/config_end.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/lexical_cast.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/iterator_range_core.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator/iterator_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/detail/iterator.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator/iterator_facade.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator/interoperable.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator/detail/config_def.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator/detail/config_undef.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator/iterator_categories.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/eval_if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/placeholders.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/arg.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/arg_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/na_assert.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/assert.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/not.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/gpu.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/pp_counter.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/arity_spec.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/arg_typedef.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/iterate.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/iteration/iterate.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/array/elem.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/array/data.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/array/size.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/slot/slot.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/slot/detail/def.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator/detail/facade_iterator_category.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/and.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/detail/indirect_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/remove_pointer.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator/detail/enable_if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/remove_const.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/always.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/apply.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/apply_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/apply_wrap.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/has_apply.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/has_xxx.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/type_wrapper.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/has_xxx.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/msvc_typename.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/has_apply.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/msvc_never_true.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/add.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/bcc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/msvc_dtw.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/lambda.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/bind.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/bind_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/bind.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/dmc_ambiguous_ctps.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/next.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/next_prior.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/common_name_wknd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/protect.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/partial_spec_params.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/repeat.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/count_args.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/expr_if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/control/expr_if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/enum_shifted_params.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/enum_shifted_params.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/full_lambda.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/quote.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/void.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/has_type.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/template_arity.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/has_rebind.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/msvc_is_class.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/preprocessor/range.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/subseq.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/first_n.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/detail/split.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/rest_n.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/comparison/not_equal.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/detail/is_empty.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/size.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/fold_left.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/seq.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/elem.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/lambda_no_ctps.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/is_placeholder.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/functions.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/begin.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/config.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/detail/begin.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/iterator.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/range_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/mutable_iterator.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/detail/extract_optional_type.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/const_iterator.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/detail/common.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/detail/sfinae.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/end.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/detail/end.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/detail/implementation_help.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/size.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/size_type.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/difference_type.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/has_range_iterator.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/concepts.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/concept_check.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/concept/assert.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/concept/detail/msvc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/concept/detail/backward_compatibility.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/concept/detail/has_constraints.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/concept/detail/borland.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/concept/detail/general.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/conversion_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/concept/usage.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/concept/detail/concept_def.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/for_each_i.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/enum.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/concept/detail/concept_undef.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator/iterator_concepts.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/value_type.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/detail/misc_concept.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/make_unsigned.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/detail/has_member_size.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/utility.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/utility/base_from_member.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/enum_binary_params.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/repeat_from_to.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/utility/binary.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/control/deduce_d.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/cat.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/seq/transform.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/arithmetic/mod.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/arithmetic/detail/div_base.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/comparison/less_equal.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/logical/not.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/utility/identity_type.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/function_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/checked_delete.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/core/checked_delete.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/next_prior.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/integral_promotion.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/has_plus.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/detail/has_binary_operator.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_base_of.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_fundamental.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/has_plus_assign.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/has_minus.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/has_minus_assign.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/distance.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/empty.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/rbegin.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/reverse_iterator.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator/reverse_iterator.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/iterator/iterator_adaptor.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/rend.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/algorithm/equal.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/range/detail/safe_bool.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/lexical_cast/bad_lexical_cast.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/lexical_cast/try_lexical_convert.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/lexical_cast/detail/is_character.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/lexical_cast/detail/converter_numeric.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/is_float.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/cast.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/old_numeric_cast.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/converter_policies.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/no_tr1/cmath.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/integral_c.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/integral_c_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/converter.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/conversion_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/conversion_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/meta.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/equal_to.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/comparison_op.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/numeric_op.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/numeric_cast.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/tag.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/has_tag.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/numeric_cast_utils.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/config/forwarding.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/msvc_eti_base.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/is_msvc_eti_arg.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/int_float_mixture.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/int_float_mixture_enum.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/sign_mixture.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/sign_mixture_enum.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/udt_builtin_mixture.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/udt_builtin_mixture_enum.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/is_subranged.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/multiplies.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/times.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/arithmetic_op.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/largest_int.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/less.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/converter.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/bounds.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/bounds.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/numeric_cast_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/numeric_cast_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/preprocessed/numeric_cast_traits_common.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/numeric/conversion/detail/preprocessed/numeric_cast_traits_long_long.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/lexical_cast/detail/converter_lexical.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/has_left_shift.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/has_right_shift.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/detail/lcast_precision.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/lexical_cast/detail/widest_char.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/array.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/swap.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/core/swap.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/functional/hash_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/functional/hash/hash_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/container/container_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/container/detail/std_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/move/detail/std_ns_begin.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/move/detail/std_ns_end.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/lexical_cast/detail/converter_lexical_streams.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/lexical_cast/detail/lcast_char_constants.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/lexical_cast/detail/lcast_unsigned_converters.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/lexical_cast/detail/inf_nan.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/math/special_functions/sign.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/math/tools/config.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/predef.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/language.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/language/stdc.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/version_number.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/make.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/detail/test.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/language/stdcpp.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/language/objc.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/alpha.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/arm.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/blackfin.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/convex.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/ia64.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/m68k.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/mips.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/parisc.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/ppc.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/pyramid.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/rs6k.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/sparc.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/superh.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/sys370.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/sys390.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/x86.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/x86/32.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/x86/64.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/architecture/z.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/borland.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/detail/comp_detected.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/clang.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/comeau.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/compaq.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/diab.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/digitalmars.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/dignus.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/edg.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/ekopath.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/gcc_xml.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/gcc.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/greenhills.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/hp_acc.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/iar.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/ibm.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/intel.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/kai.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/llvm.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/metaware.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/metrowerks.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/microtec.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/mpw.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/palm.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/pgi.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/sgi_mipspro.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/sunpro.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/tendra.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/visualc.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/compiler/watcom.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/c.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/c/_prefix.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/detail/_cassert.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/c/gnu.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/c/uc.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/c/vms.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/c/zos.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std/_prefix.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/detail/_exception.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std/cxx.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std/dinkumware.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std/libcomo.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std/modena.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std/msl.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std/roguewave.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std/sgi.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std/stdcpp3.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std/stlport.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/library/std/vacpp.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/aix.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/detail/os_detected.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/amigaos.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/android.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/beos.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/bsd.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/macos.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/ios.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/bsd/bsdi.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/bsd/dragonfly.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/bsd/free.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/bsd/open.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/bsd/net.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/cygwin.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/haiku.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/hpux.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/irix.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/linux.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/os400.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/qnxnto.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/solaris.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/unix.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/vms.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/os/windows.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/other.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/other/endian.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/platform.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/platform/mingw.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/detail/platform_detected.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/platform/windows_desktop.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/platform/windows_store.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/platform/windows_phone.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/platform/windows_runtime.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/hardware.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/hardware/simd.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/hardware/simd/x86.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/hardware/simd/x86/versions.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/hardware/simd/x86_amd.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/hardware/simd/x86_amd/versions.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/hardware/simd/arm.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/hardware/simd/arm/versions.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/hardware/simd/ppc.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/hardware/simd/ppc/versions.h \
+		../../../Qt2/boost_1_62_0/include/boost/predef/version.h \
+		../../../Qt2/boost_1_62_0/include/boost/math/tools/user.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/non_type.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/detail/fenv.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/math/special_functions/math_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/math/special_functions/detail/round_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/math/tools/promotion.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/math/policies/policy.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/list.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/limits/list.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/sequence_wrapper.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/enum_params_with_a_default.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/repetition/enum_params_with_a_default.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/preprocessor/facilities/intercept.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/contains.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/contains_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/sequence_tag.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/sequence_tag_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/has_begin.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/contains_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/begin_end.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/begin_end_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/begin_end_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/traits_lambda_spec.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/find.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/find_if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/find_if_pred.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/iter_apply.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/deref.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/msvc_type.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/iter_fold_if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/logical.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/pair.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/iter_fold_if_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/limits/unrolling.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/same_as.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/lambda_spec.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/remove_if.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/fold.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/O1_size.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/O1_size_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/O1_size_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/long.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/long_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/has_size.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/fold_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/fold_impl_body.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/reverse_fold.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/reverse_fold_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/reverse_fold_impl_body.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/inserter_algorithm.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/back_inserter.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/push_back.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/push_back_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/push_back_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/inserter.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/front_inserter.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/push_front.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/push_front_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/push_front_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/clear.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/clear_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/clear_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/vector.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/limits/vector.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/at.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/at_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/at_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/advance.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/advance_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/negate.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/advance_forward.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/advance_backward.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/prior.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/size.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/size_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/size_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/distance.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/distance_fwd.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/iter_fold.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/aux_/iter_fold_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/iterator_range.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/comparison.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/not_equal_to.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/greater.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/less_equal.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/mpl/greater_equal.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/config/no_tr1/complex.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/math/special_functions/detail/fp_traits.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/detail/endian.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/predef/detail/endian_compat.h \
+		../../../Qt2/boost_1_62_0/include/boost/math/special_functions/fpclassify.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/math/tools/real_cast.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/detail/basic_pointerbuf.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/detail/value_semantic.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function0.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function2.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function3.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function4.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function5.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function6.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function7.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function8.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function9.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/function/function10.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/shared_ptr.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/shared_ptr.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/shared_count.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/bad_weak_ptr.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_has_sync.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_nt.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/detail/sp_typeinfo.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/core/typeinfo.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_std_atomic.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_spin.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/spinlock_pool.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/spinlock.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/spinlock_std_atomic.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/yield_k.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/spinlock_sync.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/spinlock_pt.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/spinlock_gcc_arm.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/spinlock_w32.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_interlocked.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/spinlock_nt.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_pt.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_clang.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_snc_ps3.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_gcc_x86.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_acc_ia64.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_gcc_ia64.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_vacpp_ppc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_cw_ppc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_gcc_ppc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_gcc_mips.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_sync.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_gcc_sparc.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_w32.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_base_aix.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_counted_impl.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/quick_allocator.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/lightweight_mutex.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/lwm_nop.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/lwm_pthreads.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/lwm_win32_cs.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/type_traits/type_with_alignment.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_disable_deprecated.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_convertible.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/sp_nullptr_t.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/smart_ptr/detail/operator_bool.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/positional_options.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/parsers.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/option.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/detail/cmdline.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/cmdline.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/detail/parsers.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/detail/convert.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/variables_map.hpp \
+		../../../Qt2/boost_1_62_0/include/boost/program_options/version.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o command_parser2.o ../Solaris_back-end/command_parser2.cpp
 
 moc_potoc_sun.o: moc_potoc_sun.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_potoc_sun.o moc_potoc_sun.cpp

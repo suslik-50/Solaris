@@ -7,7 +7,6 @@ TcpSocketThread::TcpSocketThread(int ID, drain_parametrs_solar_battery *darin_p,
     this->socketDescriptor = ID;
     drain_ = darin_p;
     main=main_m;
-
 }
 
 
@@ -29,11 +28,9 @@ void TcpSocketThread::run()
     connect(this, SIGNAL(getDatadreain()), drain_, SLOT(get_data()),Qt::DirectConnection);
 
     qDebug() << socketDescriptor << " Client connected";
-
-    QTimer *timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()), this, SLOT(get()),Qt::DirectConnection);
-        timer->start(1000);
-
+    QTimer *timer = new QTimer(0);
+    connect(timer, SIGNAL(timeout()), this, SLOT(get()),Qt::DirectConnection);
+    timer->start(1000);
     exec();
 }
 
@@ -42,9 +39,13 @@ void TcpSocketThread::get()
    emit getDatadreain();
 }
 
+
 void TcpSocketThread::sendClient(QMap<QString,solar_battery_salleter> data_sbs)
 {
+
     QString str("tabel");
+
+
     QStringList list;
     foreach (QString key, data_sbs.keys())
     {
@@ -52,9 +53,9 @@ void TcpSocketThread::sendClient(QMap<QString,solar_battery_salleter> data_sbs)
         QString time;
         date.setTime_t(data_sbs[key].time);
         time = date.toString("yy/MM/dd:hh:mm:ss");
-        qDebug() << data_sbs[key].a;
         list.append(data_sbs[key].name + "," + QString::number(data_sbs[key].a) + "," +
-                    QString::number(data_sbs[key].b) + "," + time + ",");
+                    QString::number(data_sbs[key].b) + "," + time + ","+"\r\n");
+
     }
 
     QByteArray  arrBlock;
@@ -63,6 +64,9 @@ void TcpSocketThread::sendClient(QMap<QString,solar_battery_salleter> data_sbs)
     out << quint16(0) << str << list;
     out.device()->seek(0);
     out << quint16(arrBlock.size() - sizeof(quint16));
+    for (int i=0;i<list.count();i++){
+        qDebug()<<list[i];
+    }
     socket->write(arrBlock);
 
     list.clear();
@@ -77,7 +81,6 @@ void TcpSocketThread::pars(QString com)
     QStringList list;
     list.append(com);
     str = "config";
-
     QByteArray  arrBlock;
     QDataStream out(&arrBlock, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_5);
@@ -109,8 +112,6 @@ void TcpSocketThread::readyRead()
 
     qDebug() << massage;
     pars(massage);
-
-
 }
 
 

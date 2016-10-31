@@ -4,14 +4,13 @@
 #include<QDateTime>
 using namespace std;
 
-struct sun
-{
+
+struct vec{
     double x;
     double y;
     double z;
 };
-
-struct vector_s
+struct vector_salleter
 {
     double x;
     double y;
@@ -19,13 +18,8 @@ struct vector_s
     double vx;
     double vy;
     double vz;
-
-    double x_orb;
-    double y_orb;
-    double z_orb;
-    double vx_orb;
-    double vy_orb;
-    double vz_orb;
+    QString name;
+    double time;
 };
 
 struct solar_battery_salleter

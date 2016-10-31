@@ -5,6 +5,16 @@ timejd::timejd()
 {
 
 }
+
+double timejd::get_convert_date(double t)
+{
+    convert_date(t);
+}
+
+double timejd::get_convert_date(double t, int toch)
+{
+    convert_date(t,toch);
+}
 // Перевод из даты и времени в юлианскую дату
 double timejd::DateToJD(int year,int month, int day,int hour, int min,int sec) // перевод в юлианскую дату
 {

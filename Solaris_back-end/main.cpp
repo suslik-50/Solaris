@@ -15,11 +15,15 @@
 #include <QDebug>
 #include <stdio.h>
 
+#include <QCommandLineParser>
+
 
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+   // QCommandLineParser *parser = new QCommandLineParser();
+
     DateBaseConnect connect;
     connect.DBConnect();
     potoc_sun sun;
@@ -40,7 +44,7 @@ int main(int argc, char *argv[])
     servertcp.StartServer();
 
 
-//#ifdef Q_OS_OSX
+#ifdef Q_OS_OSX
 
 //         if (getppid() != 1 && daemon(0, 0) == -1) {
 //         }
@@ -49,7 +53,7 @@ int main(int argc, char *argv[])
 //         }
 
 
-//#endif
+#endif
 
 #ifdef Q_OS_LINUX
 

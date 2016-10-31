@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_potoc_salleter2_t {
     QByteArrayData data[21];
-    char stringdata0[160];
+    char stringdata0[167];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,27 +32,27 @@ static const qt_meta_stringdata_potoc_salleter2_t qt_meta_stringdata_potoc_salle
 QT_MOC_LITERAL(0, 0, 15), // "potoc_salleter2"
 QT_MOC_LITERAL(1, 16, 4), // "data"
 QT_MOC_LITERAL(2, 21, 0), // ""
-QT_MOC_LITERAL(3, 22, 8), // "vector_s"
-QT_MOC_LITERAL(4, 31, 11), // "speed_error"
-QT_MOC_LITERAL(5, 43, 11), // "kontrol_sum"
-QT_MOC_LITERAL(6, 55, 6), // "update"
-QT_MOC_LITERAL(7, 62, 2), // "aa"
-QT_MOC_LITERAL(8, 65, 2), // "ee"
-QT_MOC_LITERAL(9, 68, 2), // "ii"
-QT_MOC_LITERAL(10, 71, 6), // "dvudvu"
-QT_MOC_LITERAL(11, 78, 6), // "urpurp"
-QT_MOC_LITERAL(12, 85, 3), // "TT0"
-QT_MOC_LITERAL(13, 89, 8), // "upreplay"
-QT_MOC_LITERAL(14, 98, 8), // "Upreplay"
-QT_MOC_LITERAL(15, 107, 3), // "run"
-QT_MOC_LITERAL(16, 111, 9), // "StopTimer"
-QT_MOC_LITERAL(17, 121, 10), // "StartTimer"
-QT_MOC_LITERAL(18, 132, 13), // "slotNextValue"
-QT_MOC_LITERAL(19, 146, 9), // "debug_t_f"
-QT_MOC_LITERAL(20, 156, 3) // "y_n"
+QT_MOC_LITERAL(3, 22, 15), // "vector_salleter"
+QT_MOC_LITERAL(4, 38, 11), // "speed_error"
+QT_MOC_LITERAL(5, 50, 11), // "kontrol_sum"
+QT_MOC_LITERAL(6, 62, 6), // "update"
+QT_MOC_LITERAL(7, 69, 2), // "aa"
+QT_MOC_LITERAL(8, 72, 2), // "ee"
+QT_MOC_LITERAL(9, 75, 2), // "ii"
+QT_MOC_LITERAL(10, 78, 6), // "dvudvu"
+QT_MOC_LITERAL(11, 85, 6), // "urpurp"
+QT_MOC_LITERAL(12, 92, 3), // "TT0"
+QT_MOC_LITERAL(13, 96, 8), // "upreplay"
+QT_MOC_LITERAL(14, 105, 8), // "Upreplay"
+QT_MOC_LITERAL(15, 114, 3), // "run"
+QT_MOC_LITERAL(16, 118, 9), // "StopTimer"
+QT_MOC_LITERAL(17, 128, 10), // "StartTimer"
+QT_MOC_LITERAL(18, 139, 13), // "slotNextValue"
+QT_MOC_LITERAL(19, 153, 9), // "debug_t_f"
+QT_MOC_LITERAL(20, 163, 3) // "y_n"
 
     },
-    "potoc_salleter2\0data\0\0vector_s\0"
+    "potoc_salleter2\0data\0\0vector_salleter\0"
     "speed_error\0kontrol_sum\0update\0aa\0ee\0"
     "ii\0dvudvu\0urpurp\0TT0\0upreplay\0Upreplay\0"
     "run\0StopTimer\0StartTimer\0slotNextValue\0"
@@ -74,21 +74,21 @@ static const uint qt_meta_data_potoc_salleter2[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    3,   64,    2, 0x06 /* Public */,
-       4,    0,   71,    2, 0x06 /* Public */,
-       5,    1,   72,    2, 0x06 /* Public */,
+       1,    1,   64,    2, 0x06 /* Public */,
+       4,    0,   67,    2, 0x06 /* Public */,
+       5,    1,   68,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    6,   75,    2, 0x0a /* Public */,
-      13,    1,   88,    2, 0x0a /* Public */,
-      15,    0,   91,    2, 0x0a /* Public */,
-      16,    0,   92,    2, 0x0a /* Public */,
-      17,    0,   93,    2, 0x0a /* Public */,
-      18,    0,   94,    2, 0x0a /* Public */,
-      19,    1,   95,    2, 0x0a /* Public */,
+       6,    6,   71,    2, 0x0a /* Public */,
+      13,    1,   84,    2, 0x0a /* Public */,
+      15,    0,   87,    2, 0x0a /* Public */,
+      16,    0,   88,    2, 0x0a /* Public */,
+      17,    0,   89,    2, 0x0a /* Public */,
+      18,    0,   90,    2, 0x0a /* Public */,
+      19,    1,   91,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void, 0x80000000 | 3, QMetaType::Double, QMetaType::QString,    2,    2,    2,
+    QMetaType::Void, 0x80000000 | 3,    2,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    2,
 
@@ -110,7 +110,7 @@ void potoc_salleter2::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         potoc_salleter2 *_t = static_cast<potoc_salleter2 *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->data((*reinterpret_cast< vector_s(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
+        case 0: _t->data((*reinterpret_cast< vector_salleter(*)>(_a[1]))); break;
         case 1: _t->speed_error(); break;
         case 2: _t->kontrol_sum((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 3: _t->update((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< double(*)>(_a[6]))); break;
@@ -126,7 +126,7 @@ void potoc_salleter2::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
         {
-            typedef void (potoc_salleter2::*_t)(vector_s , double , QString );
+            typedef void (potoc_salleter2::*_t)(vector_salleter );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&potoc_salleter2::data)) {
                 *result = 0;
                 return;
@@ -186,9 +186,9 @@ int potoc_salleter2::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void potoc_salleter2::data(vector_s _t1, double _t2, QString _t3)
+void potoc_salleter2::data(vector_salleter _t1)
 {
-    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)) };
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 

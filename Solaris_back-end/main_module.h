@@ -35,10 +35,17 @@ private:potoc_sun  *sun_potoc;
 private:drain_parametrs_solar_battery  *drain;
 private:setting setting_f;
 private: functiondb dbf;
+private:int updata_salleter_fun(double a, double e, double i, double dvu, double urp, double t0, QString name);
+private:int delete_salleter_form_dataBase_func(QString name);
+private:int delete_potoc_salleter_func(QString name);
+private:int start_all_salleter_func();
+private:int start_salleter_func(QString name);
+private:int stop_salleter_func(QString name);
+private:int new_salleter_func(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota, double m);
     ///
 public slots :
     void run();
-    int start_all_salleter();// старт всех  спктников
+    int start_all_salleter();// старт всех  спyтников
     void qdebug_sun(bool y_t);
     void replay_sun(int replay);
     void qdebug_salleter(bool y_t);// устанавливает дебаг+
@@ -57,6 +64,19 @@ public slots :
     int set_new_salleter_to_date_base(QString name, double time_uts, double a,double e, double i, double ark_per,double dolgota, double m);//добавить новый спутник в бд
     int delete_potoc_salleter(QString name );
     int delete_salleter_form_dataBase(QString name);
+    //работа с настройками
+    bool get_qdebug_sun();
+    double get_replay_sun();
+    bool get_qdebug_salleter();
+    int get_replay_salleter();
+    bool get_corners_solar_batter_qdebug();
+    int get_telnet_port();
+    int get_tcp_port();
+    bool get_qdebug_main_modul();
+    void Set_telnet_port(int port);
+    void Set_tcp_port(int port);
+    void Set_qdebug_main_modul(bool y_n);
+
 
 signals:
     void qdebug_sun_signal(bool y_t); // сигнал для включения выключения дебага потока для солнца

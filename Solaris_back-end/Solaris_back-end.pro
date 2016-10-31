@@ -13,6 +13,11 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
+LIBS +=-L/Users/ruslannuriev/Qt2/boost_1_62_0/libs
+INCLUDEPATH +=/Users/ruslannuriev/Qt2/boost_1_62_0/include
+DEPENDPATH +=/Users/ruslannuriev/Qt2/boost_1_62_0/include
+
+
 SOURCES += main.cpp \
     timejd.cpp \
     earth_pos.cpp \
@@ -28,7 +33,8 @@ SOURCES += main.cpp \
     command_parser.cpp \
     potoc_salleter2.cpp \
     tcpserver.cpp \
-    tcpsocketthread.cpp
+    tcpsocketthread.cpp \
+    command_parser2.cpp
 
 HEADERS += \
     timejd.h \
@@ -46,4 +52,5 @@ HEADERS += \
     command_parser.h \
     potoc_salleter2.h \
     tcpserver.h \
-    tcpsocketthread.h
+    tcpsocketthread.h \
+    command_parser2.h

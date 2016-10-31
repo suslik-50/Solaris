@@ -39,14 +39,13 @@ class potoc_salleter2:public QThread
     double Px,Py,Pz,Qx,Qy,Qz,i,dvu0,urp0,dvu,urp;
     double x,y,z,V,v,p,vr,vn,vx,vy,vz;
     QString name;
-private:vector_s salleter;
+private:vector_salleter salleter;
 private:setting seting;
 
 public:potoc_salleter2();
 private:double EccAnom(double M,double e);
 private:double Getdvu(double t);
 private:double Geturp(double t);
-private:void OrbitalCoordinat();
 public:QString Getname();
 public:void load_data(double aa,double ee,double ii, double dvudvu,double urpurp,double TT0,QString name);
 private:void Additional_variables();
@@ -67,7 +66,7 @@ public slots:
     void slotNextValue();
     void debug_t_f(bool y_n);
 signals:
-    void  data(vector_s,double,QString);
+    void  data(vector_salleter);
     void  speed_error();
     void  kontrol_sum(int);
 };

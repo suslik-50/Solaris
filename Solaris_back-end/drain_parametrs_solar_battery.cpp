@@ -16,22 +16,7 @@ void drain_parametrs_solar_battery::clear()
     data_sbs.clear();
 }
 
-void drain_parametrs_solar_battery::run()
-{
-    exec();
-}
-
-void drain_parametrs_solar_battery::deletedata(QString name)
-{
-
-    foreach (QString key, data_sbs.keys()) {
-        if (key == name){
-            data_sbs.remove(key);
-        }
-    }
-}
-
-void drain_parametrs_solar_battery::data(double a,double b,double time,QString name)
+void drain_parametrs_solar_battery::set_data(double a, double b, double time, QString name)
 {
     solar_battery_salleter salleter_data ;
     salleter_data.a=a;
@@ -61,9 +46,28 @@ void drain_parametrs_solar_battery::data(double a,double b,double time,QString n
     }
 }
 
+void drain_parametrs_solar_battery::run()
+{
+    exec();
+}
+
+void drain_parametrs_solar_battery::deletedata(QString name)
+{
+
+    foreach (QString key, data_sbs.keys()) {
+        if (key == name){
+            data_sbs.remove(key);
+        }
+    }
+}
+
+void drain_parametrs_solar_battery::data(double a,double b,double time,QString name)
+{
+    set_data(a,b,time,name);
+}
+
 void drain_parametrs_solar_battery::get_data()
 {
     emit data_solar_battery(data_sbs);
-    //data_sbs.clear();
 }
 

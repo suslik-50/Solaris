@@ -17,7 +17,7 @@ class potoc_sun:public QThread
 {
     Q_OBJECT
 private:setting seting;
-private:sun sun_dan;
+private:vec sun_dan;
 public:QTimer timer;
 private:double time;
 private:double replay=5;
@@ -25,7 +25,7 @@ private:bool qdebug=true;
 private:Earth_pos pos;
 
 public:potoc_sun();
-public:sun sun_pull(double t );
+public:vec sun_pull(double t );
 private:double MeanObliquity (double Mjd_TT);
 private slots:
     void slotNextValue();
@@ -37,7 +37,7 @@ public slots:
     void timerstop();
     void timerstart();
 signals:
-    void positionsun(double x,double y,double z,double t);
+    void positionsun(double x,double y,double z);
 };
 
 #endif // POTOC_SUN_H

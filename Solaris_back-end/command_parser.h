@@ -4,6 +4,7 @@
 #include <setting.h>
 
 
+
 class command_parser
 {
     main_module *module;

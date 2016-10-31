@@ -13,7 +13,7 @@ void TcpServer::StartServer()
     port=file_setting.Get_tcp_port();
     if(!this->listen(QHostAddress::Any, port))
     {
-        qDebug() << "[-] Tcp Server not start server";
+        qDebug() << "[-] Tcp Server is not started";
     }
     else
     {
@@ -29,11 +29,10 @@ void TcpServer::get()
 void TcpServer::incomingConnection(qintptr socketDescriptor)
 {
     qDebug() << socketDescriptor << " Connecting...";
-    TcpSocketThread *thread = new TcpSocketThread(socketDescriptor, drain, main);
-    thread->start();
-    connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
-    this->moveToThread(thread);
-    thread->start();
+    TcpSocketThread *userconnect = new TcpSocketThread(socketDescriptor, drain, main);
+    userconnect->start();
+    connect(userconnect, SIGNAL(finished()), userconnect, SLOT(deleteLater()));
+    userconnect->start();
 
 }
 

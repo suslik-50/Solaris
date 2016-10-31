@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_main_module_t {
-    QByteArrayData data[49];
-    char stringdata0[721];
+    QByteArrayData data[62];
+    char stringdata0[934];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -77,7 +77,20 @@ QT_MOC_LITERAL(44, 589, 26), // "get_value_corners_salleter"
 QT_MOC_LITERAL(45, 616, 22), // "solar_battery_salleter"
 QT_MOC_LITERAL(46, 639, 29), // "set_new_salleter_to_date_base"
 QT_MOC_LITERAL(47, 669, 21), // "delete_potoc_salleter"
-QT_MOC_LITERAL(48, 691, 29) // "delete_salleter_form_dataBase"
+QT_MOC_LITERAL(48, 691, 29), // "delete_salleter_form_dataBase"
+QT_MOC_LITERAL(49, 721, 14), // "get_qdebug_sun"
+QT_MOC_LITERAL(50, 736, 14), // "get_replay_sun"
+QT_MOC_LITERAL(51, 751, 19), // "get_qdebug_salleter"
+QT_MOC_LITERAL(52, 771, 19), // "get_replay_salleter"
+QT_MOC_LITERAL(53, 791, 31), // "get_corners_solar_batter_qdebug"
+QT_MOC_LITERAL(54, 823, 15), // "get_telnet_port"
+QT_MOC_LITERAL(55, 839, 12), // "get_tcp_port"
+QT_MOC_LITERAL(56, 852, 21), // "get_qdebug_main_modul"
+QT_MOC_LITERAL(57, 874, 15), // "Set_telnet_port"
+QT_MOC_LITERAL(58, 890, 4), // "port"
+QT_MOC_LITERAL(59, 895, 12), // "Set_tcp_port"
+QT_MOC_LITERAL(60, 908, 21), // "Set_qdebug_main_modul"
+QT_MOC_LITERAL(61, 930, 3) // "y_n"
 
     },
     "main_module\0qdebug_sun_signal\0\0y_t\0"
@@ -101,7 +114,14 @@ QT_MOC_LITERAL(48, 691, 29) // "delete_salleter_form_dataBase"
     "solar_battery_salleter\0"
     "set_new_salleter_to_date_base\0"
     "delete_potoc_salleter\0"
-    "delete_salleter_form_dataBase"
+    "delete_salleter_form_dataBase\0"
+    "get_qdebug_sun\0get_replay_sun\0"
+    "get_qdebug_salleter\0get_replay_salleter\0"
+    "get_corners_solar_batter_qdebug\0"
+    "get_telnet_port\0get_tcp_port\0"
+    "get_qdebug_main_modul\0Set_telnet_port\0"
+    "port\0Set_tcp_port\0Set_qdebug_main_modul\0"
+    "y_n"
 };
 #undef QT_MOC_LITERAL
 
@@ -111,7 +131,7 @@ static const uint qt_meta_data_main_module[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      32,   14, // methods
+      43,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -119,40 +139,51 @@ static const uint qt_meta_data_main_module[] = {
       12,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  174,    2, 0x06 /* Public */,
-       4,    1,  177,    2, 0x06 /* Public */,
-       6,    1,  180,    2, 0x06 /* Public */,
-       7,    1,  183,    2, 0x06 /* Public */,
-       8,    1,  186,    2, 0x06 /* Public */,
-      10,    1,  189,    2, 0x06 /* Public */,
-      11,    0,  192,    2, 0x06 /* Public */,
-      12,    0,  193,    2, 0x06 /* Public */,
-      13,    0,  194,    2, 0x06 /* Public */,
-      14,    0,  195,    2, 0x06 /* Public */,
-      15,    0,  196,    2, 0x06 /* Public */,
-      16,    0,  197,    2, 0x06 /* Public */,
+       1,    1,  229,    2, 0x06 /* Public */,
+       4,    1,  232,    2, 0x06 /* Public */,
+       6,    1,  235,    2, 0x06 /* Public */,
+       7,    1,  238,    2, 0x06 /* Public */,
+       8,    1,  241,    2, 0x06 /* Public */,
+      10,    1,  244,    2, 0x06 /* Public */,
+      11,    0,  247,    2, 0x06 /* Public */,
+      12,    0,  248,    2, 0x06 /* Public */,
+      13,    0,  249,    2, 0x06 /* Public */,
+      14,    0,  250,    2, 0x06 /* Public */,
+      15,    0,  251,    2, 0x06 /* Public */,
+      16,    0,  252,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      17,    0,  198,    2, 0x0a /* Public */,
-      18,    0,  199,    2, 0x0a /* Public */,
-      19,    1,  200,    2, 0x0a /* Public */,
-      20,    1,  203,    2, 0x0a /* Public */,
-      21,    1,  206,    2, 0x0a /* Public */,
-      22,    1,  209,    2, 0x0a /* Public */,
-      23,    1,  212,    2, 0x0a /* Public */,
-      24,    8,  215,    2, 0x0a /* Public */,
-      33,    1,  232,    2, 0x0a /* Public */,
-      34,    1,  235,    2, 0x0a /* Public */,
-      35,    7,  238,    2, 0x0a /* Public */,
-      39,    0,  253,    2, 0x0a /* Public */,
-      40,    0,  254,    2, 0x0a /* Public */,
-      41,    0,  255,    2, 0x0a /* Public */,
-      42,    0,  256,    2, 0x0a /* Public */,
-      43,    0,  257,    2, 0x0a /* Public */,
-      44,    1,  258,    2, 0x0a /* Public */,
-      46,    8,  261,    2, 0x0a /* Public */,
-      47,    1,  278,    2, 0x0a /* Public */,
-      48,    1,  281,    2, 0x0a /* Public */,
+      17,    0,  253,    2, 0x0a /* Public */,
+      18,    0,  254,    2, 0x0a /* Public */,
+      19,    1,  255,    2, 0x0a /* Public */,
+      20,    1,  258,    2, 0x0a /* Public */,
+      21,    1,  261,    2, 0x0a /* Public */,
+      22,    1,  264,    2, 0x0a /* Public */,
+      23,    1,  267,    2, 0x0a /* Public */,
+      24,    8,  270,    2, 0x0a /* Public */,
+      33,    1,  287,    2, 0x0a /* Public */,
+      34,    1,  290,    2, 0x0a /* Public */,
+      35,    7,  293,    2, 0x0a /* Public */,
+      39,    0,  308,    2, 0x0a /* Public */,
+      40,    0,  309,    2, 0x0a /* Public */,
+      41,    0,  310,    2, 0x0a /* Public */,
+      42,    0,  311,    2, 0x0a /* Public */,
+      43,    0,  312,    2, 0x0a /* Public */,
+      44,    1,  313,    2, 0x0a /* Public */,
+      46,    8,  316,    2, 0x0a /* Public */,
+      47,    1,  333,    2, 0x0a /* Public */,
+      48,    1,  336,    2, 0x0a /* Public */,
+      49,    0,  339,    2, 0x0a /* Public */,
+      50,    0,  340,    2, 0x0a /* Public */,
+      51,    0,  341,    2, 0x0a /* Public */,
+      52,    0,  342,    2, 0x0a /* Public */,
+      53,    0,  343,    2, 0x0a /* Public */,
+      54,    0,  344,    2, 0x0a /* Public */,
+      55,    0,  345,    2, 0x0a /* Public */,
+      56,    0,  346,    2, 0x0a /* Public */,
+      57,    1,  347,    2, 0x0a /* Public */,
+      59,    1,  350,    2, 0x0a /* Public */,
+      60,    1,  353,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Bool,    3,
@@ -189,6 +220,17 @@ static const uint qt_meta_data_main_module[] = {
     QMetaType::Int, QMetaType::QString, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double,   25,   26,   27,   28,   29,   30,   31,   32,
     QMetaType::Int, QMetaType::QString,   25,
     QMetaType::Int, QMetaType::QString,   25,
+    QMetaType::Bool,
+    QMetaType::Double,
+    QMetaType::Bool,
+    QMetaType::Int,
+    QMetaType::Bool,
+    QMetaType::Int,
+    QMetaType::Int,
+    QMetaType::Bool,
+    QMetaType::Void, QMetaType::Int,   58,
+    QMetaType::Void, QMetaType::Int,   58,
+    QMetaType::Void, QMetaType::Bool,   61,
 
        0        // eod
 };
@@ -242,6 +284,25 @@ void main_module::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
         case 31: { int _r = _t->delete_salleter_form_dataBase((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
+        case 32: { bool _r = _t->get_qdebug_sun();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 33: { double _r = _t->get_replay_sun();
+            if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
+        case 34: { bool _r = _t->get_qdebug_salleter();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 35: { int _r = _t->get_replay_salleter();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
+        case 36: { bool _r = _t->get_corners_solar_batter_qdebug();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 37: { int _r = _t->get_telnet_port();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
+        case 38: { int _r = _t->get_tcp_port();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
+        case 39: { bool _r = _t->get_qdebug_main_modul();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 40: _t->Set_telnet_port((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 41: _t->Set_tcp_port((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 42: _t->Set_qdebug_main_modul((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -359,13 +420,13 @@ int main_module::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 32)
+        if (_id < 43)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 32;
+        _id -= 43;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 32)
+        if (_id < 43)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 32;
+        _id -= 43;
     }
     return _id;
 }

@@ -16,10 +16,12 @@ public:QMap<QString,solar_battery_salleter> data_sbs;
 public:drain_parametrs_solar_battery();
 public:int count_drain();
 public:void clear();
+private:void set_data(double a,double b,double time,QString name);
 public slots:
     void run();
     void deletedata(QString name);
     void data (double a,double b,double time,QString name);
+
     void get_data();
 signals:
     void data_solar_battery(QMap<QString,solar_battery_salleter>);
