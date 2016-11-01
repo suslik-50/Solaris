@@ -15,14 +15,9 @@
 #include <QDebug>
 #include <stdio.h>
 
-#include <QCommandLineParser>
-
-
-
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-   // QCommandLineParser *parser = new QCommandLineParser();
 
     DateBaseConnect connect;
     connect.DBConnect();
@@ -33,6 +28,7 @@ int main(int argc, char *argv[])
 
     drain_parametrs_solar_battery c_s_b;
     c_s_b.start();
+
     main_module main_ma(sun,c_s_b);
     main_ma.start();
 

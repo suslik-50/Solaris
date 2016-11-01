@@ -64,11 +64,10 @@ int main_module::start_all_salleter_func(){
 }
 
 int main_module::start_all_salleter()
-{
-    try{
-        return start_all_salleter();
+{   try{
+        return start_all_salleter_func();
     }catch(...){
-    return 2;
+        return 2;
     }
 }
 

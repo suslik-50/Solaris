@@ -35,7 +35,7 @@ double potoc_salleter2::Getdvu(double t)
     double dvu;
     del_dvu = (-9.964 / pow((1 - pow(e,2)),2)) * pow((Re/a),3.5) * cos(i);
     dvu = dvu0 + (del_dvu * (t-t0));
-    return dvu;
+    return dvu; // в сутках // радианы в секундах
 }
 
 double potoc_salleter2::Geturp(double t)
@@ -44,7 +44,7 @@ double potoc_salleter2::Geturp(double t)
     double upr;
     del_urp = (4.982 / pow(1-pow(e,2),2)) * pow((Re/a),3.5)*(5*pow(cos(i),2)-1);
     upr = urp0 + (del_urp * (t-t0));
-    return upr;
+    return upr; //  в сутках
 }
 
 
