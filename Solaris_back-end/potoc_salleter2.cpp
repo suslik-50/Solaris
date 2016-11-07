@@ -132,7 +132,7 @@ void potoc_salleter2::slotNextValue()
     z = (Pz*oe)+(Qz*on); // z
 
     if (qdebag)
-    {   qDebug()<<name<<"-name";
+    {   qDebug()<<name<<"-name+";
         qDebug()<<x<<"x";
         qDebug()<<y<<"y";
         qDebug()<<z<<"z";

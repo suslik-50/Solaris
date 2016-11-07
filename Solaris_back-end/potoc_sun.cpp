@@ -39,8 +39,7 @@ void potoc_sun::slotNextValue()
 {
     time=QDateTime::currentDateTime().toTime_t();
     sun_dan=sun_pull(time);
-
-    if (qdebug)              //для отладки
+    if (false)              //для отладки
     {
         qDebug()<<sun_dan.x<<"x-экваториальная солнца";
         qDebug()<<sun_dan.y<<"y-экваториальная солнца";
@@ -66,7 +65,6 @@ vec potoc_sun::sun_pull(double newtime )
     timejd retime;
     time=retime.get_convert_date(newtime); // преобразование из UTC в юлианскую дату
     t_earth = (time - 2451545) / 365250;
-
     double Xs,Ys,Zs;
     Xs=pos.getEarth_X(t_earth);  // получение координат земли
     Ys=pos.getEarth_Y(t_earth);  //

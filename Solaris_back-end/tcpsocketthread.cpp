@@ -54,7 +54,7 @@ void TcpSocketThread::sendClient(QMap<QString,solar_battery_salleter> data_sbs)
         date.setTime_t(data_sbs[key].time);
         time = date.toString("yy/MM/dd:hh:mm:ss");
         list.append(data_sbs[key].name + "," + QString::number(data_sbs[key].a) + "," +
-                    QString::number(data_sbs[key].b) + "," + time );
+                    QString::number(data_sbs[key].b) + "," + time +",");
 
     }
 
