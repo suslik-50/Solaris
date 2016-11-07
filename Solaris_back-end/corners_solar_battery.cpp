@@ -99,7 +99,6 @@ void corners_solar_battery::datacornes(solar_battery_salleter salleter)
 void corners_solar_battery::position_salleter(vector_salleter salleter) // получение данных оспутнике
 {
     sputnik=salleter;
-    sostaunie_salleter=true;
     datapotoc();
 }
 
@@ -108,7 +107,6 @@ void corners_solar_battery::position_sun(double x, double y, double z)
     san.x=x;
     san.y=y;
     san.z=z;
-    sostaunie_san=true;
     datapotoc();
 }
 
@@ -118,10 +116,14 @@ void corners_solar_battery::debug(bool y_n) // получение команды
 }
 
 void corners_solar_battery::datapotoc(){
-    if ( sostaunie_san==true && sostaunie_salleter!=true)
+
+
+    if ( san.x!=0 && sputnik.x!=0)
     {
+
         datacornes(cornes(san,sputnik));
-        sostaunie_salleter=false;
-        sostaunie_san=false;
+        san.x=0;
+        sputnik.x=0;
+
     }
 }

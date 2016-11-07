@@ -14,7 +14,7 @@ private:vector_salleter sputnik;
 private:vec san;
 private:double a,b;
 private:double buffer;
-private:bool sostaunie_salleter,sostaunie_san=false;
+private:bool sostaunie_salleter,sostaunie_san;
 private:void datapotoc();
 private:bool qdebug=false;
 private:solar_battery_salleter cornes(vec san,vector_salleter salleter);

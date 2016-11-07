@@ -1,6 +1,5 @@
 #include "drain_parametrs_solar_battery.h"
-
-
+#include <QDebug>
 drain_parametrs_solar_battery::drain_parametrs_solar_battery()
 {
 
