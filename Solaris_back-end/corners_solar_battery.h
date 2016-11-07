@@ -13,6 +13,7 @@ private:setting seting;
 private:vector_salleter sputnik;
 private:vec san;
 private:double a,b;
+private:double buffer;
 private:bool sostaunie_salleter,sostaunie_san=false;
 private:void datapotoc();
 private:bool qdebug=false;

@@ -50,8 +50,22 @@ solar_battery_salleter corners_solar_battery::cornes(vec san,vector_salleter sal
     //a,b
     double sinA=s.x;
     double cosA=sqrt(1-(s.x*s.x));
-    double sinB=-(s.y/cosA); // возможно деление на ноль
-    double cosB=s.z/cosA;
+
+    double sinB;
+    double cosB;
+    //
+    // возможно деление на ноль
+    if (cosA!=0){
+        sinB=-(s.y/cosA);
+        cosB=s.z/cosA;
+        buffer= cosA;
+    }
+    else
+    {
+        sinB=-(s.y/buffer);
+        cosB=s.z/buffer;
+    }
+    //
     // радианы
     a=atan2(sinA,cosA);
     b=atan2(sinB,cosB);
