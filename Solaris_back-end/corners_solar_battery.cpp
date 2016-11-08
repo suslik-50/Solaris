@@ -85,11 +85,11 @@ solar_battery_salleter corners_solar_battery::cornes(vec san,vector_salleter sal
     corne.time=salleter.time;
     if (qdebug)
     {
-        qDebug()<<salleter.name<<"-имя спутника";
-        qDebug()<<a<<"-угол а(альфа)";
-        qDebug()<<b<<"-угол б(бетта)";
-        qDebug()<<QDateTime::fromTime_t(salleter.time).time();
-        qDebug()<<QDateTime::fromTime_t(salleter.time).date();
+//        qDebug()<<salleter.name<<"-имя спутника";
+//        qDebug()<<a<<"-угол а(альфа)";
+//        qDebug()<<b<<"-угол б(бетта)";
+//        qDebug()<<QDateTime::fromTime_t(salleter.time).time();
+//        qDebug()<<QDateTime::fromTime_t(salleter.time).date();
     }
 
     return corne;

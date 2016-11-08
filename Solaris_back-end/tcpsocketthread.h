@@ -37,6 +37,7 @@ private:
     quint16 m_nNextBlockSize;
     drain_parametrs_solar_battery *drain_;
     void pars(QString com);
+    void sendSettingClent();
 };
 
 #endif // TCPSOCKETTHREAD_H

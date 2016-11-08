@@ -28,9 +28,13 @@ void TcpSocketThread::run()
     connect(this, SIGNAL(getDatadreain()), drain_, SLOT(get_data()),Qt::DirectConnection);
 
     qDebug() << socketDescriptor << " Client connected";
+
     QTimer *timer = new QTimer(0);
     connect(timer, SIGNAL(timeout()), this, SLOT(get()),Qt::DirectConnection);
     timer->start(1000);
+
+    sendSettingClent();
+
     exec();
 }
 
@@ -45,7 +49,6 @@ void TcpSocketThread::sendClient(QMap<QString,solar_battery_salleter> data_sbs)
 
     QString str("tabel");
 
-
     QStringList list;
     foreach (QString key, data_sbs.keys())
     {
@@ -55,7 +58,7 @@ void TcpSocketThread::sendClient(QMap<QString,solar_battery_salleter> data_sbs)
         time = date.toString("yy/MM/dd:hh:mm:ss");
         list.append(data_sbs[key].name + "," + QString::number(data_sbs[key].a) + "," +
                     QString::number(data_sbs[key].b) + "," + time +",");
-
+        qDebug() << data_sbs[key].name << data_sbs[key].a << data_sbs[key].b << data_sbs[key].time;
     }
 
     QByteArray  arrBlock;
@@ -64,9 +67,6 @@ void TcpSocketThread::sendClient(QMap<QString,solar_battery_salleter> data_sbs)
     out << quint16(0) << str << list;
     out.device()->seek(0);
     out << quint16(arrBlock.size() - sizeof(quint16));
-    for (int i=0;i<list.count();i++){
-        qDebug()<<list[i];
-    }
     socket->write(arrBlock);
 
     list.clear();
@@ -79,8 +79,27 @@ void TcpSocketThread::pars(QString com)
     arr = parser_cmd.command(com);
     QString str(arr);
     QStringList list;
-    list.append(com);
+    list.append(arr);
     str = "config";
+    QByteArray  arrBlock;
+    QDataStream out(&arrBlock, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_4_5);
+    out << quint16(0) << str << list;
+    out.device()->seek(0);
+    out << quint16(arrBlock.size() - sizeof(quint16));
+    socket->write(arrBlock);
+}
+
+void TcpSocketThread::sendSettingClent()
+{
+    QStringList list;
+    QString str = "setting";
+
+    list.append(QString::number(main->get_replay_salleter()));
+    list.append(QString::number(main->get_replay_sun()));
+    list.append(QString::number(main->get_telnet_port()));
+    list.append(QString::number(main->get_tcp_port()));
+
     QByteArray  arrBlock;
     QDataStream out(&arrBlock, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_5);

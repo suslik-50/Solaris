@@ -390,7 +390,6 @@ bool main_module::get_qdebug_sun()
 double main_module::get_replay_sun()
 {
     return setting_f.Get_replay_sun();
-
 }
 
 bool main_module::get_qdebug_salleter()
