@@ -2,15 +2,16 @@
 #include <QTimer>
 
 
-TcpServer::TcpServer(drain_parametrs_solar_battery *darin_p, main_module *man_m)
+TcpServer::TcpServer(main_module *man_constructor, DataConteiner *dc_constructor)
 {
-    drain = darin_p;
-    main = man_m;
+    main = man_constructor;
+    dc = dc_constructor;
 }
 
 void TcpServer::StartServer()
 {
-    port=file_setting.Get_tcp_port();
+    port = file_setting.Get_tcp_port();
+
     if(!this->listen(QHostAddress::Any, port))
     {
         qDebug() << "[-] Tcp Server is not started";
@@ -21,18 +22,12 @@ void TcpServer::StartServer()
     }
 }
 
-void TcpServer::get()
-{
-   drain->get_data();
-}
-
 void TcpServer::incomingConnection(qintptr socketDescriptor)
 {
     qDebug() << socketDescriptor << " Connecting...";
-    TcpSocketThread *userconnect = new TcpSocketThread(socketDescriptor, drain, main);
-    userconnect->start();
+
+    TcpSocketThread *userconnect = new TcpSocketThread(socketDescriptor, main, dc);
     connect(userconnect, SIGNAL(finished()), userconnect, SLOT(deleteLater()));
     userconnect->start();
-
 }
 

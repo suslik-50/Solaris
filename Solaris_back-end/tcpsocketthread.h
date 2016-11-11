@@ -1,44 +1,41 @@
 #ifndef TCPSOCKETTHREAD_H
 #define TCPSOCKETTHREAD_H
 
+#include "main_module.h"
+#include "dataconteiner.h"
+#include "command_parser.h"
 #include <QObject>
 #include <QThread>
 #include <QTcpSocket>
 #include <QDataStream>
-#include <structur.h>
-#include "drain_parametrs_solar_battery.h"
-#include <main_module.h>
-#include <QTimer>
-#include <QMap>
 
 class TcpSocketThread : public QThread
 {
     Q_OBJECT
-    main_module *main;
-    QTimer* timer;
-
-   QMap<QString,solar_battery_salleter> olddata;
 public:
-    explicit TcpSocketThread(int ID, drain_parametrs_solar_battery *darin_p, main_module *main_m);
-
+    TcpSocketThread(int ID, main_module *main_constructor, DataConteiner* dc_constructor);
     void run();
+
 signals:
     void error(QTcpSocket::SocketError socketerror);
     void getDatadreain();
 
-public slots:
-    void get();
+private slots:
+    void sendTabelData();
     void readyRead();
     void disconnected();
-    void sendClient(QMap<QString,solar_battery_salleter> data_sbs);
 
 private:
     QTcpSocket *socket;
     int socketDescriptor;
+    QString keyWord;
     quint16 m_nNextBlockSize;
-    drain_parametrs_solar_battery *drain_;
+    DataConteiner* dc;
+    main_module *main;
+
+    void byteArr(QStringList list);
     void pars(QString com);
-    void sendSettingClent();
+    void sendSetting();
 };
 
 #endif // TCPSOCKETTHREAD_H

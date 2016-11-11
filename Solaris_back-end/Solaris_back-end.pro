@@ -38,7 +38,8 @@ SOURCES += main.cpp \
     prognoz_salleter.cpp \
     function_salleter.cpp \
     function_sun.cpp \
-    function_cornes.cpp
+    function_cornes.cpp\
+    dataconteiner.cpp
 
 HEADERS += \
     timejd.h \
@@ -61,4 +62,5 @@ HEADERS += \
     prognoz_salleter.h \
     function_salleter.h \
     function_sun.h \
-    function_cornes.h
+    function_cornes.h\
+    dataconteiner.h

@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_TcpSocketThread_t {
-    QByteArrayData data[12];
-    char stringdata0[157];
+    QByteArrayData data[9];
+    char stringdata0[110];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,19 +35,14 @@ QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 23), // "QTcpSocket::SocketError"
 QT_MOC_LITERAL(4, 47, 11), // "socketerror"
 QT_MOC_LITERAL(5, 59, 13), // "getDatadreain"
-QT_MOC_LITERAL(6, 73, 3), // "get"
-QT_MOC_LITERAL(7, 77, 9), // "readyRead"
-QT_MOC_LITERAL(8, 87, 12), // "disconnected"
-QT_MOC_LITERAL(9, 100, 10), // "sendClient"
-QT_MOC_LITERAL(10, 111, 36), // "QMap<QString,solar_battery_sa..."
-QT_MOC_LITERAL(11, 148, 8) // "data_sbs"
+QT_MOC_LITERAL(6, 73, 13), // "sendTabelData"
+QT_MOC_LITERAL(7, 87, 9), // "readyRead"
+QT_MOC_LITERAL(8, 97, 12) // "disconnected"
 
     },
     "TcpSocketThread\0error\0\0QTcpSocket::SocketError\0"
-    "socketerror\0getDatadreain\0get\0readyRead\0"
-    "disconnected\0sendClient\0"
-    "QMap<QString,solar_battery_salleter>\0"
-    "data_sbs"
+    "socketerror\0getDatadreain\0sendTabelData\0"
+    "readyRead\0disconnected"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,7 +52,7 @@ static const uint qt_meta_data_TcpSocketThread[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -65,14 +60,13 @@ static const uint qt_meta_data_TcpSocketThread[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   44,    2, 0x06 /* Public */,
-       5,    0,   47,    2, 0x06 /* Public */,
+       1,    1,   39,    2, 0x06 /* Public */,
+       5,    0,   42,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   48,    2, 0x0a /* Public */,
-       7,    0,   49,    2, 0x0a /* Public */,
-       8,    0,   50,    2, 0x0a /* Public */,
-       9,    1,   51,    2, 0x0a /* Public */,
+       6,    0,   43,    2, 0x08 /* Private */,
+       7,    0,   44,    2, 0x08 /* Private */,
+       8,    0,   45,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -82,7 +76,6 @@ static const uint qt_meta_data_TcpSocketThread[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 10,   11,
 
        0        // eod
 };
@@ -95,10 +88,9 @@ void TcpSocketThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         switch (_id) {
         case 0: _t->error((*reinterpret_cast< QTcpSocket::SocketError(*)>(_a[1]))); break;
         case 1: _t->getDatadreain(); break;
-        case 2: _t->get(); break;
+        case 2: _t->sendTabelData(); break;
         case 3: _t->readyRead(); break;
         case 4: _t->disconnected(); break;
-        case 5: _t->sendClient((*reinterpret_cast< QMap<QString,solar_battery_salleter>(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -146,13 +138,13 @@ int TcpSocketThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 5;
     }
     return _id;
 }

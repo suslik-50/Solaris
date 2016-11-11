@@ -37,10 +37,14 @@ int main(int argc, char *argv[])
     main_module main_ma(sun,c_s_b,position_salleter);
     main_ma.start();
 
+
+
+    DataConteiner dc(&c_s_b);
+
     TelnetServer server(&main_ma);
     server.StartServer();
 
-    TcpServer servertcp(&c_s_b, &main_ma);
+    TcpServer servertcp(&main_ma, &dc);
     servertcp.StartServer();
 
 
