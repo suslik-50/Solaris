@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_main_module_t {
-    QByteArrayData data[62];
-    char stringdata0[934];
+    QByteArrayData data[65];
+    char stringdata0[1029];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -90,7 +90,10 @@ QT_MOC_LITERAL(57, 874, 15), // "Set_telnet_port"
 QT_MOC_LITERAL(58, 890, 4), // "port"
 QT_MOC_LITERAL(59, 895, 12), // "Set_tcp_port"
 QT_MOC_LITERAL(60, 908, 21), // "Set_qdebug_main_modul"
-QT_MOC_LITERAL(61, 930, 3) // "y_n"
+QT_MOC_LITERAL(61, 930, 3), // "y_n"
+QT_MOC_LITERAL(62, 934, 33), // "get_count_record_positon_sall..."
+QT_MOC_LITERAL(63, 968, 29), // "clean_record_positon_salleter"
+QT_MOC_LITERAL(64, 998, 30) // "remove_record_positon_salleter"
 
     },
     "main_module\0qdebug_sun_signal\0\0y_t\0"
@@ -121,7 +124,9 @@ QT_MOC_LITERAL(61, 930, 3) // "y_n"
     "get_telnet_port\0get_tcp_port\0"
     "get_qdebug_main_modul\0Set_telnet_port\0"
     "port\0Set_tcp_port\0Set_qdebug_main_modul\0"
-    "y_n"
+    "y_n\0get_count_record_positon_salleter\0"
+    "clean_record_positon_salleter\0"
+    "remove_record_positon_salleter"
 };
 #undef QT_MOC_LITERAL
 
@@ -131,7 +136,7 @@ static const uint qt_meta_data_main_module[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      43,   14, // methods
+      46,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -139,51 +144,54 @@ static const uint qt_meta_data_main_module[] = {
       12,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  229,    2, 0x06 /* Public */,
-       4,    1,  232,    2, 0x06 /* Public */,
-       6,    1,  235,    2, 0x06 /* Public */,
-       7,    1,  238,    2, 0x06 /* Public */,
-       8,    1,  241,    2, 0x06 /* Public */,
-      10,    1,  244,    2, 0x06 /* Public */,
-      11,    0,  247,    2, 0x06 /* Public */,
-      12,    0,  248,    2, 0x06 /* Public */,
-      13,    0,  249,    2, 0x06 /* Public */,
-      14,    0,  250,    2, 0x06 /* Public */,
-      15,    0,  251,    2, 0x06 /* Public */,
-      16,    0,  252,    2, 0x06 /* Public */,
+       1,    1,  244,    2, 0x06 /* Public */,
+       4,    1,  247,    2, 0x06 /* Public */,
+       6,    1,  250,    2, 0x06 /* Public */,
+       7,    1,  253,    2, 0x06 /* Public */,
+       8,    1,  256,    2, 0x06 /* Public */,
+      10,    1,  259,    2, 0x06 /* Public */,
+      11,    0,  262,    2, 0x06 /* Public */,
+      12,    0,  263,    2, 0x06 /* Public */,
+      13,    0,  264,    2, 0x06 /* Public */,
+      14,    0,  265,    2, 0x06 /* Public */,
+      15,    0,  266,    2, 0x06 /* Public */,
+      16,    0,  267,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      17,    0,  253,    2, 0x0a /* Public */,
-      18,    0,  254,    2, 0x0a /* Public */,
-      19,    1,  255,    2, 0x0a /* Public */,
-      20,    1,  258,    2, 0x0a /* Public */,
-      21,    1,  261,    2, 0x0a /* Public */,
-      22,    1,  264,    2, 0x0a /* Public */,
-      23,    1,  267,    2, 0x0a /* Public */,
-      24,    8,  270,    2, 0x0a /* Public */,
-      33,    1,  287,    2, 0x0a /* Public */,
-      34,    1,  290,    2, 0x0a /* Public */,
-      35,    7,  293,    2, 0x0a /* Public */,
-      39,    0,  308,    2, 0x0a /* Public */,
-      40,    0,  309,    2, 0x0a /* Public */,
-      41,    0,  310,    2, 0x0a /* Public */,
-      42,    0,  311,    2, 0x0a /* Public */,
-      43,    0,  312,    2, 0x0a /* Public */,
-      44,    1,  313,    2, 0x0a /* Public */,
-      46,    8,  316,    2, 0x0a /* Public */,
-      47,    1,  333,    2, 0x0a /* Public */,
-      48,    1,  336,    2, 0x0a /* Public */,
-      49,    0,  339,    2, 0x0a /* Public */,
-      50,    0,  340,    2, 0x0a /* Public */,
-      51,    0,  341,    2, 0x0a /* Public */,
-      52,    0,  342,    2, 0x0a /* Public */,
-      53,    0,  343,    2, 0x0a /* Public */,
-      54,    0,  344,    2, 0x0a /* Public */,
-      55,    0,  345,    2, 0x0a /* Public */,
-      56,    0,  346,    2, 0x0a /* Public */,
-      57,    1,  347,    2, 0x0a /* Public */,
-      59,    1,  350,    2, 0x0a /* Public */,
-      60,    1,  353,    2, 0x0a /* Public */,
+      17,    0,  268,    2, 0x0a /* Public */,
+      18,    0,  269,    2, 0x0a /* Public */,
+      19,    1,  270,    2, 0x0a /* Public */,
+      20,    1,  273,    2, 0x0a /* Public */,
+      21,    1,  276,    2, 0x0a /* Public */,
+      22,    1,  279,    2, 0x0a /* Public */,
+      23,    1,  282,    2, 0x0a /* Public */,
+      24,    8,  285,    2, 0x0a /* Public */,
+      33,    1,  302,    2, 0x0a /* Public */,
+      34,    1,  305,    2, 0x0a /* Public */,
+      35,    7,  308,    2, 0x0a /* Public */,
+      39,    0,  323,    2, 0x0a /* Public */,
+      40,    0,  324,    2, 0x0a /* Public */,
+      41,    0,  325,    2, 0x0a /* Public */,
+      42,    0,  326,    2, 0x0a /* Public */,
+      43,    0,  327,    2, 0x0a /* Public */,
+      44,    1,  328,    2, 0x0a /* Public */,
+      46,    8,  331,    2, 0x0a /* Public */,
+      47,    1,  348,    2, 0x0a /* Public */,
+      48,    1,  351,    2, 0x0a /* Public */,
+      49,    0,  354,    2, 0x0a /* Public */,
+      50,    0,  355,    2, 0x0a /* Public */,
+      51,    0,  356,    2, 0x0a /* Public */,
+      52,    0,  357,    2, 0x0a /* Public */,
+      53,    0,  358,    2, 0x0a /* Public */,
+      54,    0,  359,    2, 0x0a /* Public */,
+      55,    0,  360,    2, 0x0a /* Public */,
+      56,    0,  361,    2, 0x0a /* Public */,
+      57,    1,  362,    2, 0x0a /* Public */,
+      59,    1,  365,    2, 0x0a /* Public */,
+      60,    1,  368,    2, 0x0a /* Public */,
+      62,    0,  371,    2, 0x0a /* Public */,
+      63,    0,  372,    2, 0x0a /* Public */,
+      64,    1,  373,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Bool,    3,
@@ -231,6 +239,9 @@ static const uint qt_meta_data_main_module[] = {
     QMetaType::Void, QMetaType::Int,   58,
     QMetaType::Void, QMetaType::Int,   58,
     QMetaType::Void, QMetaType::Bool,   61,
+    QMetaType::Int,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   25,
 
        0        // eod
 };
@@ -303,6 +314,10 @@ void main_module::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 40: _t->Set_telnet_port((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 41: _t->Set_tcp_port((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 42: _t->Set_qdebug_main_modul((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 43: { int _r = _t->get_count_record_positon_salleter();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
+        case 44: _t->clean_record_positon_salleter(); break;
+        case 45: _t->remove_record_positon_salleter((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -420,13 +435,13 @@ int main_module::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 43)
+        if (_id < 46)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 43;
+        _id -= 46;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 43)
+        if (_id < 46)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 43;
+        _id -= 46;
     }
     return _id;
 }

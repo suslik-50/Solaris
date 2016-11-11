@@ -70,19 +70,19 @@ static const uint qt_meta_data_potoc_sun[] = {
 
  // slots: name, argc, parameters, tag, flags
        6,    0,   61,    2, 0x08 /* Private */,
-       7,    0,   62,    2, 0x08 /* Private */,
-       8,    0,   63,    2, 0x0a /* Public */,
-       9,    1,   64,    2, 0x0a /* Public */,
-      11,    1,   67,    2, 0x0a /* Public */,
-      13,    0,   70,    2, 0x0a /* Public */,
-      14,    0,   71,    2, 0x0a /* Public */,
+       7,    3,   62,    2, 0x08 /* Private */,
+       8,    0,   69,    2, 0x0a /* Public */,
+       9,    1,   70,    2, 0x0a /* Public */,
+      11,    1,   73,    2, 0x0a /* Public */,
+      13,    0,   76,    2, 0x0a /* Public */,
+      14,    0,   77,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::Double,    3,    4,    5,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::Double,    3,    4,    5,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Bool,   10,
     QMetaType::Void, QMetaType::Int,   12,
@@ -100,7 +100,7 @@ void potoc_sun::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->positionsun((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3]))); break;
         case 1: _t->slotNextValue(); break;
-        case 2: _t->sunposition(); break;
+        case 2: _t->sunposition((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3]))); break;
         case 3: _t->run(); break;
         case 4: _t->debug((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 5: _t->upreplay((*reinterpret_cast< int(*)>(_a[1]))); break;

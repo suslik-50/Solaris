@@ -35,28 +35,13 @@ class potoc_salleter2:public QThread
  * urp0 - ω (угловое расстояние перицента),начальное
  */
     double replay;
-    double oe,on,r,a,E,M,t,t0,n,e,tjd;
-    double Px,Py,Pz,Qx,Qy,Qz,i,dvu0,urp0,dvu,urp;
-    double x,y,z,V,v,p,vr,vn,vx,vy,vz;
+    double i,urp0,dvu0,a,E,M,t,t0,e;
     QString name;
 private:vector_salleter salleter;
 private:setting seting;
-
 public:potoc_salleter2();
-private:double EccAnom(double M,double e);
-private:double Getdvu(double t);
-private:double Geturp(double t);
 public:QString Getname();
 public:void load_data(double aa,double ee,double ii, double dvudvu,double urpurp,double TT0,QString name);
-private:void Additional_variables();
-private:double Frac (double x)
-    {
-        return x-floor(x);
-    }
-private:double Modulo (double x, double y)
-    {
-        return y*Frac(x/y);
-    }
 public slots:
     void update (double aa,double ee,double ii, double dvudvu,double urpurp,double TT0);
     void upreplay (double Upreplay);
@@ -68,6 +53,7 @@ public slots:
 signals:
     void  data(vector_salleter);
     void  speed_error();
+    void data_(double x,double y,double z,double vx, double vy,double vz,QString name,double time);
     void  kontrol_sum(int);
 };
 

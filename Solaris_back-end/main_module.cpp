@@ -1,7 +1,8 @@
 #include "main_module.h"
 
-main_module::main_module(potoc_sun &sun_p, drain_parametrs_solar_battery &drain_p)
+main_module::main_module(potoc_sun &sun_p, drain_parametrs_solar_battery &drain_p,drain_position_salleter & position)
 {
+    position_salleter_potoc=&position;
     sun_potoc=&sun_p;
     drain=&drain_p;
     QObject::connect(this,SIGNAL(stop_sun_signal()),sun_potoc,SLOT(timerstop()));
@@ -37,6 +38,7 @@ int main_module::start_all_salleter_func(){
                 QObject::connect(L_potoc_sallete.value(sputnik.stl_name),SIGNAL(data(vector_salleter)),L_corners_solar_battery.value(sputnik.stl_name),SLOT(position_salleter(vector_salleter)));
                 QObject::connect(sun_potoc,SIGNAL(positionsun(double,double,double)),L_corners_solar_battery.value(sputnik.stl_name),SLOT(position_sun(double,double,double)));
                 QObject::connect(L_corners_solar_battery.value(sputnik.stl_name),SIGNAL(data(double,double,double,QString)),drain,SLOT(data(double,double,double,QString)));
+                QObject::connect(L_potoc_sallete.value(sputnik.stl_name),SIGNAL(data_(double,double,double,double,double,double,QString,double)), position_salleter_potoc,SLOT(data(double,double,double,double,double,double,QString,double)));
                 //связывающие сигналы (второстепенные)
                 QObject::connect(this,SIGNAL(qdebug_salleter_signal(bool)),L_potoc_sallete.value(sputnik.stl_name),SLOT(debug_t_f(bool)));
                 QObject::connect(this,SIGNAL(replay_salleter_signal(double)),L_potoc_sallete.value(sputnik.stl_name),SLOT(upreplay(double)));
@@ -435,6 +437,21 @@ void main_module::Set_tcp_port(int port)
 void main_module::Set_qdebug_main_modul(bool y_n)
 {
     setting_f.Set_qdebug_main_modul(y_n);
+}
+
+int main_module::get_count_record_positon_salleter()
+{
+    return  position_salleter_potoc->count_drain();
+}
+
+void main_module::clean_record_positon_salleter()
+{
+    position_salleter_potoc->clear();
+}
+
+void main_module::remove_record_positon_salleter(QString name)
+{
+     position_salleter_potoc->deletedata(name);
 }
 
 

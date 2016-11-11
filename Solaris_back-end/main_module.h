@@ -20,11 +20,12 @@
 #include <databaseconnect.h>
 #include <functiondb.h>
 #include <structur.h>
+#include <drain_position_salleter.h>
 
 class main_module: public QThread
 {
     Q_OBJECT
-public:main_module(potoc_sun & sun_p,drain_parametrs_solar_battery & drain_p);
+public:main_module(potoc_sun & sun_p,drain_parametrs_solar_battery & drain_p,drain_position_salleter & position);
     ///
 private:bool qdebug;
 private:QList <int> id_salleter;
@@ -33,6 +34,7 @@ private:QMap<QString,corners_solar_battery *> L_corners_solar_battery;
 private:QMap<QString,QThread *> T_potoc;
 private:potoc_sun  *sun_potoc;
 private:drain_parametrs_solar_battery  *drain;
+private:drain_position_salleter *position_salleter_potoc;
 private:setting setting_f;
 private: functiondb dbf;
 private:int updata_salleter_fun(double a, double e, double i, double dvu, double urp, double t0, QString name);
@@ -76,6 +78,10 @@ public slots :
     void Set_telnet_port(int port);
     void Set_tcp_port(int port);
     void Set_qdebug_main_modul(bool y_n);
+    //работа с drain_position_salleter
+    int get_count_record_positon_salleter();
+    void clean_record_positon_salleter();
+    void remove_record_positon_salleter(QString name);
 
 
 signals:

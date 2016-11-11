@@ -1,5 +1,6 @@
 #include <QCoreApplication>
 #include <potoc_sun.h>
+#include <drain_position_salleter.h>
 #include <QThread>
 #include <functiondb.h>
 #include <databaseconnect.h>
@@ -29,12 +30,14 @@ int main(int argc, char *argv[])
     drain_parametrs_solar_battery c_s_b;
     c_s_b.start();
 
-    main_module main_ma(sun,c_s_b);
+    drain_position_salleter position_salleter;
+    position_salleter.start();
+
+    main_module main_ma(sun,c_s_b,position_salleter);
     main_ma.start();
 
     TelnetServer server(&main_ma);
     server.StartServer();
-
 
     TcpServer servertcp(&c_s_b, &main_ma);
     servertcp.StartServer();

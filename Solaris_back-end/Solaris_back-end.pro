@@ -34,7 +34,11 @@ SOURCES += main.cpp \
     potoc_salleter2.cpp \
     tcpserver.cpp \
     tcpsocketthread.cpp \
-    command_parser2.cpp
+    drain_position_salleter.cpp \
+    prognoz_salleter.cpp \
+    function_salleter.cpp \
+    function_sun.cpp \
+    function_cornes.cpp
 
 HEADERS += \
     timejd.h \
@@ -53,4 +57,8 @@ HEADERS += \
     potoc_salleter2.h \
     tcpserver.h \
     tcpsocketthread.h \
-    command_parser2.h
+    drain_position_salleter.h \
+    prognoz_salleter.h \
+    function_salleter.h \
+    function_sun.h \
+    function_cornes.h

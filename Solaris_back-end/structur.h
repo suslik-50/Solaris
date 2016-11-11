@@ -20,6 +20,7 @@ struct vector_salleter
     double vz;
     QString name;
     double time;
+    double V;
 };
 
 struct solar_battery_salleter
@@ -28,6 +29,19 @@ struct solar_battery_salleter
     double b;
     double time;
     QString name;
+};
+struct data_salleter{
+   vector_salleter position;
+   solar_battery_salleter battary;
+};
+struct variables{
+    double Px;
+    double Py;
+    double Pz;
+    double Qx;
+    double Qy;
+    double Qz;
+
 };
 
 struct satellite //структура для спутника
