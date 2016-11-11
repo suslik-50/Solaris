@@ -50,23 +50,34 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_OSX
 
-//         if (getppid() != 1 && daemon(0, 0) == -1) {
-//         }
-//         #else
-//         if (daemon(0, 0) == -1) {
-//         }
+    //         if (getppid() != 1 && daemon(0, 0) == -1) {
+    //         }
+    //         #else
+    //         if (daemon(0, 0) == -1) {
+    //         }
 
 
 #endif
+
+    //вариант 1
 #ifdef Q_OS_WIN
 
     QTextCodec* codec = QTextCodec::codecForName("IBM 866"");
-       QTextCodec::setCodecForTr(codec);
-       QTextCodec::setCodecForCStrings(codec);
-       QTextCodec::setCodecForLocale(codec);
+    QTextCodec::setCodecForTr(codec);
+    QTextCodec::setCodecForCStrings(codec);
+    QTextCodec::setCodecForLocale(codec);
 
 #endif
+    // вариант 2
+    //сайт к варианту 2 http://nicknixer.ru/programmirovanie/russkie-simvolybukvy-pri-vvodevyvode-v-konsol-na-c/
+    /*#ifdef Q_OS_WIN
+#include <iostream>
+#include <Windows.h>
+SetConsoleCP(1251);
+SetConsoleOutputCP(1251);
 
+#endif
+ */
 #ifdef Q_OS_LINUX
 
     pid_t parpid, sid;

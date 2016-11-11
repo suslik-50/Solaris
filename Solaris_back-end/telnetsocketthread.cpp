@@ -37,7 +37,11 @@ void TelnetSocketThread::run()
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()), Qt::DirectConnection);
     connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()), Qt::DirectConnection);
 
-
+    // windows
+    QTextCodec *codec = QTextCodec::codecForName("IBM 866");
+    QByteArray encodedString = codec->fromUnicode("Введите команду \r\n");
+    socket->write(encodedString);
+    //
     QByteArray data("Введите команду \r\n");
     socket->write(data);
     setAccess(false);
