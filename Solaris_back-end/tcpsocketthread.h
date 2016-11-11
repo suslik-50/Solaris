@@ -16,6 +16,7 @@ class TcpSocketThread : public QThread
     Q_OBJECT
     main_module *main;
     QTimer* timer;
+
    QMap<QString,solar_battery_salleter> olddata;
 public:
     explicit TcpSocketThread(int ID, drain_parametrs_solar_battery *darin_p, main_module *main_m);

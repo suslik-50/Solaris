@@ -15,3 +15,10 @@ data_salleter prognoz_salleter::get_data(double a, double e, double i, double dv
  data.position=salleter;
  return data;
 }
+
+void prognoz_salleter::run()
+{
+      exec();
+}
+
+

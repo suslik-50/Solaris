@@ -48,7 +48,6 @@ void TcpSocketThread::sendClient(QMap<QString,solar_battery_salleter> data_sbs)
 {
 
     QString str("tabel");
-
     QStringList list;
     foreach (QString key, data_sbs.keys())
     {
@@ -68,7 +67,6 @@ void TcpSocketThread::sendClient(QMap<QString,solar_battery_salleter> data_sbs)
     out.device()->seek(0);
     out << quint16(arrBlock.size() - sizeof(quint16));
     socket->write(arrBlock);
-
     list.clear();
 }
 

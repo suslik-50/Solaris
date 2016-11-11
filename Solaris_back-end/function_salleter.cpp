@@ -38,7 +38,7 @@ double Getdvu(double t,double t0,double dvu0,double i,double e, double a)
     double dvu;
     del_dvu = (-9.964 / pow((1 - pow(e,2)),2)) * pow((Re/a),3.5) * cos(i);
     dvu = dvu0 + (del_dvu * (t-t0));
-    dvu=dvu*(45.0/atan(1));
+    dvu=dvu*(45.0/atan(1));// градусы
     return dvu;
 }
 // получение углового расстояния перицента для солнеце-синхронной орбиты

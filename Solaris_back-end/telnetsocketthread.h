@@ -10,6 +10,7 @@
 #include <structur.h>
 #include <setting.h>
 #include <command_parser.h>
+#include <QTextCodec>
 
 class TelnetSocketThread : public QThread
 {
@@ -19,6 +20,9 @@ class TelnetSocketThread : public QThread
     QString login, password;
     QByteArray bytes;
     main_module *main;
+    QString command;
+    bool win;
+    bool first = true;
     int num = 0;
 private:setting file_setting;
 private:void parser(QString coomand);

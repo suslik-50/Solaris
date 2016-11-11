@@ -77,7 +77,8 @@ SOURCES       = ../Solaris_back-end/main.cpp \
 		moc_potoc_salleter2.cpp \
 		moc_tcpserver.cpp \
 		moc_tcpsocketthread.cpp \
-		moc_drain_position_salleter.cpp
+		moc_drain_position_salleter.cpp \
+		moc_prognoz_salleter.cpp
 OBJECTS       = main.o \
 		timejd.o \
 		earth_pos.o \
@@ -108,7 +109,8 @@ OBJECTS       = main.o \
 		moc_potoc_salleter2.o \
 		moc_tcpserver.o \
 		moc_tcpsocketthread.o \
-		moc_drain_position_salleter.o
+		moc_drain_position_salleter.o \
+		moc_prognoz_salleter.o
 DIST          = ../../../Qt2/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt2/5.7/clang_64/mkspecs/qdevice.pri \
 		../../../Qt2/5.7/clang_64/mkspecs/features/device_config.prf \
@@ -245,7 +247,7 @@ DIST          = ../../../Qt2/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt2/5.7/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt2/5.7/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt2/5.7/clang_64/mkspecs/features/spec_post.prf \
-		../Solaris_back-end/.qmake.stash \
+		../../.qmake.stash \
 		../../../Qt2/5.7/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt2/5.7/clang_64/mkspecs/features/default_pre.prf \
 		../../../Qt2/5.7/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -454,7 +456,7 @@ Makefile: ../Solaris_back-end/Solaris_back-end.pro ../../../Qt2/5.7/clang_64/mks
 		../../../Qt2/5.7/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt2/5.7/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt2/5.7/clang_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
+		../../.qmake.stash \
 		../../../Qt2/5.7/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt2/5.7/clang_64/mkspecs/features/default_pre.prf \
 		../../../Qt2/5.7/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -616,7 +618,7 @@ Makefile: ../Solaris_back-end/Solaris_back-end.pro ../../../Qt2/5.7/clang_64/mks
 ../../../Qt2/5.7/clang_64/mkspecs/features/qt_config.prf:
 ../../../Qt2/5.7/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../../Qt2/5.7/clang_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
+../../.qmake.stash:
 ../../../Qt2/5.7/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt2/5.7/clang_64/mkspecs/features/default_pre.prf:
 ../../../Qt2/5.7/clang_64/mkspecs/features/mac/default_pre.prf:
@@ -666,7 +668,6 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) $(TARGET) 
-	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -682,9 +683,9 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_potoc_sun.cpp moc_corners_solar_battery.cpp moc_drain_parametrs_solar_battery.cpp moc_main_module.cpp moc_telnetserver.cpp moc_telnetsocketthread.cpp moc_potoc_salleter2.cpp moc_tcpserver.cpp moc_tcpsocketthread.cpp moc_drain_position_salleter.cpp
+compiler_moc_header_make_all: moc_potoc_sun.cpp moc_corners_solar_battery.cpp moc_drain_parametrs_solar_battery.cpp moc_main_module.cpp moc_telnetserver.cpp moc_telnetsocketthread.cpp moc_potoc_salleter2.cpp moc_tcpserver.cpp moc_tcpsocketthread.cpp moc_drain_position_salleter.cpp moc_prognoz_salleter.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_potoc_sun.cpp moc_corners_solar_battery.cpp moc_drain_parametrs_solar_battery.cpp moc_main_module.cpp moc_telnetserver.cpp moc_telnetsocketthread.cpp moc_potoc_salleter2.cpp moc_tcpserver.cpp moc_tcpsocketthread.cpp moc_drain_position_salleter.cpp
+	-$(DEL_FILE) moc_potoc_sun.cpp moc_corners_solar_battery.cpp moc_drain_parametrs_solar_battery.cpp moc_main_module.cpp moc_telnetserver.cpp moc_telnetsocketthread.cpp moc_potoc_salleter2.cpp moc_tcpserver.cpp moc_tcpsocketthread.cpp moc_drain_position_salleter.cpp moc_prognoz_salleter.cpp
 moc_potoc_sun.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QThread \
@@ -703,6 +704,7 @@ moc_potoc_sun.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObjec
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../Solaris_back-end/timejd.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/potoc_sun.h \
 		../../../Qt2/5.7/clang_64/bin/moc
 	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/potoc_sun.h -o moc_potoc_sun.cpp
@@ -765,6 +767,7 @@ moc_main_module.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObj
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/drain_parametrs_solar_battery.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QMap \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qmap.h \
@@ -849,6 +852,7 @@ moc_telnetserver.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QOb
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/drain_parametrs_solar_battery.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QMap \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qmap.h \
@@ -933,6 +937,7 @@ moc_telnetsocketthread.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Heade
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/drain_parametrs_solar_battery.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QMap \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qmap.h \
@@ -1012,6 +1017,7 @@ moc_tcpserver.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObjec
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/functiondb.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/QSql \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
@@ -1063,6 +1069,7 @@ moc_tcpsocketthread.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/functiondb.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/QSql \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
@@ -1097,6 +1104,24 @@ moc_drain_position_salleter.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/
 		../Solaris_back-end/drain_position_salleter.h \
 		../../../Qt2/5.7/clang_64/bin/moc
 	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/drain_position_salleter.h -o moc_drain_position_salleter.cpp
+
+moc_prognoz_salleter.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QThread \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../Solaris_back-end/function_salleter.h \
+		../Solaris_back-end/structur.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../Solaris_back-end/timejd.h \
+		../Solaris_back-end/function_sun.h \
+		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_cornes.h \
+		../Solaris_back-end/prognoz_salleter.h \
+		../../../Qt2/5.7/clang_64/bin/moc
+	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/prognoz_salleter.h -o moc_prognoz_salleter.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1133,6 +1158,7 @@ main.o: ../Solaris_back-end/main.cpp ../../../Qt2/5.7/clang_64/lib/QtCore.framew
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../Solaris_back-end/timejd.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/drain_position_salleter.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qlist.h \
@@ -1233,7 +1259,8 @@ potoc_sun.o: ../Solaris_back-end/potoc_sun.cpp ../Solaris_back-end/potoc_sun.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		../Solaris_back-end/timejd.h
+		../Solaris_back-end/timejd.h \
+		../Solaris_back-end/function_sun.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o potoc_sun.o ../Solaris_back-end/potoc_sun.cpp
 
 corners_solar_battery.o: ../Solaris_back-end/corners_solar_battery.cpp ../Solaris_back-end/corners_solar_battery.h \
@@ -1250,7 +1277,8 @@ corners_solar_battery.o: ../Solaris_back-end/corners_solar_battery.cpp ../Solari
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QSettings \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qsettings.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../Solaris_back-end/function_cornes.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o corners_solar_battery.o ../Solaris_back-end/corners_solar_battery.cpp
 
 setting.o: ../Solaris_back-end/setting.cpp ../Solaris_back-end/setting.h \
@@ -1306,6 +1334,7 @@ main_module.o: ../Solaris_back-end/main_module.cpp ../Solaris_back-end/main_modu
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/drain_parametrs_solar_battery.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QMap \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qmap.h \
@@ -1447,6 +1476,7 @@ telnetserver.o: ../Solaris_back-end/telnetserver.cpp ../Solaris_back-end/telnets
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/drain_parametrs_solar_battery.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QMap \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qmap.h \
@@ -1530,6 +1560,7 @@ telnetsocketthread.o: ../Solaris_back-end/telnetsocketthread.cpp ../Solaris_back
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/drain_parametrs_solar_battery.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QMap \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qmap.h \
@@ -1579,6 +1610,7 @@ command_parser.o: ../Solaris_back-end/command_parser.cpp ../Solaris_back-end/com
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/drain_parametrs_solar_battery.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QMap \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qmap.h \
@@ -1617,7 +1649,8 @@ potoc_salleter2.o: ../Solaris_back-end/potoc_salleter2.cpp ../Solaris_back-end/p
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		../Solaris_back-end/timejd.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../Solaris_back-end/function_salleter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o potoc_salleter2.o ../Solaris_back-end/potoc_salleter2.cpp
 
 tcpserver.o: ../Solaris_back-end/tcpserver.cpp ../Solaris_back-end/tcpserver.h \
@@ -1657,6 +1690,7 @@ tcpserver.o: ../Solaris_back-end/tcpserver.cpp ../Solaris_back-end/tcpserver.h \
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/functiondb.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/QSql \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
@@ -1707,6 +1741,7 @@ tcpsocketthread.o: ../Solaris_back-end/tcpsocketthread.cpp ../Solaris_back-end/t
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_sun.h \
 		../Solaris_back-end/functiondb.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/QSql \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
@@ -1743,24 +1778,18 @@ drain_position_salleter.o: ../Solaris_back-end/drain_position_salleter.cpp ../So
 prognoz_salleter.o: ../Solaris_back-end/prognoz_salleter.cpp ../Solaris_back-end/prognoz_salleter.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../Solaris_back-end/potoc_sun.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QThread \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../Solaris_back-end/function_salleter.h \
 		../Solaris_back-end/structur.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDateTime \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
-		../Solaris_back-end/earth_pos.h \
-		../Solaris_back-end/setting.h \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QSettings \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qsettings.h \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../Solaris_back-end/timejd.h \
-		../Solaris_back-end/corners_solar_battery.h
+		../Solaris_back-end/function_sun.h \
+		../Solaris_back-end/earth_pos.h \
+		../Solaris_back-end/function_cornes.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o prognoz_salleter.o ../Solaris_back-end/prognoz_salleter.cpp
 
 function_salleter.o: ../Solaris_back-end/function_salleter.cpp ../Solaris_back-end/function_salleter.h \
@@ -1769,7 +1798,9 @@ function_salleter.o: ../Solaris_back-end/function_salleter.cpp ../Solaris_back-e
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDateTime \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
-		../Solaris_back-end/timejd.h
+		../Solaris_back-end/timejd.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o function_salleter.o ../Solaris_back-end/function_salleter.cpp
 
 function_sun.o: ../Solaris_back-end/function_sun.cpp ../Solaris_back-end/function_sun.h \
@@ -1779,7 +1810,9 @@ function_sun.o: ../Solaris_back-end/function_sun.cpp ../Solaris_back-end/functio
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDateTime \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		../Solaris_back-end/earth_pos.h \
-		../Solaris_back-end/timejd.h
+		../Solaris_back-end/timejd.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o function_sun.o ../Solaris_back-end/function_sun.cpp
 
 function_cornes.o: ../Solaris_back-end/function_cornes.cpp ../Solaris_back-end/function_cornes.h \
@@ -1819,6 +1852,9 @@ moc_tcpsocketthread.o: moc_tcpsocketthread.cpp
 
 moc_drain_position_salleter.o: moc_drain_position_salleter.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_drain_position_salleter.o moc_drain_position_salleter.cpp
+
+moc_prognoz_salleter.o: moc_prognoz_salleter.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_prognoz_salleter.o moc_prognoz_salleter.cpp
 
 ####### Install
 

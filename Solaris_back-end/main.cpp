@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <QDebug>
 #include <stdio.h>
+#include <QTextCodec>
 
 int main(int argc, char *argv[])
 {
@@ -51,6 +52,14 @@ int main(int argc, char *argv[])
 //         if (daemon(0, 0) == -1) {
 //         }
 
+
+#endif
+#ifdef Q_OS_WIN
+
+    QTextCodec* codec = QTextCodec::codecForName("IBM 866"");
+       QTextCodec::setCodecForTr(codec);
+       QTextCodec::setCodecForCStrings(codec);
+       QTextCodec::setCodecForLocale(codec);
 
 #endif
 

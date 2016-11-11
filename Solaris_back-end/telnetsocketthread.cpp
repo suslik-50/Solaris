@@ -7,15 +7,22 @@
 void TelnetSocketThread::parser(QString command)
 {
     command_parser parser_cmd(*main);
-
-    socket->write(parser_cmd.command(command));
+    /// если булева переменная true возращаем с кодировкой 1251
+    /// если false то как обычно
+    if (win==true){
+        QTextCodec *codec = QTextCodec::codecForName("IBM 866");
+        QByteArray encodedString = codec->fromUnicode(parser_cmd.command(command));
+        socket->write(encodedString);
+    }else{
+        socket->write(parser_cmd.command(command));
+    }
 
 }
 
 TelnetSocketThread::TelnetSocketThread(int ID, QObject *parent, main_module *main_m)
 {
     this->socketDescriptor = ID;
-    main=main_m;  
+    main=main_m;
 }
 
 void TelnetSocketThread::run()
@@ -45,22 +52,66 @@ bool TelnetSocketThread::access() const
 void TelnetSocketThread::readyRead()
 {
 
+
     QByteArray data = socket->readAll();
     QString str(data);
-    int leng = str.length();
-    str = str.left(leng-2);
-    if (str!="")
+    ///если четыре последних символа не "\r\n" то это windows ставим bool переменную win=true
+    ///eсли четыре последних символа не "\r\n" то это unix ставим bool переменную win=false
+    /// и обрабатываем как обычно
+
+    if (first)
     {
-        parser(str);
+        if (str.right(2) == "\r\n")
+        {
+            win=false;
+            qDebug()<<"Winfalse";
+        }
+        else
+        {
+            win=true;
+            qDebug()<<"Wintrue";
+        }
+        first = false;
     }
+    if (win==true){
+        if (str != "\r\n")
+        {
+            command += str;
+            return;
+        }
 
-    if (str == "exit")
+        if (command == "exit")
+        {
+            socket->deleteLater();
+            command = "";
+            exit(0);
+        }
+
+        if (str == "\r\n")
+        {
+            parser(command);
+            command = "";
+        }
+
+
+    }else
     {
-        socket->deleteLater();
-        exit(0);
+        int leng = str.length();
+        str = str.left(leng-2);
+        if (str!="")
+        {
+            qDebug()<<"Command";
+            parser(str);
+        }
+
+        if (str == "exit")
+        {
+            socket->deleteLater();
+            str = "";
+            exit(0);
+        }
+        str = "";
     }
-
-
 }
 void TelnetSocketThread::disconnected()
 {
