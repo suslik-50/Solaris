@@ -16,14 +16,13 @@ QString potoc_salleter2::Getname()
 
 void potoc_salleter2::update(double aa, double ee, double ii, double dvudvu, double urpurp, double TT0)
 {
-    StopTimer();
     a=aa;
     e=ee;
     i=ii;
     dvu0=dvudvu;
     urp0=urpurp;
     t0=TT0;
-    StartTimer();
+
 }
 
 void potoc_salleter2::upreplay(double Upreplay)
@@ -55,7 +54,6 @@ void potoc_salleter2::StartTimer()
 
 void potoc_salleter2::load_data( double aa,double ee,double ii, double dvudvu,double urpurp,double TT0,QString Name)
 {
-
     a=aa;
     e=ee;
     i=ii;

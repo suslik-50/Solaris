@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_potoc_sun_t {
-    QByteArrayData data[16];
-    char stringdata0[103];
+    QByteArrayData data[15];
+    char stringdata0[101];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,21 +35,20 @@ QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 1), // "x"
 QT_MOC_LITERAL(4, 25, 1), // "y"
 QT_MOC_LITERAL(5, 27, 1), // "z"
-QT_MOC_LITERAL(6, 29, 1), // "t"
-QT_MOC_LITERAL(7, 31, 13), // "slotNextValue"
-QT_MOC_LITERAL(8, 45, 11), // "sunposition"
-QT_MOC_LITERAL(9, 57, 3), // "run"
-QT_MOC_LITERAL(10, 61, 5), // "debug"
-QT_MOC_LITERAL(11, 67, 3), // "y_n"
-QT_MOC_LITERAL(12, 71, 8), // "upreplay"
-QT_MOC_LITERAL(13, 80, 1), // "i"
-QT_MOC_LITERAL(14, 82, 9), // "timerstop"
-QT_MOC_LITERAL(15, 92, 10) // "timerstart"
+QT_MOC_LITERAL(6, 29, 13), // "slotNextValue"
+QT_MOC_LITERAL(7, 43, 11), // "sunposition"
+QT_MOC_LITERAL(8, 55, 3), // "run"
+QT_MOC_LITERAL(9, 59, 5), // "debug"
+QT_MOC_LITERAL(10, 65, 3), // "y_n"
+QT_MOC_LITERAL(11, 69, 8), // "upreplay"
+QT_MOC_LITERAL(12, 78, 1), // "i"
+QT_MOC_LITERAL(13, 80, 9), // "timerstop"
+QT_MOC_LITERAL(14, 90, 10) // "timerstart"
 
     },
-    "potoc_sun\0positionsun\0\0x\0y\0z\0t\0"
-    "slotNextValue\0sunposition\0run\0debug\0"
-    "y_n\0upreplay\0i\0timerstop\0timerstart"
+    "potoc_sun\0positionsun\0\0x\0y\0z\0slotNextValue\0"
+    "sunposition\0run\0debug\0y_n\0upreplay\0i\0"
+    "timerstop\0timerstart"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,26 +66,26 @@ static const uint qt_meta_data_potoc_sun[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    4,   54,    2, 0x06 /* Public */,
+       1,    3,   54,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    0,   63,    2, 0x08 /* Private */,
-       8,    0,   64,    2, 0x08 /* Private */,
-       9,    0,   65,    2, 0x0a /* Public */,
-      10,    1,   66,    2, 0x0a /* Public */,
-      12,    1,   69,    2, 0x0a /* Public */,
-      14,    0,   72,    2, 0x0a /* Public */,
-      15,    0,   73,    2, 0x0a /* Public */,
+       6,    0,   61,    2, 0x08 /* Private */,
+       7,    3,   62,    2, 0x08 /* Private */,
+       8,    0,   69,    2, 0x0a /* Public */,
+       9,    1,   70,    2, 0x0a /* Public */,
+      11,    1,   73,    2, 0x0a /* Public */,
+      13,    0,   76,    2, 0x0a /* Public */,
+      14,    0,   77,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double,    3,    4,    5,    6,
+    QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::Double,    3,    4,    5,
 
  // slots: parameters
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::Double,    3,    4,    5,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   11,
-    QMetaType::Void, QMetaType::Int,   13,
+    QMetaType::Void, QMetaType::Bool,   10,
+    QMetaType::Void, QMetaType::Int,   12,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -99,9 +98,9 @@ void potoc_sun::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         potoc_sun *_t = static_cast<potoc_sun *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->positionsun((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4]))); break;
+        case 0: _t->positionsun((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3]))); break;
         case 1: _t->slotNextValue(); break;
-        case 2: _t->sunposition(); break;
+        case 2: _t->sunposition((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3]))); break;
         case 3: _t->run(); break;
         case 4: _t->debug((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 5: _t->upreplay((*reinterpret_cast< int(*)>(_a[1]))); break;
@@ -113,7 +112,7 @@ void potoc_sun::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
         {
-            typedef void (potoc_sun::*_t)(double , double , double , double );
+            typedef void (potoc_sun::*_t)(double , double , double );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&potoc_sun::positionsun)) {
                 *result = 0;
                 return;
@@ -159,9 +158,9 @@ int potoc_sun::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void potoc_sun::positionsun(double _t1, double _t2, double _t3, double _t4)
+void potoc_sun::positionsun(double _t1, double _t2, double _t3)
 {
-    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)) };
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_END_MOC_NAMESPACE

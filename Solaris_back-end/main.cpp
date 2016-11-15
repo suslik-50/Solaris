@@ -15,11 +15,17 @@
 #include <unistd.h>
 #include <QDebug>
 #include <stdio.h>
-#include <QTextCodec>
+#include <clocale>
+
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+#ifdef Q_OS_WIN
+#include <windows>
+  SetConsoleCP(1251);
+  SetConsoleOutputCP(1251);
+#endif
 
     DateBaseConnect connect;
     connect.DBConnect();
@@ -33,13 +39,9 @@ int main(int argc, char *argv[])
 
     drain_position_salleter position_salleter;
     position_salleter.start();
-
+    DataConteiner dc(&c_s_b);
     main_module main_ma(sun,c_s_b,position_salleter);
     main_ma.start();
-
-
-
-    DataConteiner dc(&c_s_b);
 
     TelnetServer server(&main_ma);
     server.StartServer();
@@ -59,25 +61,8 @@ int main(int argc, char *argv[])
 
 #endif
 
-    //вариант 1
-#ifdef Q_OS_WIN
 
-    QTextCodec* codec = QTextCodec::codecForName("IBM 866"");
-    QTextCodec::setCodecForTr(codec);
-    QTextCodec::setCodecForCStrings(codec);
-    QTextCodec::setCodecForLocale(codec);
 
-#endif
-    // вариант 2
-    //сайт к варианту 2 http://nicknixer.ru/programmirovanie/russkie-simvolybukvy-pri-vvodevyvode-v-konsol-na-c/
-    /*#ifdef Q_OS_WIN
-#include <iostream>
-#include <Windows.h>
-SetConsoleCP(1251);
-SetConsoleOutputCP(1251);
-
-#endif
- */
 #ifdef Q_OS_LINUX
 
     pid_t parpid, sid;

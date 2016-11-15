@@ -9,6 +9,7 @@
 #include "../Solaris_back-end/main_module.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
+#include <QtCore/QList>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'main_module.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -19,8 +20,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_main_module_t {
-    QByteArrayData data[65];
-    char stringdata0[1029];
+    QByteArrayData data[77];
+    char stringdata0[1208];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -61,39 +62,51 @@ QT_MOC_LITERAL(28, 432, 1), // "e"
 QT_MOC_LITERAL(29, 434, 1), // "i"
 QT_MOC_LITERAL(30, 436, 7), // "ark_per"
 QT_MOC_LITERAL(31, 444, 7), // "dolgota"
-QT_MOC_LITERAL(32, 452, 1), // "m"
-QT_MOC_LITERAL(33, 454, 13), // "stop_salleter"
-QT_MOC_LITERAL(34, 468, 14), // "start_salleter"
-QT_MOC_LITERAL(35, 483, 15), // "updata_salleter"
-QT_MOC_LITERAL(36, 499, 3), // "dvu"
-QT_MOC_LITERAL(37, 503, 3), // "urp"
-QT_MOC_LITERAL(38, 507, 2), // "t0"
-QT_MOC_LITERAL(39, 510, 8), // "stop_sun"
-QT_MOC_LITERAL(40, 519, 9), // "start_sun"
-QT_MOC_LITERAL(41, 529, 17), // "stop_all_salleter"
-QT_MOC_LITERAL(42, 547, 22), // "get_count_record_drain"
-QT_MOC_LITERAL(43, 570, 18), // "clean_record_drain"
-QT_MOC_LITERAL(44, 589, 26), // "get_value_corners_salleter"
-QT_MOC_LITERAL(45, 616, 22), // "solar_battery_salleter"
-QT_MOC_LITERAL(46, 639, 29), // "set_new_salleter_to_date_base"
-QT_MOC_LITERAL(47, 669, 21), // "delete_potoc_salleter"
-QT_MOC_LITERAL(48, 691, 29), // "delete_salleter_form_dataBase"
-QT_MOC_LITERAL(49, 721, 14), // "get_qdebug_sun"
-QT_MOC_LITERAL(50, 736, 14), // "get_replay_sun"
-QT_MOC_LITERAL(51, 751, 19), // "get_qdebug_salleter"
-QT_MOC_LITERAL(52, 771, 19), // "get_replay_salleter"
-QT_MOC_LITERAL(53, 791, 31), // "get_corners_solar_batter_qdebug"
-QT_MOC_LITERAL(54, 823, 15), // "get_telnet_port"
-QT_MOC_LITERAL(55, 839, 12), // "get_tcp_port"
-QT_MOC_LITERAL(56, 852, 21), // "get_qdebug_main_modul"
-QT_MOC_LITERAL(57, 874, 15), // "Set_telnet_port"
-QT_MOC_LITERAL(58, 890, 4), // "port"
-QT_MOC_LITERAL(59, 895, 12), // "Set_tcp_port"
-QT_MOC_LITERAL(60, 908, 21), // "Set_qdebug_main_modul"
-QT_MOC_LITERAL(61, 930, 3), // "y_n"
-QT_MOC_LITERAL(62, 934, 33), // "get_count_record_positon_sall..."
-QT_MOC_LITERAL(63, 968, 29), // "clean_record_positon_salleter"
-QT_MOC_LITERAL(64, 998, 30) // "remove_record_positon_salleter"
+QT_MOC_LITERAL(32, 452, 13), // "stop_salleter"
+QT_MOC_LITERAL(33, 466, 14), // "start_salleter"
+QT_MOC_LITERAL(34, 481, 15), // "updata_salleter"
+QT_MOC_LITERAL(35, 497, 3), // "dvu"
+QT_MOC_LITERAL(36, 501, 3), // "urp"
+QT_MOC_LITERAL(37, 505, 2), // "t0"
+QT_MOC_LITERAL(38, 508, 8), // "stop_sun"
+QT_MOC_LITERAL(39, 517, 9), // "start_sun"
+QT_MOC_LITERAL(40, 527, 17), // "stop_all_salleter"
+QT_MOC_LITERAL(41, 545, 22), // "get_count_record_drain"
+QT_MOC_LITERAL(42, 568, 18), // "clean_record_drain"
+QT_MOC_LITERAL(43, 587, 19), // "delete_record_drain"
+QT_MOC_LITERAL(44, 607, 26), // "get_value_corners_salleter"
+QT_MOC_LITERAL(45, 634, 22), // "solar_battery_salleter"
+QT_MOC_LITERAL(46, 657, 29), // "set_new_salleter_to_date_base"
+QT_MOC_LITERAL(47, 687, 21), // "delete_potoc_salleter"
+QT_MOC_LITERAL(48, 709, 29), // "delete_salleter_form_dataBase"
+QT_MOC_LITERAL(49, 739, 14), // "get_qdebug_sun"
+QT_MOC_LITERAL(50, 754, 14), // "get_replay_sun"
+QT_MOC_LITERAL(51, 769, 19), // "get_qdebug_salleter"
+QT_MOC_LITERAL(52, 789, 19), // "get_replay_salleter"
+QT_MOC_LITERAL(53, 809, 31), // "get_corners_solar_batter_qdebug"
+QT_MOC_LITERAL(54, 841, 15), // "get_telnet_port"
+QT_MOC_LITERAL(55, 857, 12), // "get_tcp_port"
+QT_MOC_LITERAL(56, 870, 21), // "get_qdebug_main_modul"
+QT_MOC_LITERAL(57, 892, 15), // "Set_telnet_port"
+QT_MOC_LITERAL(58, 908, 4), // "port"
+QT_MOC_LITERAL(59, 913, 12), // "Set_tcp_port"
+QT_MOC_LITERAL(60, 926, 21), // "Set_qdebug_main_modul"
+QT_MOC_LITERAL(61, 948, 3), // "y_n"
+QT_MOC_LITERAL(62, 952, 33), // "get_count_record_positon_sall..."
+QT_MOC_LITERAL(63, 986, 29), // "clean_record_positon_salleter"
+QT_MOC_LITERAL(64, 1016, 30), // "remove_record_positon_salleter"
+QT_MOC_LITERAL(65, 1047, 16), // "pos_salleter_all"
+QT_MOC_LITERAL(66, 1064, 6), // "timeT0"
+QT_MOC_LITERAL(67, 1071, 8), // "time_end"
+QT_MOC_LITERAL(68, 1080, 4), // "step"
+QT_MOC_LITERAL(69, 1085, 4), // "time"
+QT_MOC_LITERAL(70, 1090, 12), // "pos_salleter"
+QT_MOC_LITERAL(71, 1103, 17), // "grup_pos_salleter"
+QT_MOC_LITERAL(72, 1121, 14), // "QList<QString>"
+QT_MOC_LITERAL(73, 1136, 12), // "namesalleter"
+QT_MOC_LITERAL(74, 1149, 17), // "pos_salleter_slot"
+QT_MOC_LITERAL(75, 1167, 35), // "QMap<QString,QList<data_salle..."
+QT_MOC_LITERAL(76, 1203, 4) // "data"
 
     },
     "main_module\0qdebug_sun_signal\0\0y_t\0"
@@ -108,12 +121,12 @@ QT_MOC_LITERAL(64, 998, 30) // "remove_record_positon_salleter"
     "qdebug_sun\0replay_sun\0qdebug_salleter\0"
     "qdebug_corners_solar_battery\0"
     "replay_salleter\0new_salleter\0name\0"
-    "time_uts\0a\0e\0i\0ark_per\0dolgota\0m\0"
+    "time_uts\0a\0e\0i\0ark_per\0dolgota\0"
     "stop_salleter\0start_salleter\0"
     "updata_salleter\0dvu\0urp\0t0\0stop_sun\0"
     "start_sun\0stop_all_salleter\0"
     "get_count_record_drain\0clean_record_drain\0"
-    "get_value_corners_salleter\0"
+    "delete_record_drain\0get_value_corners_salleter\0"
     "solar_battery_salleter\0"
     "set_new_salleter_to_date_base\0"
     "delete_potoc_salleter\0"
@@ -126,7 +139,12 @@ QT_MOC_LITERAL(64, 998, 30) // "remove_record_positon_salleter"
     "port\0Set_tcp_port\0Set_qdebug_main_modul\0"
     "y_n\0get_count_record_positon_salleter\0"
     "clean_record_positon_salleter\0"
-    "remove_record_positon_salleter"
+    "remove_record_positon_salleter\0"
+    "pos_salleter_all\0timeT0\0time_end\0step\0"
+    "time\0pos_salleter\0grup_pos_salleter\0"
+    "QList<QString>\0namesalleter\0"
+    "pos_salleter_slot\0QMap<QString,QList<data_salleter> >\0"
+    "data"
 };
 #undef QT_MOC_LITERAL
 
@@ -136,7 +154,7 @@ static const uint qt_meta_data_main_module[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      46,   14, // methods
+      57,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -144,54 +162,65 @@ static const uint qt_meta_data_main_module[] = {
       12,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  244,    2, 0x06 /* Public */,
-       4,    1,  247,    2, 0x06 /* Public */,
-       6,    1,  250,    2, 0x06 /* Public */,
-       7,    1,  253,    2, 0x06 /* Public */,
-       8,    1,  256,    2, 0x06 /* Public */,
-      10,    1,  259,    2, 0x06 /* Public */,
-      11,    0,  262,    2, 0x06 /* Public */,
-      12,    0,  263,    2, 0x06 /* Public */,
-      13,    0,  264,    2, 0x06 /* Public */,
-      14,    0,  265,    2, 0x06 /* Public */,
-      15,    0,  266,    2, 0x06 /* Public */,
-      16,    0,  267,    2, 0x06 /* Public */,
+       1,    1,  299,    2, 0x06 /* Public */,
+       4,    1,  302,    2, 0x06 /* Public */,
+       6,    1,  305,    2, 0x06 /* Public */,
+       7,    1,  308,    2, 0x06 /* Public */,
+       8,    1,  311,    2, 0x06 /* Public */,
+      10,    1,  314,    2, 0x06 /* Public */,
+      11,    0,  317,    2, 0x06 /* Public */,
+      12,    0,  318,    2, 0x06 /* Public */,
+      13,    0,  319,    2, 0x06 /* Public */,
+      14,    0,  320,    2, 0x06 /* Public */,
+      15,    0,  321,    2, 0x06 /* Public */,
+      16,    0,  322,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      17,    0,  268,    2, 0x0a /* Public */,
-      18,    0,  269,    2, 0x0a /* Public */,
-      19,    1,  270,    2, 0x0a /* Public */,
-      20,    1,  273,    2, 0x0a /* Public */,
-      21,    1,  276,    2, 0x0a /* Public */,
-      22,    1,  279,    2, 0x0a /* Public */,
-      23,    1,  282,    2, 0x0a /* Public */,
-      24,    8,  285,    2, 0x0a /* Public */,
-      33,    1,  302,    2, 0x0a /* Public */,
-      34,    1,  305,    2, 0x0a /* Public */,
-      35,    7,  308,    2, 0x0a /* Public */,
-      39,    0,  323,    2, 0x0a /* Public */,
-      40,    0,  324,    2, 0x0a /* Public */,
-      41,    0,  325,    2, 0x0a /* Public */,
-      42,    0,  326,    2, 0x0a /* Public */,
-      43,    0,  327,    2, 0x0a /* Public */,
-      44,    1,  328,    2, 0x0a /* Public */,
-      46,    8,  331,    2, 0x0a /* Public */,
-      47,    1,  348,    2, 0x0a /* Public */,
-      48,    1,  351,    2, 0x0a /* Public */,
-      49,    0,  354,    2, 0x0a /* Public */,
-      50,    0,  355,    2, 0x0a /* Public */,
-      51,    0,  356,    2, 0x0a /* Public */,
-      52,    0,  357,    2, 0x0a /* Public */,
-      53,    0,  358,    2, 0x0a /* Public */,
-      54,    0,  359,    2, 0x0a /* Public */,
-      55,    0,  360,    2, 0x0a /* Public */,
-      56,    0,  361,    2, 0x0a /* Public */,
-      57,    1,  362,    2, 0x0a /* Public */,
-      59,    1,  365,    2, 0x0a /* Public */,
-      60,    1,  368,    2, 0x0a /* Public */,
-      62,    0,  371,    2, 0x0a /* Public */,
-      63,    0,  372,    2, 0x0a /* Public */,
-      64,    1,  373,    2, 0x0a /* Public */,
+      17,    0,  323,    2, 0x0a /* Public */,
+      18,    0,  324,    2, 0x0a /* Public */,
+      19,    1,  325,    2, 0x0a /* Public */,
+      20,    1,  328,    2, 0x0a /* Public */,
+      21,    1,  331,    2, 0x0a /* Public */,
+      22,    1,  334,    2, 0x0a /* Public */,
+      23,    1,  337,    2, 0x0a /* Public */,
+      24,    7,  340,    2, 0x0a /* Public */,
+      32,    1,  355,    2, 0x0a /* Public */,
+      33,    1,  358,    2, 0x0a /* Public */,
+      34,    7,  361,    2, 0x0a /* Public */,
+      38,    0,  376,    2, 0x0a /* Public */,
+      39,    0,  377,    2, 0x0a /* Public */,
+      40,    0,  378,    2, 0x0a /* Public */,
+      41,    0,  379,    2, 0x0a /* Public */,
+      42,    0,  380,    2, 0x0a /* Public */,
+      43,    1,  381,    2, 0x0a /* Public */,
+      44,    1,  384,    2, 0x0a /* Public */,
+      46,    7,  387,    2, 0x0a /* Public */,
+      47,    1,  402,    2, 0x0a /* Public */,
+      48,    1,  405,    2, 0x0a /* Public */,
+      49,    0,  408,    2, 0x0a /* Public */,
+      50,    0,  409,    2, 0x0a /* Public */,
+      51,    0,  410,    2, 0x0a /* Public */,
+      52,    0,  411,    2, 0x0a /* Public */,
+      53,    0,  412,    2, 0x0a /* Public */,
+      54,    0,  413,    2, 0x0a /* Public */,
+      55,    0,  414,    2, 0x0a /* Public */,
+      56,    0,  415,    2, 0x0a /* Public */,
+      57,    1,  416,    2, 0x0a /* Public */,
+      59,    1,  419,    2, 0x0a /* Public */,
+      60,    1,  422,    2, 0x0a /* Public */,
+      62,    0,  425,    2, 0x0a /* Public */,
+      63,    0,  426,    2, 0x0a /* Public */,
+      64,    1,  427,    2, 0x0a /* Public */,
+      65,    2,  430,    2, 0x0a /* Public */,
+      65,    3,  435,    2, 0x0a /* Public */,
+      65,    1,  442,    2, 0x0a /* Public */,
+      70,    3,  445,    2, 0x0a /* Public */,
+      70,    4,  452,    2, 0x0a /* Public */,
+      70,    2,  461,    2, 0x0a /* Public */,
+      71,    3,  466,    2, 0x0a /* Public */,
+      71,    4,  473,    2, 0x0a /* Public */,
+      71,    2,  482,    2, 0x0a /* Public */,
+      74,    1,  487,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Bool,    3,
@@ -215,17 +244,18 @@ static const uint qt_meta_data_main_module[] = {
     QMetaType::Void, QMetaType::Bool,    3,
     QMetaType::Void, QMetaType::Bool,    3,
     QMetaType::Void, QMetaType::Double,    5,
-    QMetaType::Int, QMetaType::QString, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double,   25,   26,   27,   28,   29,   30,   31,   32,
+    QMetaType::Int, QMetaType::QString, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double,   25,   26,   27,   28,   29,   30,   31,
     QMetaType::Int, QMetaType::QString,   25,
     QMetaType::Int, QMetaType::QString,   25,
-    QMetaType::Int, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::QString,   27,   28,   29,   36,   37,   38,   25,
+    QMetaType::Int, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::QString,   27,   28,   29,   35,   36,   37,   25,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Int,
     QMetaType::Int,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   25,
     0x80000000 | 45, QMetaType::QString,   25,
-    QMetaType::Int, QMetaType::QString, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double,   25,   26,   27,   28,   29,   30,   31,   32,
+    QMetaType::Int, QMetaType::QString, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double,   25,   26,   27,   28,   29,   30,   31,
     QMetaType::Int, QMetaType::QString,   25,
     QMetaType::Int, QMetaType::QString,   25,
     QMetaType::Bool,
@@ -242,6 +272,16 @@ static const uint qt_meta_data_main_module[] = {
     QMetaType::Int,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,   25,
+    QMetaType::Void, QMetaType::Double, QMetaType::Double,   66,   67,
+    QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::Int,   66,   67,   68,
+    QMetaType::Void, QMetaType::Double,   69,
+    QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::QString,   66,   67,   25,
+    QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::QString, QMetaType::Int,   66,   67,   25,   68,
+    QMetaType::Void, QMetaType::Double, QMetaType::QString,   69,   25,
+    QMetaType::Void, QMetaType::Double, QMetaType::Double, 0x80000000 | 72,   66,   67,   73,
+    QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::Int, 0x80000000 | 72,   66,   67,   68,   73,
+    QMetaType::Void, QMetaType::Double, 0x80000000 | 72,   69,   73,
+    QMetaType::Void, 0x80000000 | 75,   76,
 
        0        // eod
 };
@@ -272,7 +312,7 @@ void main_module::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 16: _t->qdebug_salleter((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 17: _t->qdebug_corners_solar_battery((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 18: _t->replay_salleter((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 19: { int _r = _t->new_salleter((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< double(*)>(_a[6])),(*reinterpret_cast< double(*)>(_a[7])),(*reinterpret_cast< double(*)>(_a[8])));
+        case 19: { int _r = _t->new_salleter((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< double(*)>(_a[6])),(*reinterpret_cast< double(*)>(_a[7])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
         case 20: { int _r = _t->stop_salleter((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
@@ -287,38 +327,74 @@ void main_module::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 26: { int _r = _t->get_count_record_drain();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
         case 27: _t->clean_record_drain(); break;
-        case 28: { solar_battery_salleter _r = _t->get_value_corners_salleter((*reinterpret_cast< QString(*)>(_a[1])));
+        case 28: _t->delete_record_drain((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 29: { solar_battery_salleter _r = _t->get_value_corners_salleter((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< solar_battery_salleter*>(_a[0]) = _r; }  break;
-        case 29: { int _r = _t->set_new_salleter_to_date_base((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< double(*)>(_a[6])),(*reinterpret_cast< double(*)>(_a[7])),(*reinterpret_cast< double(*)>(_a[8])));
+        case 30: { int _r = _t->set_new_salleter_to_date_base((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< double(*)>(_a[6])),(*reinterpret_cast< double(*)>(_a[7])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 30: { int _r = _t->delete_potoc_salleter((*reinterpret_cast< QString(*)>(_a[1])));
+        case 31: { int _r = _t->delete_potoc_salleter((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 31: { int _r = _t->delete_salleter_form_dataBase((*reinterpret_cast< QString(*)>(_a[1])));
+        case 32: { int _r = _t->delete_salleter_form_dataBase((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 32: { bool _r = _t->get_qdebug_sun();
+        case 33: { bool _r = _t->get_qdebug_sun();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 33: { double _r = _t->get_replay_sun();
+        case 34: { double _r = _t->get_replay_sun();
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 34: { bool _r = _t->get_qdebug_salleter();
+        case 35: { bool _r = _t->get_qdebug_salleter();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 35: { int _r = _t->get_replay_salleter();
+        case 36: { int _r = _t->get_replay_salleter();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 36: { bool _r = _t->get_corners_solar_batter_qdebug();
+        case 37: { bool _r = _t->get_corners_solar_batter_qdebug();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 37: { int _r = _t->get_telnet_port();
+        case 38: { int _r = _t->get_telnet_port();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 38: { int _r = _t->get_tcp_port();
+        case 39: { int _r = _t->get_tcp_port();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 39: { bool _r = _t->get_qdebug_main_modul();
+        case 40: { bool _r = _t->get_qdebug_main_modul();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 40: _t->Set_telnet_port((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 41: _t->Set_tcp_port((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 42: _t->Set_qdebug_main_modul((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 43: { int _r = _t->get_count_record_positon_salleter();
+        case 41: _t->Set_telnet_port((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 42: _t->Set_tcp_port((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 43: _t->Set_qdebug_main_modul((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 44: { int _r = _t->get_count_record_positon_salleter();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 44: _t->clean_record_positon_salleter(); break;
-        case 45: _t->remove_record_positon_salleter((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 45: _t->clean_record_positon_salleter(); break;
+        case 46: _t->remove_record_positon_salleter((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 47: _t->pos_salleter_all((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
+        case 48: _t->pos_salleter_all((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 49: _t->pos_salleter_all((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 50: _t->pos_salleter((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
+        case 51: _t->pos_salleter((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4]))); break;
+        case 52: _t->pos_salleter((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 53: _t->grup_pos_salleter((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< QList<QString>(*)>(_a[3]))); break;
+        case 54: _t->grup_pos_salleter((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< QList<QString>(*)>(_a[4]))); break;
+        case 55: _t->grup_pos_salleter((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< QList<QString>(*)>(_a[2]))); break;
+        case 56: _t->pos_salleter_slot((*reinterpret_cast< QMap<QString,QList<data_salleter> >(*)>(_a[1]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 53:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 2:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QList<QString> >(); break;
+            }
+            break;
+        case 54:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 3:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QList<QString> >(); break;
+            }
+            break;
+        case 55:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 1:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QList<QString> >(); break;
+            }
+            break;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
@@ -435,13 +511,13 @@ int main_module::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 46)
+        if (_id < 57)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 46;
+        _id -= 57;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 46)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 46;
+        if (_id < 57)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 57;
     }
     return _id;
 }

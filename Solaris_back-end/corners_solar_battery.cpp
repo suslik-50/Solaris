@@ -26,7 +26,7 @@ solar_battery_salleter corners_solar_battery::cornes(vec san,vector_salleter sal
 
     solar_battery_salleter corne;
     corne =fun_cornes(san,salleter);
-    if (qdebug)
+    if (false)
     {
         qDebug()<<salleter.name<<"-имя спутника";
         qDebug()<<corne.a<<"-угол а(альфа)";

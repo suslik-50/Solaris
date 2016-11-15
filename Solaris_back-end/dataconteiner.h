@@ -4,6 +4,7 @@
 #include <QObject>
 #include "drain_parametrs_solar_battery.h"
 #include <QDebug>
+#include <structur.h>
 
 class DataConteiner : public QObject
 {
@@ -11,11 +12,13 @@ class DataConteiner : public QObject
 public:
     explicit DataConteiner(drain_parametrs_solar_battery *darin_container);
     QStringList list;
+
 signals:
     void getDatadreain();
 public slots:
     void getData(QMap<QString, solar_battery_salleter> data_sbs);
     void slot();
+
 
 private:
     drain_parametrs_solar_battery *drain;

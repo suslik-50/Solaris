@@ -25,7 +25,7 @@
 class main_module: public QThread
 {
     Q_OBJECT
-public:main_module(potoc_sun & sun_p,drain_parametrs_solar_battery & drain_p,drain_position_salleter & position);
+public:main_module(potoc_sun & sun_p,drain_parametrs_solar_battery & drain_p,drain_position_salleter & position );
     ///
 private:bool qdebug;
 private:QList <int> id_salleter;
@@ -43,7 +43,7 @@ private:int delete_potoc_salleter_func(QString name);
 private:int start_all_salleter_func();
 private:int start_salleter_func(QString name);
 private:int stop_salleter_func(QString name);
-private:int new_salleter_func(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota, double m);
+private:int new_salleter_func(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota);
     ///
 public slots :
     void run();
@@ -53,7 +53,7 @@ public slots :
     void qdebug_salleter(bool y_t);// устанавливает дебаг+
     void qdebug_corners_solar_battery(bool y_t); // устанавливает дебаг+
     void replay_salleter(double replay);// устанавливае количество секунд для повторения+
-    int new_salleter(QString name, double time_uts, double a,double e, double i, double ark_per,double dolgota, double m);// добовление нового спутниак и его запуск после успешного дорбавления в бд
+    int new_salleter(QString name, double time_uts, double a,double e, double i, double ark_per,double dolgota);// добовление нового спутниак и его запуск после успешного дорбавления в бд
     int stop_salleter(QString name);//остановка вычесление какого-либо спутника+
     int start_salleter(QString name);//старт вычесление какого-либо спутника если он до этого был остановлен+
     int updata_salleter(double a,double e,double i,double dvu,double urp,double t0, QString name);//обнавление данных вычесление какого-либо спутника
@@ -62,8 +62,9 @@ public slots :
     int stop_all_salleter();//остановит все потоки вычислений спутника+
     int get_count_record_drain();// получение количество записей в пуле значений углов
     void clean_record_drain();//отчиска пула значенией углов+
+    void delete_record_drain(QString name);
     solar_battery_salleter get_value_corners_salleter(QString name);//получение значения углов спутника из пула по имени спутника
-    int set_new_salleter_to_date_base(QString name, double time_uts, double a,double e, double i, double ark_per,double dolgota, double m);//добавить новый спутник в бд
+    int set_new_salleter_to_date_base(QString name, double time_uts, double a,double e, double i, double ark_per,double dolgota);//добавить новый спутник в бд
     int delete_potoc_salleter(QString name );
     int delete_salleter_form_dataBase(QString name);
     //работа с настройками
@@ -82,7 +83,6 @@ public slots :
     int get_count_record_positon_salleter();
     void clean_record_positon_salleter();
     void remove_record_positon_salleter(QString name);
-
 
 signals:
     void qdebug_sun_signal(bool y_t); // сигнал для включения выключения дебага потока для солнца

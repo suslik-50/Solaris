@@ -991,16 +991,10 @@ moc_potoc_salleter2.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/
 		../../../Qt2/5.7/clang_64/bin/moc
 	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/potoc_salleter2.h -o moc_potoc_salleter2.cpp
 
-moc_tcpserver.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpServer \
-		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h \
-		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
-		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
-		../Solaris_back-end/tcpsocketthread.h \
+moc_tcpserver.cpp: ../Solaris_back-end/tcpsocketthread.h \
 		../Solaris_back-end/main_module.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QThread \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QList \
@@ -1019,6 +1013,8 @@ moc_tcpserver.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObjec
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDateTime \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		../Solaris_back-end/timejd.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
@@ -1042,8 +1038,12 @@ moc_tcpserver.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObjec
 		../Solaris_back-end/drain_position_salleter.h \
 		../Solaris_back-end/dataconteiner.h \
 		../Solaris_back-end/command_parser.h \
+		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
+		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpServer \
+		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h \
 		../Solaris_back-end/tcpserver.h \
 		../../../Qt2/5.7/clang_64/bin/moc
 	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib ../Solaris_back-end/tcpserver.h -o moc_tcpserver.cpp
@@ -1259,9 +1259,9 @@ main.o: ../Solaris_back-end/main.cpp ../../../Qt2/5.7/clang_64/lib/QtCore.framew
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QTextCodec \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qtextcodec.h \
 		../Solaris_back-end/tcpserver.h \
-		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
 		../Solaris_back-end/tcpsocketthread.h \
 		../Solaris_back-end/dataconteiner.h \
+		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Solaris_back-end/main.cpp
@@ -1695,16 +1695,10 @@ potoc_salleter2.o: ../Solaris_back-end/potoc_salleter2.cpp ../Solaris_back-end/p
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o potoc_salleter2.o ../Solaris_back-end/potoc_salleter2.cpp
 
 tcpserver.o: ../Solaris_back-end/tcpserver.cpp ../Solaris_back-end/tcpserver.h \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpServer \
-		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h \
-		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
-		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
 		../Solaris_back-end/tcpsocketthread.h \
 		../Solaris_back-end/main_module.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QThread \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QList \
@@ -1723,6 +1717,8 @@ tcpserver.o: ../Solaris_back-end/tcpserver.cpp ../Solaris_back-end/tcpserver.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDateTime \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		../Solaris_back-end/timejd.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../Solaris_back-end/corners_solar_battery.h \
 		../Solaris_back-end/potoc_sun.h \
 		../Solaris_back-end/earth_pos.h \
@@ -1746,8 +1742,12 @@ tcpserver.o: ../Solaris_back-end/tcpserver.cpp ../Solaris_back-end/tcpserver.h \
 		../Solaris_back-end/drain_position_salleter.h \
 		../Solaris_back-end/dataconteiner.h \
 		../Solaris_back-end/command_parser.h \
+		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
+		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDataStream \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpServer \
+		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tcpserver.o ../Solaris_back-end/tcpserver.cpp
 
 tcpsocketthread.o: ../Solaris_back-end/tcpsocketthread.cpp ../Solaris_back-end/tcpsocketthread.h \

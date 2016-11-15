@@ -35,7 +35,7 @@ class potoc_salleter2:public QThread
  * urp0 - ω (угловое расстояние перицента),начальное
  */
     double replay;
-    double i,urp0,dvu0,a,E,M,t,t0,e;
+    double i,urp0,dvu0,a,E,M,t,t0,e,m;
     QString name;
 private:vector_salleter salleter;
 private:setting seting;

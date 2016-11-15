@@ -43,6 +43,129 @@ void TcpSocketThread::sendTabelData()
 
 void TcpSocketThread::pars(QString com)
 {
+    QStringList shortList = com.split(' ');
+    if (shortList.first()=="prognoz"){
+
+    /*
+    //расчет всех местоположения спутников от начального времни timeT0 , до конечного time_end шаг по умолчанию 1 секунда
+    //пример команды
+    //prognoz pos_salleter_all 123456 678910
+    if (""==""){
+    double timeT0; timeT0=123456
+    double time_end; time_end=678910
+    prognoz_salleter *prognoz =new  prognoz_salleter(timeT0,time_end);
+    }
+    */
+
+    //расчет всех местоположения спутников от начального времни timeT0 , до конечного time_end шаг задается step
+    //пример команды
+    //prognoz pos_salleter_all 123456 678910 3
+    /*
+    if (""==""){
+    double timeT0; timeT0=123456
+    double time_end; time_end=678910
+    int step; step=3
+    prognoz_salleter prognoz(timeT0,time_end,step);
+    }
+    */
+
+    //расчет всех местоположения спутников на время time
+    //прмер команды
+    //prognoz pos_salleter_all 123456
+    /*
+     if (""==""){
+     ouble time; time=123456
+     prognoz_salleter prognoz(time);
+     }
+    */
+
+    /*//расчет местоположения спутника от начального времни timeT0 , до конечного time_end шаг по умолчанию 1 секунда
+      // пример команды
+      // prognoz pos_salleter 12345 678910 salleter1
+      if (""==""){
+      double timeT0; timeT0=12345
+      double time_end; time_end=678910
+      QString name; name=salleter1;
+      prognoz_salleter prognoz(timeT0,time_end,name);
+      }
+     * /
+
+
+     /*
+      //расчет местоположения спутника от начального времни timeT0 , до конечного time_end шаг задается step
+      // пример команды
+      // prognoz pos_salleter 12345 678910 salleter2 1
+    if (""=="")
+    {
+      double timeT0; timeT0=12345
+      double time_end; time_end=678910
+      QString name; name=salleter2;
+      int step; step=1;
+      prognoz_salleter prognoz(timeT0,time_end,name,step);
+    }
+    */
+
+    /*
+    //расчет местоположения спутника на время time
+    // пример команды
+    // prognoz pos_salleter 12345 salleter2
+    if (""=="")
+    {
+      double time; time=12345
+      QString name; name=salleter2;
+      prognoz_salleter prognoz(time,name);
+    }
+    */
+
+    /*
+     //расчет для нескольких спутнкиков имена спутников задаются в QList<QString>
+     //пример команды
+     //prognoz grup_pos_salleter 12345 678910 sputnik1 sputnik2 sputnik3
+      if (""=="")
+      {
+      double timeT0; timeT0=12345
+      double time_end; time_end=678910
+      //перед добавление в QList спутников проверять на существование таких  в бд или дописать такую проверку в бд
+      QList<QString> namesalleter;<-sputnik1 sputnik2 sputnik3
+       prognoz_salleter prognoz(timeT0,time_end,namesalleter);
+      }
+     */
+
+    /*
+      //расчет местоположения группы спутников от начального времни timeT0 , до конечного time_end шаг задается step
+      //пример команды
+      //prognoz grup_pos_salleter 12345 678910 sputnik1 sputnik2 sputnik3
+      if (""=="")
+      {
+      double timeT0; timeT0=12345
+      double time_end; time_end=678910
+      int step;
+      //перед добавление в QList спутников проверять на существование таких  в бд
+      QList<QString> namesalleter;<-sputnik1 sputnik2 sputnik3
+      prognoz_salleter prognoz(timeT0,time_end,step,namesalleter);
+      }
+     * /
+
+
+
+     /*
+     ////расчет местоположения группы спутников на время time
+     //пример команды
+     //prognoz grup_pos_salleter 12345  sputnik1 sputnik2 sputnik3
+     if(""==""){
+     double time; time=1245
+     //перед добавление в QList спутников проверять на существование таких  в бд
+     QList<QString> namesalleter;<-sputnik1 sputnik2 sputnik3
+     prognoz_salleter prognoz(time,namesalleter);
+     }
+     */
+
+   // потом раскоментировать
+   // QObject::connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)));
+   // prognoz.start();
+
+    }
+
     command_parser parser_cmd(*main);
     QStringList list;
     list.append(parser_cmd.command(com));
@@ -92,6 +215,12 @@ void TcpSocketThread::disconnected()
 
      socket->deleteLater();
      exit(0);
+}
+
+void TcpSocketThread::raschet(QMap<QString, QList<data_salleter> > data)
+{
+   //какимто раком разобрать и отправить в seket
+   // socket->write(data);
 }
 
 void TcpSocketThread::byteArr(QStringList list)

@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_corners_solar_battery_t {
-    QByteArrayData data[19];
-    char stringdata0[120];
+    QByteArrayData data[17];
+    char stringdata0[118];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,22 +38,19 @@ QT_MOC_LITERAL(5, 32, 4), // "time"
 QT_MOC_LITERAL(6, 37, 4), // "name"
 QT_MOC_LITERAL(7, 42, 3), // "run"
 QT_MOC_LITERAL(8, 46, 17), // "position_salleter"
-QT_MOC_LITERAL(9, 64, 8), // "vector_s"
-QT_MOC_LITERAL(10, 73, 8), // "salleter"
-QT_MOC_LITERAL(11, 82, 6), // "name_s"
-QT_MOC_LITERAL(12, 89, 12), // "position_sun"
-QT_MOC_LITERAL(13, 102, 1), // "x"
-QT_MOC_LITERAL(14, 104, 1), // "y"
-QT_MOC_LITERAL(15, 106, 1), // "z"
-QT_MOC_LITERAL(16, 108, 1), // "t"
-QT_MOC_LITERAL(17, 110, 5), // "debug"
-QT_MOC_LITERAL(18, 116, 3) // "y_n"
+QT_MOC_LITERAL(9, 64, 15), // "vector_salleter"
+QT_MOC_LITERAL(10, 80, 8), // "salleter"
+QT_MOC_LITERAL(11, 89, 12), // "position_sun"
+QT_MOC_LITERAL(12, 102, 1), // "x"
+QT_MOC_LITERAL(13, 104, 1), // "y"
+QT_MOC_LITERAL(14, 106, 1), // "z"
+QT_MOC_LITERAL(15, 108, 5), // "debug"
+QT_MOC_LITERAL(16, 114, 3) // "y_n"
 
     },
     "corners_solar_battery\0data\0\0a\0b\0time\0"
-    "name\0run\0position_salleter\0vector_s\0"
-    "salleter\0name_s\0position_sun\0x\0y\0z\0t\0"
-    "debug\0y_n"
+    "name\0run\0position_salleter\0vector_salleter\0"
+    "salleter\0position_sun\0x\0y\0z\0debug\0y_n"
 };
 #undef QT_MOC_LITERAL
 
@@ -75,18 +72,18 @@ static const uint qt_meta_data_corners_solar_battery[] = {
 
  // slots: name, argc, parameters, tag, flags
        7,    0,   48,    2, 0x0a /* Public */,
-       8,    3,   49,    2, 0x0a /* Public */,
-      12,    4,   56,    2, 0x0a /* Public */,
-      17,    1,   65,    2, 0x0a /* Public */,
+       8,    1,   49,    2, 0x0a /* Public */,
+      11,    3,   52,    2, 0x0a /* Public */,
+      15,    1,   59,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::QString,    3,    4,    5,    6,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 9, QMetaType::Double, QMetaType::QString,   10,    5,   11,
-    QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::Double, QMetaType::Double,   13,   14,   15,   16,
-    QMetaType::Void, QMetaType::Bool,   18,
+    QMetaType::Void, 0x80000000 | 9,   10,
+    QMetaType::Void, QMetaType::Double, QMetaType::Double, QMetaType::Double,   12,   13,   14,
+    QMetaType::Void, QMetaType::Bool,   16,
 
        0        // eod
 };
@@ -99,8 +96,8 @@ void corners_solar_battery::qt_static_metacall(QObject *_o, QMetaObject::Call _c
         switch (_id) {
         case 0: _t->data((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4]))); break;
         case 1: _t->run(); break;
-        case 2: _t->position_salleter((*reinterpret_cast< vector_s(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
-        case 3: _t->position_sun((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4]))); break;
+        case 2: _t->position_salleter((*reinterpret_cast< vector_salleter(*)>(_a[1]))); break;
+        case 3: _t->position_sun((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3]))); break;
         case 4: _t->debug((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }

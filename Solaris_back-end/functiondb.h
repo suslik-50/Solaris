@@ -25,14 +25,14 @@ public:
     void update_to_sun(double x, double y, double z, double time_uts);
     bool inset_to_satellite(QString name, double time_uts, double a,
                             double e, double i, double ark_per,
-                            double dolgota, double m);
+                            double dolgota);
     void update_to_satellite(QString name, double time_uts, double a,
                              double e, double i, double ark_per,
-                             double dolgota, double m, QString editor);
+                             double dolgota, QString editor);
     void delete_satellite(QString name);
     bool insert_to_correct_satellite(int satellite_id, double time_uts, double a,
                                      double e, double i, double ark_per,
-                                     double dolgota, double m, QString editor);
+                                     double dolgota, QString editor);
     void read_satellite();
     satellite get_satellite(int id);
     satellite get_satellite(QString name );

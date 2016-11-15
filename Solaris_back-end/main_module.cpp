@@ -10,6 +10,7 @@ main_module::main_module(potoc_sun &sun_p, drain_parametrs_solar_battery &drain_
     QObject::connect(this,SIGNAL(qdebug_sun_signal(bool)),sun_potoc,SLOT(debug(bool)));
     QObject::connect(this,SIGNAL(replay_sun_signal(int)),sun_potoc,SLOT(upreplay(int)));
     qdebug=setting_f.Get_qdebug_main_modul();
+
 }
 
 void main_module::run()
@@ -103,10 +104,11 @@ void main_module::replay_salleter(double replay)
     emit replay_salleter_signal(replay);
     setting_f.Set_replay_salleter(replay);
 }
-int main_module::new_salleter_func(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota, double m)
+int main_module::new_salleter_func(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota)
 {
     satellite sputnik;
-    if(dbf.inset_to_satellite(name,time_uts,a,e,i,ark_per,dolgota,m))
+    if(dbf.inset_to_satellite(name,time_uts,a,e,i,ark_per,dolgota))
+
     {
         sputnik=dbf.get_satellite(name);
         //
@@ -135,12 +137,12 @@ int main_module::new_salleter_func(QString name, double time_uts, double a, doub
     }
 }
 
-int main_module::new_salleter(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota, double m)
+int main_module::new_salleter(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota)
 {
     try{
-        return new_salleter_func(name,time_uts,a,e,i,ark_per,dolgota,m);
+        return new_salleter_func(name,time_uts,a,e,i,ark_per,dolgota);
     }catch(...){
-    return 2;
+        return 2;
     }
 }
 int main_module::stop_salleter_func(QString name){
@@ -171,7 +173,7 @@ int main_module::stop_salleter(QString name)
     try{
         return stop_salleter_func(name);
     }catch(...){
-    return 2;
+        return 2;
     }
 }
 int main_module::start_salleter_func(QString name){
@@ -200,10 +202,10 @@ int main_module::start_salleter_func(QString name){
 
 int main_module::start_salleter(QString name)
 {
-   try{
+    try{
         return start_salleter_func(name);
     }catch(...){
-    return 2;
+        return 2;
     }
 }
 
@@ -213,6 +215,9 @@ int main_module::updata_salleter_fun(double a, double e, double i, double dvu, d
     foreach ( potoc_salleter2* value , L_potoc_sallete.values())
     {
         if (value->Getname()==name){
+            // добавть обновление данных в бд
+
+            //dbf.update_to_satellite(name,t0,a,e,i,urp,dvu,men);
             value->update(a,e,i,dvu,urp,t0);
             s_t=true;
             if(qdebug){
@@ -235,9 +240,9 @@ int main_module::updata_salleter_fun(double a, double e, double i, double dvu, d
 int main_module::updata_salleter(double a, double e, double i, double dvu, double urp, double t0, QString name)
 {
     try{
-      return  updata_salleter_fun(a,e,i,dvu,urp,t0,name);
+        return  updata_salleter_fun(a,e,i,dvu,urp,t0,name);
     }catch(...){
-    return 2;
+        return 2;
     }
 }
 
@@ -282,6 +287,11 @@ void main_module::clean_record_drain()
     drain->clear();
 }
 
+void main_module::delete_record_drain(QString name)
+{
+    drain->deletedata(name);
+}
+
 solar_battery_salleter main_module::get_value_corners_salleter(QString name)
 {
     bool s_t=false;
@@ -311,10 +321,10 @@ solar_battery_salleter main_module::get_value_corners_salleter(QString name)
 }
 
 
-int main_module::set_new_salleter_to_date_base(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota, double m)
+int main_module::set_new_salleter_to_date_base(QString name, double time_uts, double a, double e, double i, double ark_per, double dolgota)
 {
 
-    if ( dbf.inset_to_satellite(name,time_uts,a,e,i,ark_per,dolgota,m)){
+    if ( dbf.inset_to_satellite(name,time_uts,a,e,i,ark_per,dolgota)){
         if(qdebug){
             qDebug()<<"Спутник добавлен в бд";
         }
@@ -333,10 +343,10 @@ int main_module::set_new_salleter_to_date_base(QString name, double time_uts, do
 
 int main_module::delete_potoc_salleter(QString name)
 {
-try{
-    return    delete_potoc_salleter_func(name);
+    try{
+        return    delete_potoc_salleter_func(name);
     }catch(...){
-    return 2;
+        return 2;
     }
 }
 
@@ -369,7 +379,7 @@ int main_module::delete_salleter_form_dataBase(QString name)
     try{
         return  delete_salleter_form_dataBase_func(name);
     }catch(...){
-    return 2;
+        return 2;
     }
 }
 
@@ -451,7 +461,7 @@ void main_module::clean_record_positon_salleter()
 
 void main_module::remove_record_positon_salleter(QString name)
 {
-     position_salleter_potoc->deletedata(name);
-}
 
+    position_salleter_potoc->deletedata(name);
+}
 

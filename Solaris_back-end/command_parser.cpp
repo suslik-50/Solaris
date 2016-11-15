@@ -180,6 +180,21 @@ QByteArray command_parser::command(QString cmd)
             }
         }
     } else if (shortList.first()=="clean"){
+        if (shortList.size()>2){
+            if (shortList[1]=="record_drain"){
+                if (shortList[2]!=" "){
+
+                    module->delete_record_drain(shortList[2]);
+                    return bytes.append("Пул углов отчищен_\r\n");
+                }
+                else{
+                   return bytes.append("Некоректное имя спутника\r\n");
+                }
+            }
+            else{
+                bytes.append("Команда не найдена\r\n");
+            }
+        }
         if (shortList.size()>1){
             if (shortList[1]=="record_drain")
             {
@@ -273,6 +288,7 @@ QByteArray command_parser::command(QString cmd)
                     bytes.append("Неврно указынный параметр долгота восходящего узла, необходим тип double\r\n");
                     return bytes;
                 }
+
                 int otvet=module->updata_salleter(a,e,i,dolgot,ark_per,time_ut,name);
                 if (otvet==0){
                     bytes.append("Спутник данные спутника "+name+" обновлены\r\n");
@@ -291,9 +307,9 @@ QByteArray command_parser::command(QString cmd)
     } else if(shortList.first()=="new")
     {  if (shortList[1]=="salleter")
         {
-            if (shortList.size()>8 || shortList.size()==9 ){
+            if (shortList.size()>7 || shortList.size()==8 ){
                 QString name;
-                double time_ut,a,e,i,ark_per,dolgot,m;
+                double time_ut,a,e,i,ark_per,dolgot;
                 name=shortList[2];
                 if (shortList[3].toDouble()){
                     time_ut=shortList[3].toDouble();
@@ -336,14 +352,8 @@ QByteArray command_parser::command(QString cmd)
                     bytes.append("Неврно указынный параметр долгота восходящего узла, необходим тип double\r\n");
                     return bytes;
                 }
-                if (shortList[9].toDouble()){
-                    m=shortList[9].toDouble();
-                }
-                else{
-                    bytes.append("Неврно указынный m, необходим тип double\r\n");
-                    return bytes;
-                }
-                module->new_salleter(name,time_ut,a,e,i,ark_per,dolgot,m);
+
+                module->new_salleter(name,time_ut,a,e,i,ark_per,dolgot);
                 bytes.append("Спутник добавлен в бд и запущен\r\n");
             }
             else{
@@ -351,9 +361,9 @@ QByteArray command_parser::command(QString cmd)
             }
         } else   if (shortList[1]=="salleter_to_date_base")
         {
-            if (shortList.size()>8 ||shortList.size()==9 ){
+            if (shortList.size()>7 ||shortList.size()==8 ){
                 QString name;
-                double time_ut,a,e,i,ark_per,dolgot,m;
+                double time_ut,a,e,i,ark_per,dolgot;
                 name=shortList[2];
                 if (shortList[3].toDouble()){
                     time_ut=shortList[3].toDouble();
@@ -396,16 +406,9 @@ QByteArray command_parser::command(QString cmd)
                     bytes.append("Неврно указынный параметр долгота восходящего узла, необходим тип double\r\n");
                     return bytes;
                 }
-                if (shortList[9].toDouble()){
-                    m=shortList[9].toDouble();
-                }
-                else{
-                    bytes.append("Неврно указынный m, необходим тип double\r\n");
-                    return bytes;
-                }
-                int otvet=module->set_new_salleter_to_date_base(name,time_ut,a,e,i,ark_per,dolgot,m);
+                int otvet=module->set_new_salleter_to_date_base(name,time_ut,a,e,i,ark_per,dolgot);
                 if (otvet==0){
-                    bytes.append("Спутник добавлен в бд и запущен\r\n");
+                    bytes.append("Спутник добавлен в бд\r\n");
                 }else
                     if(otvet==1){
                         bytes.append("Спутник не добавлен в бд\r\n");
@@ -472,7 +475,9 @@ QByteArray command_parser::command(QString cmd)
         if (shortList.size()>=4){
             if (shortList[1]=="potoc" && shortList[2]=="salleter"){
                 int otvet=module->delete_potoc_salleter(shortList[3]);
+                module->clean_record_drain();
                 if (otvet==0){
+                    module->clean_record_drain();
                     bytes.append("Поток спутника "+shortList[3]+" отсановлен и удален из памяти\r\n");
                 }else
                     if(otvet==1){
@@ -482,7 +487,9 @@ QByteArray command_parser::command(QString cmd)
 
             if (shortList[1]=="data" && shortList[2]=="salleter"){
                 int otvet=module->delete_salleter_form_dataBase(shortList[3]);
+                module->clean_record_drain();
                 if (otvet==0){
+                     module->clean_record_drain();
                     bytes.append("Данные спутника "+shortList[3]+" удален \r\n");
                 }else
                     if(otvet==1){

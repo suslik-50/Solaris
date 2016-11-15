@@ -11,6 +11,7 @@ DataConteiner::DataConteiner(drain_parametrs_solar_battery *darin_container)
     connect(drain, SIGNAL(new_data()), drain, SLOT(get_data()));
 }
 
+
 void DataConteiner::getData(QMap<QString,solar_battery_salleter> data_sbs)
 {
     list.clear();

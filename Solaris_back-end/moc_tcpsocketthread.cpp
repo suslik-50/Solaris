@@ -9,6 +9,7 @@
 #include "tcpsocketthread.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
+#include <QtCore/QList>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'tcpsocketthread.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -20,7 +21,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_TcpSocketThread_t {
     QByteArrayData data[12];
-    char stringdata0[157];
+    char stringdata0[159];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,19 +36,19 @@ QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 23), // "QTcpSocket::SocketError"
 QT_MOC_LITERAL(4, 47, 11), // "socketerror"
 QT_MOC_LITERAL(5, 59, 13), // "getDatadreain"
-QT_MOC_LITERAL(6, 73, 3), // "get"
-QT_MOC_LITERAL(7, 77, 9), // "readyRead"
-QT_MOC_LITERAL(8, 87, 12), // "disconnected"
-QT_MOC_LITERAL(9, 100, 10), // "sendClient"
-QT_MOC_LITERAL(10, 111, 36), // "QMap<QString,solar_battery_sa..."
-QT_MOC_LITERAL(11, 148, 8) // "data_sbs"
+QT_MOC_LITERAL(6, 73, 13), // "sendTabelData"
+QT_MOC_LITERAL(7, 87, 9), // "readyRead"
+QT_MOC_LITERAL(8, 97, 12), // "disconnected"
+QT_MOC_LITERAL(9, 110, 7), // "raschet"
+QT_MOC_LITERAL(10, 118, 35), // "QMap<QString,QList<data_salle..."
+QT_MOC_LITERAL(11, 154, 4) // "data"
 
     },
     "TcpSocketThread\0error\0\0QTcpSocket::SocketError\0"
-    "socketerror\0getDatadreain\0get\0readyRead\0"
-    "disconnected\0sendClient\0"
-    "QMap<QString,solar_battery_salleter>\0"
-    "data_sbs"
+    "socketerror\0getDatadreain\0sendTabelData\0"
+    "readyRead\0disconnected\0raschet\0"
+    "QMap<QString,QList<data_salleter> >\0"
+    "data"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,10 +70,10 @@ static const uint qt_meta_data_TcpSocketThread[] = {
        5,    0,   47,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   48,    2, 0x0a /* Public */,
-       7,    0,   49,    2, 0x0a /* Public */,
-       8,    0,   50,    2, 0x0a /* Public */,
-       9,    1,   51,    2, 0x0a /* Public */,
+       6,    0,   48,    2, 0x08 /* Private */,
+       7,    0,   49,    2, 0x08 /* Private */,
+       8,    0,   50,    2, 0x08 /* Private */,
+       9,    1,   51,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -95,10 +96,10 @@ void TcpSocketThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         switch (_id) {
         case 0: _t->error((*reinterpret_cast< QTcpSocket::SocketError(*)>(_a[1]))); break;
         case 1: _t->getDatadreain(); break;
-        case 2: _t->get(); break;
+        case 2: _t->sendTabelData(); break;
         case 3: _t->readyRead(); break;
         case 4: _t->disconnected(); break;
-        case 5: _t->sendClient((*reinterpret_cast< QMap<QString,solar_battery_salleter>(*)>(_a[1]))); break;
+        case 5: _t->raschet((*reinterpret_cast< QMap<QString,QList<data_salleter> >(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

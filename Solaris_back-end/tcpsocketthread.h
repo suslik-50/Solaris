@@ -8,7 +8,9 @@
 #include <QThread>
 #include <QTcpSocket>
 #include <QDataStream>
-
+#include <prognoz_salleter.h>
+#include <structur.h>
+#include <QMap>
 class TcpSocketThread : public QThread
 {
     Q_OBJECT
@@ -24,6 +26,7 @@ private slots:
     void sendTabelData();
     void readyRead();
     void disconnected();
+    void raschet(QMap<QString, QList<data_salleter>>  data);
 
 private:
     QTcpSocket *socket;

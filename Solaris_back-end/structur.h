@@ -54,7 +54,7 @@ struct satellite //структура для спутника
     double stl_i;
     double stl_ark_per;
     double stl_dolgota;
-    double stl_m;
+
 };
 
 struct correction_sun_panel // структура для корректировки спутника
