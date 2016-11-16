@@ -54,6 +54,8 @@ void TcpSocketThread::pars(QString com)
     double timeT0; timeT0=123456
     double time_end; time_end=678910
     prognoz_salleter *prognoz =new  prognoz_salleter(timeT0,time_end);
+    prognoz_salleter.start();
+    return;
     }
     */
 
@@ -66,6 +68,8 @@ void TcpSocketThread::pars(QString com)
     double time_end; time_end=678910
     int step; step=3
     prognoz_salleter prognoz(timeT0,time_end,step);
+    prognoz_salleter.start();
+    return;
     }
     */
 
@@ -76,6 +80,8 @@ void TcpSocketThread::pars(QString com)
      if (""==""){
      ouble time; time=123456
      prognoz_salleter prognoz(time);
+     prognoz_salleter.start();
+     return;
      }
     */
 
@@ -87,6 +93,8 @@ void TcpSocketThread::pars(QString com)
       double time_end; time_end=678910
       QString name; name=salleter1;
       prognoz_salleter prognoz(timeT0,time_end,name);
+      prognoz_salleter.start();
+      return;
       }
      * /
 
@@ -102,6 +110,8 @@ void TcpSocketThread::pars(QString com)
       QString name; name=salleter2;
       int step; step=1;
       prognoz_salleter prognoz(timeT0,time_end,name,step);
+      prognoz_salleter.start();
+      return;
     }
     */
 
@@ -114,6 +124,8 @@ void TcpSocketThread::pars(QString com)
       double time; time=12345
       QString name; name=salleter2;
       prognoz_salleter prognoz(time,name);
+      prognoz_salleter.start();
+      return;
     }
     */
 
@@ -127,7 +139,9 @@ void TcpSocketThread::pars(QString com)
       double time_end; time_end=678910
       //перед добавление в QList спутников проверять на существование таких  в бд или дописать такую проверку в бд
       QList<QString> namesalleter;<-sputnik1 sputnik2 sputnik3
-       prognoz_salleter prognoz(timeT0,time_end,namesalleter);
+      prognoz_salleter prognoz(timeT0,time_end,namesalleter);
+      prognoz_salleter.start();
+      return;
       }
      */
 
@@ -143,6 +157,8 @@ void TcpSocketThread::pars(QString com)
       //перед добавление в QList спутников проверять на существование таких  в бд
       QList<QString> namesalleter;<-sputnik1 sputnik2 sputnik3
       prognoz_salleter prognoz(timeT0,time_end,step,namesalleter);
+      prognoz_salleter.start();
+      return;
       }
      * /
 
@@ -157,6 +173,8 @@ void TcpSocketThread::pars(QString com)
      //перед добавление в QList спутников проверять на существование таких  в бд
      QList<QString> namesalleter;<-sputnik1 sputnik2 sputnik3
      prognoz_salleter prognoz(time,namesalleter);
+     prognoz_salleter.start();
+     return;
      }
      */
 
@@ -169,7 +187,6 @@ void TcpSocketThread::pars(QString com)
     command_parser parser_cmd(*main);
       QStringList list;
       list.append(parser_cmd.command(com));
-      qDebug() << list;
       keyWord = "config";
 
       byteArr(list, true);

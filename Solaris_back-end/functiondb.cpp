@@ -159,7 +159,7 @@ void functiondb::update_to_satellite(QString name, double time_uts, double a,
             QSqlQuery query2;
             query2.prepare("UPDATE SATELLITE SET STL_NAME=:STL_NAME, "
                            "STL_TIME_UTS=:STL_TIME_UTS, STL_A=:STL_A, STL_E=:STL_E,"
-                           "STL_I=:STL_I, STL_ARK_PER=:STL_ARK_PER, STL_DOLGOTA=:STL_DOLGOTA,"
+                           "STL_I=:STL_I, STL_ARK_PER=:STL_ARK_PER, STL_DOLGOTA=:STL_DOLGOTA "
                            "WHERE STL_NAME =:STL_NAME;");
 
             query2.bindValue(":STL_NAME",name);
@@ -216,12 +216,12 @@ bool functiondb::insert_to_correct_satellite(int satellite_id, double time_uts, 
 
     if (query.exec())
     {
-        qDebug()<<"[+] Данные добавлены в таблицу "<<endl;
+        qDebug()<<"[+] Данные добавлены в таблицу корректировки"<<endl;
         return true;
     }
     else
     {
-        qDebug()<<"[-] Данные не добавлены в таблицу "<<endl;
+        qDebug()<<"[-] Данные не добавлены в таблицу корректировки"<<endl;
         return false;
     }
 }
@@ -304,6 +304,79 @@ satellite functiondb::get_satellite(QString name ) // Возращает дан�
     {
         qDebug()<<"[-]"<<endl;
         return sputnik;
+    }
+}
+
+satellite functiondb::get_satellite_per(QString name)
+{
+    satellite sputnik;
+    QSqlQuery query;
+    query.prepare("SELECT ID_SATELLITE, STL_NAME,"
+                  " STL_TIME_UTS, STL_A, STL_E, STL_I, STL_ARK_PER, STL_DOLGOTA"
+                  " FROM SATELLITE where STL_NAME=:name_s;");
+        query.bindValue(":name_s",name);
+    if (query.exec())
+    {
+        while(query.next())
+        {
+            QSqlRecord rec = query.record();
+            sputnik.id_satellite=query.value(rec.indexOf("ID_SATELLITE")).toInt();
+            sputnik.stl_name=query.value(rec.indexOf("STL_NAME")).toString();
+            sputnik.stl_a=query.value(rec.indexOf("STL_A")).toDouble();
+            sputnik.stl_e=query.value(rec.indexOf("STL_E")).toDouble();
+            sputnik.stl_i=query.value(rec.indexOf("STL_I")).toDouble();
+            sputnik.stl_ark_per=query.value(rec.indexOf("STL_ARK_PER")).toDouble();
+            sputnik.stl_dolgota=query.value(rec.indexOf("STL_DOLGOTA")).toDouble();
+            sputnik.stl_time_uts=query.value(rec.indexOf("STL_TIME_UTS")).toDouble();
+            qDebug() << sputnik.stl_name << sputnik.stl_e;
+            //sputnik.stl_m=query.value(rec.indexOf("STL_M")).toDouble();
+        }
+        return sputnik;
+    }
+    else
+    {
+        qDebug()<<"[-]"<<endl;
+        return sputnik;
+    }
+}
+
+QStringList functiondb::nameSatellite()
+{
+    QSqlQuery query;
+    QStringList list;
+    query.prepare("SELECT STL_NAME FROM SATELLITE");
+    if (query.exec())
+    {
+        while(query.next())
+        {
+            list.append(query.value(0).toString());
+        }
+        return list;
+    }
+    else
+    {
+        qDebug()<<"[-]"<<endl;
+        return list;
+    }
+}
+
+int functiondb::countSatellite()
+{
+    QSqlQuery query;
+    int count;
+    query.prepare("SELECT COUNT(*) FROM SATELLITE");
+    if (query.exec())
+    {
+        while(query.next())
+        {
+            count = query.value(0).toInt();
+        }
+        return count;
+    }
+    else
+    {
+        qDebug()<<"[-]"<<endl;
+        return count;
     }
 }
 

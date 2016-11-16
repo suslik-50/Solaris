@@ -36,6 +36,9 @@ public:
     void read_satellite();
     satellite get_satellite(int id);
     satellite get_satellite(QString name );
+    satellite get_satellite_per(QString name);
+    QStringList nameSatellite();
+    int countSatellite();
 
     int count_record_satellite(); // Количесство спутников
     QList<int> get_list_id_satellite();

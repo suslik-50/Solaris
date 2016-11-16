@@ -36,7 +36,7 @@ private:
     DataConteiner* dc;
     main_module *main;
 
-    void byteArr(QStringList list);
+    void byteArr(QStringList list, bool b);
     void pars(QString com);
     void sendSetting();
 };
