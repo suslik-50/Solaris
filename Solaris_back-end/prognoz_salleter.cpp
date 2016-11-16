@@ -1,14 +1,14 @@
 #include "prognoz_salleter.h"
 
 
-prognoz_salleter::prognoz_salleter(double timeTT0, double time_endd)
+prognoz_salleter::prognoz_salleter(int timeTT0, int time_endd)
 {
     timeT0=timeTT0;
     time_end=time_endd;
     type_ras=1;
 }
 
-prognoz_salleter::prognoz_salleter(double timeTT0, double time_endd, int stepp)
+prognoz_salleter::prognoz_salleter(int timeTT0, int time_endd, int stepp)
 {
     timeT0=timeTT0;
     time_end=time_endd;
@@ -16,13 +16,13 @@ prognoz_salleter::prognoz_salleter(double timeTT0, double time_endd, int stepp)
     type_ras=2;
 }
 
-prognoz_salleter::prognoz_salleter(double timee)
+prognoz_salleter::prognoz_salleter(int timee)
 {
     time=timee;
     type_ras=3;
 }
 
-prognoz_salleter::prognoz_salleter(double timeTT0, double time_endd, QString Name)
+prognoz_salleter::prognoz_salleter(int timeTT0, int time_endd, QString Name)
 {
     timeT0=timeTT0;
     time_end=time_endd;
@@ -30,7 +30,7 @@ prognoz_salleter::prognoz_salleter(double timeTT0, double time_endd, QString Nam
     type_ras=4;
 }
 
-prognoz_salleter::prognoz_salleter(double timeTT0, double time_endd, QString Name, int stepp)
+prognoz_salleter::prognoz_salleter(int timeTT0, int time_endd, QString Name, int stepp)
 {
     timeT0=timeTT0;
     time_end=time_endd;
@@ -39,14 +39,14 @@ prognoz_salleter::prognoz_salleter(double timeTT0, double time_endd, QString Nam
     type_ras=5;
 }
 
-prognoz_salleter::prognoz_salleter(double timee, QString Name)
+prognoz_salleter::prognoz_salleter(int timee, QString Name)
 {
     time=timee;
     name=Name;
     type_ras=6;
 }
 
-prognoz_salleter::prognoz_salleter(double timeTT0, double time_endd, QList<QString> Namesalleter)
+prognoz_salleter::prognoz_salleter(int timeTT0, int time_endd, QList<QString> Namesalleter)
 {
     timeT0=timeTT0;
     time_end=time_endd;
@@ -54,7 +54,7 @@ prognoz_salleter::prognoz_salleter(double timeTT0, double time_endd, QList<QStri
     type_ras=7;
 }
 
-prognoz_salleter::prognoz_salleter(double timeTT0, double time_endd, int stepp, QList<QString> Namesalleter)
+prognoz_salleter::prognoz_salleter(int timeTT0, int time_endd, int stepp, QList<QString> Namesalleter)
 {
     timeT0=timeTT0;
     time_end=time_endd;
@@ -63,7 +63,7 @@ prognoz_salleter::prognoz_salleter(double timeTT0, double time_endd, int stepp, 
     type_ras=8;
 }
 
-prognoz_salleter::prognoz_salleter(double timee, QList<QString> Namesalleter)
+prognoz_salleter::prognoz_salleter(int timee, QList<QString> Namesalleter)
 {
     time=timee;
     namesalleter=Namesalleter;
@@ -81,14 +81,14 @@ data_salleter prognoz_salleter::get_data(double a, double e, double i, double dv
     return data;
 }
 
-QMap<QString, QList<data_salleter>> prognoz_salleter::pos_salleter_all(double timeT0, double realtime)
+QMap<QString, QList<data_salleter>> prognoz_salleter::pos_salleter_all(int timeT0, int realtime)
 {
     QMap<QString, QList<data_salleter>> salleter;
     int koll_sputnik;
     satellite sputnik;
     int step=1;
-    double time0=timeT0;
-    double time=realtime;
+    int time0=timeT0;
+    int time=realtime;
     koll_sputnik=dbf.count_record_satellite();
     if (koll_sputnik!=0){
         id_salleter=dbf.get_list_id_satellite();
@@ -107,13 +107,13 @@ QMap<QString, QList<data_salleter>> prognoz_salleter::pos_salleter_all(double ti
     return salleter;
 }
 
-QMap<QString, QList<data_salleter>> prognoz_salleter::pos_salleter_all(double timeT0, double realtime, int step)
+QMap<QString, QList<data_salleter>> prognoz_salleter::pos_salleter_all(int timeT0, int realtime, int step)
 {
     QMap<QString, QList<data_salleter>> salleter;
     int koll_sputnik;
     satellite sputnik;
-    double time0=timeT0;
-    double time=realtime;
+    int time0=timeT0;
+    int time=realtime;
     koll_sputnik=dbf.count_record_satellite();
     if (koll_sputnik!=0){
         id_salleter=dbf.get_list_id_satellite();
@@ -132,7 +132,7 @@ QMap<QString, QList<data_salleter>> prognoz_salleter::pos_salleter_all(double ti
     return salleter;
 }
 
-QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter_all(double time_end)
+QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter_all(int time_end)
 {
     QMap<QString, QList<data_salleter>> salleter;
     int koll_sputnik;
@@ -152,13 +152,13 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter_all(double t
     return salleter;
 }
 
-QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter(double timeT0, double realtime, QString name)
+QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter(int timeT0, int realtime, QString name)
 {
     QMap<QString, QList<data_salleter>> salleter;
     satellite sputnik;
     int step=1;
-    double time0=timeT0;
-    double time=realtime;
+    int time0=timeT0;
+    int time=realtime;
 
     sputnik=dbf.get_satellite(name);
     QList<data_salleter> position;
@@ -172,12 +172,12 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter(double timeT
     return salleter;
 }
 
-QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter(double timeT0, double realtime, QString name, int step)
+QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter(int timeT0, int realtime, QString name, int step)
 {
     QMap<QString, QList<data_salleter>> salleter;
     satellite sputnik;
-    double time0=timeT0;
-    double time=realtime;
+    int time0=timeT0;
+    int time=realtime;
 
     sputnik=dbf.get_satellite(name);
     QList<data_salleter> position;
@@ -191,7 +191,7 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter(double timeT
     return salleter;
 }
 
-QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter(double time_end, QString name)
+QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter(int time_end, QString name)
 {
     QMap<QString, QList<data_salleter>> salleter;
     satellite sputnik;
@@ -206,14 +206,14 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter(double time_
     return salleter;
 }
 
-QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(double timeT0, double time_end, QList<QString> namesalleter)
+QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(int timeT0, int time_end, QList<QString> namesalleter)
 {
     QMap<QString, QList<data_salleter>> salleter;
     int koll_sputnik;
     satellite sputnik;
     int step=1;
-    double time0=timeT0;
-    double time=time_end;
+    int time0=timeT0;
+    int time=time_end;
     koll_sputnik=dbf.count_record_satellite();
     if (koll_sputnik!=0 && koll_sputnik>=namesalleter.count()){
         for (int i=0;i<namesalleter.count();i++)
@@ -231,13 +231,13 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(double 
     return salleter;
 }
 
-QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(double timeT0, double time_end, int step, QList<QString> namesalleter)
+QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(int timeT0, int time_end, int step, QList<QString> namesalleter)
 {
     QMap<QString, QList<data_salleter>> salleter;
     int koll_sputnik;
     satellite sputnik;
-    double time0=timeT0;
-    double time=time_end;
+    int time0=timeT0;
+    int time=time_end;
     koll_sputnik=dbf.count_record_satellite();
     if (koll_sputnik!=0 && koll_sputnik>=namesalleter.count()){
         for (int i=0;i<namesalleter.count();i++)
@@ -255,7 +255,7 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(double 
     return salleter;
 }
 
-QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(double time, QList<QString> namesalleter)
+QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(int time, QList<QString> namesalleter)
 {
     QMap<QString, QList<data_salleter>> salleter;
     int koll_sputnik;
