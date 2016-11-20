@@ -16,10 +16,13 @@
 #include <QDebug>
 #include <stdio.h>
 #include <clocale>
+#include <QMetaType>
+#include <structur.h>
 
 
 int main(int argc, char *argv[])
 {
+
     QCoreApplication a(argc, argv);
 #ifdef Q_OS_WIN
 #include <windows>

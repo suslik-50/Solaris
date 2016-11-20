@@ -2,6 +2,7 @@
 #define STRUCTUR_H
 #include <QString>
 #include<QDateTime>
+#include <QMetaType>
 using namespace std;
 
 
@@ -22,6 +23,7 @@ struct vector_salleter
     double time;
     double V;
 };
+Q_DECLARE_METATYPE(vector_salleter);
 
 struct solar_battery_salleter
 {
@@ -30,10 +32,13 @@ struct solar_battery_salleter
     double time;
     QString name;
 };
+Q_DECLARE_METATYPE(solar_battery_salleter);
 struct data_salleter{
    vector_salleter position;
    solar_battery_salleter battary;
 };
+Q_DECLARE_METATYPE(data_salleter);
+
 struct variables{
     double Px;
     double Py;
@@ -71,6 +76,15 @@ struct correction_sun_panel // структура для корректиров�
     QString editer;
 };
 
+static struct RegisterTypes {
+    RegisterTypes()
+    {
+        qRegisterMetaType<vector_salleter>("vector_salleter");
+        qRegisterMetaType<solar_battery_salleter>("solar_battery_salleter");
+        qRegisterMetaType<data_salleter>("data_salleter");
+       // qRegisterMetaType<QMap<QString,QList<data_salleter>>>("QMap<QString,QList<data_salleter>>");
+    }
+} RegisterTypes;
 
 
 #endif // STRUCTUR_H

@@ -791,9 +791,6 @@ moc_main_module.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QObj
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		drain_position_salleter.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h \
 		main_module.h \
 		../../../Qt2/5.7/clang_64/bin/moc
 	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib main_module.h -o moc_main_module.cpp
@@ -879,9 +876,6 @@ moc_telnetserver.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QOb
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		drain_position_salleter.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h \
 		command_parser.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QTextCodec \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qtextcodec.h \
@@ -969,9 +963,6 @@ moc_telnetsocketthread.cpp: ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Heade
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		drain_position_salleter.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h \
 		command_parser.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QTextCodec \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qtextcodec.h \
@@ -1045,15 +1036,15 @@ moc_tcpserver.cpp: tcpsocketthread.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		drain_position_salleter.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h \
 		dataconteiner.h \
 		command_parser.h \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		prognoz_salleter.h \
+		function_salleter.h \
+		function_cornes.h \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpServer \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h \
 		tcpserver.h \
@@ -1104,15 +1095,15 @@ moc_tcpsocketthread.cpp: main_module.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		drain_position_salleter.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h \
 		dataconteiner.h \
 		command_parser.h \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		prognoz_salleter.h \
+		function_salleter.h \
+		function_cornes.h \
 		tcpsocketthread.h \
 		../../../Qt2/5.7/clang_64/bin/moc
 	/Users/ruslannuriev/Qt2/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ruslannuriev/Qt2/5.7/clang_64/mkspecs/macx-clang -I/Users/ruslannuriev/Documents/Solaris/Solaris_back-end -I/Users/ruslannuriev/Qt2/boost_1_62_0/include -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers -I/Users/ruslannuriev/Qt2/5.7/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/usr/include -I'/System/Library/Frameworks (framework directory)' -I'/Library/Frameworks (framework directory)' -F/Users/ruslannuriev/Qt2/5.7/clang_64/lib tcpsocketthread.h -o moc_tcpsocketthread.cpp
@@ -1254,9 +1245,6 @@ main.o: main.cpp ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QCoreApp
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		potoc_salleter2.h \
 		corners_solar_battery.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h \
 		telnetserver.h \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpServer \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h \
@@ -1303,7 +1291,12 @@ main.o: main.cpp ../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QCoreApp
 		dataconteiner.h \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDataStream \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		prognoz_salleter.h \
+		function_salleter.h \
+		function_cornes.h \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QMetaType \
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qmetatype.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 timejd.o: timejd.cpp timejd.h \
@@ -1428,10 +1421,7 @@ main_module.o: main_module.cpp main_module.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		drain_position_salleter.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h
+		drain_position_salleter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_module.o main_module.cpp
 
 databaseconnect.o: databaseconnect.cpp databaseconnect.h \
@@ -1574,9 +1564,6 @@ telnetserver.o: telnetserver.cpp telnetserver.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		drain_position_salleter.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h \
 		command_parser.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QTextCodec \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qtextcodec.h
@@ -1663,9 +1650,6 @@ telnetsocketthread.o: telnetsocketthread.cpp telnetsocketthread.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		drain_position_salleter.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h \
 		command_parser.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QTextCodec \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qtextcodec.h \
@@ -1718,9 +1702,6 @@ command_parser.o: command_parser.cpp command_parser.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		drain_position_salleter.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QStringList \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qstringlist.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o command_parser.o command_parser.cpp
@@ -1792,15 +1773,15 @@ tcpserver.o: tcpserver.cpp tcpserver.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		drain_position_salleter.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h \
 		dataconteiner.h \
 		command_parser.h \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		prognoz_salleter.h \
+		function_salleter.h \
+		function_cornes.h \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpServer \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tcpserver.o tcpserver.cpp
@@ -1850,15 +1831,15 @@ tcpsocketthread.o: tcpsocketthread.cpp tcpsocketthread.h \
 		../../../Qt2/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		drain_position_salleter.h \
-		prognoz_salleter.h \
-		function_salleter.h \
-		function_cornes.h \
 		dataconteiner.h \
 		command_parser.h \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
 		../../../Qt2/5.7/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
 		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/QDataStream \
-		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h
+		../../../Qt2/5.7/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		prognoz_salleter.h \
+		function_salleter.h \
+		function_cornes.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tcpsocketthread.o tcpsocketthread.cpp
 
 drain_position_salleter.o: drain_position_salleter.cpp drain_position_salleter.h \

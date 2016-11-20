@@ -378,6 +378,7 @@ int functiondb::countSatellite()
         qDebug()<<"[-]"<<endl;
         return count;
     }
+    return 0;
 }
 
 int functiondb::count_record_satellite()

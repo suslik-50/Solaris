@@ -1,4 +1,6 @@
 #include "tcpsocketthread.h"
+#include <QMetaType>
+
 
 TcpSocketThread::TcpSocketThread(int ID, main_module *main_constructor, DataConteiner *dc_constructor) :
     m_nNextBlockSize(0)
@@ -7,6 +9,7 @@ TcpSocketThread::TcpSocketThread(int ID, main_module *main_constructor, DataCont
 
     main = main_constructor;
     dc = dc_constructor;
+      qRegisterMetaType<QMap<QString,QList<data_salleter>>>("R");
 }
 
 
@@ -49,7 +52,7 @@ void TcpSocketThread::pars(QString com)
         //пример команды
         //prognoz pos_salleter_all 123456 678910
         if (shortList[1]=="pos_salleter_all"){
-            if (shortList.count()==3){
+            if (shortList.count()==4){
                 int timeT0;//'timeT0=123456
                 int time_end; //time_end=678910
                 if(shortList[2].toInt()){
@@ -82,11 +85,12 @@ void TcpSocketThread::pars(QString com)
 
 
 
+
         //расчет всех местоположения спутников от начального времни timeT0 , до конечного time_end шаг задается step
         //пример команды
         //prognoz pos_salleter_all 123456 678910 3
         if (shortList[1]=="pos_salleter_all"){
-            if (shortList.count()==4){
+            if (shortList.count()==5){
                 int timeT0; //timeT0=123456
                 int time_end; //time_end=678910
                 int step; //step=3
@@ -97,7 +101,7 @@ void TcpSocketThread::pars(QString com)
                         if (shortList[4].toInt()){
                             step=shortList[4].toInt();
                             prognoz_salleter *prognoz=new  prognoz_salleter(timeT0,time_end,step);
-                            QObject::connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)));
+                            QObject::connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)));                       
                             prognoz->start();
                             return;
                         }
@@ -118,13 +122,12 @@ void TcpSocketThread::pars(QString com)
             }
         }
 
-
         //расчет всех местоположения спутников на время time
         //прмер команды
         //prognoz pos_salleter_all 123456
 
         if (shortList[1]=="pos_salleter_all"){
-            if (shortList.count()==2){
+            if (shortList.count()==3){
                 if (shortList[2].toInt()){
                     int time; // time=123456
                     time=shortList[2].toInt();
@@ -149,7 +152,7 @@ void TcpSocketThread::pars(QString com)
             int timeT0; //timeT0=12345
             int time_end; //time_end=678910
             QString name; //name=salleter1;
-            if (shortList.count()==4){
+            if (shortList.count()==5){
                 if (shortList[2].toInt()){
                     timeT0=shortList[2].toInt();
                     if (shortList[3].toInt()){
@@ -179,7 +182,7 @@ void TcpSocketThread::pars(QString com)
         // prognoz pos_salleter 12345 678910  1 salleter2
         if (shortList[1]=="pos_salleter")
         {
-            if (shortList.count()==5){
+            if (shortList.count()==6){
                 int timeT0; //timeT0=12345
                 int time_end; //time_end=678910
                 QString name; //name=salleter2;
@@ -220,7 +223,7 @@ void TcpSocketThread::pars(QString com)
         // prognoz pos_salleter 12345 salleter2
         if (shortList[1]=="pos_salleter")
         {
-            if (shortList.count()==3){
+            if (shortList.count()==4){
                 int time;
                 QString name;
                 if (shortList[2].toInt()){
@@ -246,7 +249,7 @@ void TcpSocketThread::pars(QString com)
         //или prognoz grup_pos_salleter 12345 sputnik1 sputnik2 sputnik3
         if (shortList[1]=="grup_pos_salleter")
         {
-            if (shortList.count()>=4){
+            if (shortList.count()>=5){
                 int  timeT0; //timeT0=12345
                 int  time_end; //time_end=678910
                 int  step;
@@ -262,6 +265,7 @@ void TcpSocketThread::pars(QString com)
                     }
                     prognoz_salleter *prognoz=new  prognoz_salleter(timeT0,time_end,step,namesalleter);
                     QObject::connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)));
+
                     prognoz->start();
                     return;
                 }else
@@ -276,6 +280,7 @@ void TcpSocketThread::pars(QString com)
                         }
                         prognoz_salleter *prognoz=new  prognoz_salleter(timeT0,time_end,namesalleter);
                         QObject::connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)));
+
                         prognoz->start();
                         return;
                     }
@@ -339,7 +344,6 @@ void TcpSocketThread::readyRead()
             break;
         }
         in >> massage;
-        qDebug() << massage;
         m_nNextBlockSize = 0;
     }
     pars(massage);
@@ -355,6 +359,8 @@ void TcpSocketThread::disconnected()
 
 void TcpSocketThread::raschet(QMap<QString, QList<data_salleter> > data)
 {
+    qDebug()<<"расчеты закончены";
+    qDebug()<<data.count();
     //какимто раком разобрать и отправить в seket
     // socket->write(data);
 }
