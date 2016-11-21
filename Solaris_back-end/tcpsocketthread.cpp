@@ -294,7 +294,6 @@ void TcpSocketThread::pars(QString com)
                                 namesalleter.append(shortList[i]);
                             }
                             //перед добавление в QList спутников проверять на существование таких  в бд
-                            QList<QString> namesalleter;//<-sputnik1 sputnik2 sputnik3
                             prognoz_salleter *prognoz = new  prognoz_salleter(timeT0,namesalleter);
                             QObject::connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)));
                             prognoz->start();
@@ -370,13 +369,12 @@ void TcpSocketThread::raschet(QMap<QString, QList<data_salleter> > data)
                qDebug()<<newdata[i].battary.b<<"b";
                qDebug()<<newdata[i].battary.time<<"time";
                qDebug()<<newdata[i].position.name<<"name";
-              qDebug()<<newdata[i].position.x<<"x";
+               qDebug()<<newdata[i].position.x<<"x";
            }
      }
 
 
     qDebug()<<"расчеты закончены";
-    qDebug()<<data.count();
 
     // socket->write(data);
 }

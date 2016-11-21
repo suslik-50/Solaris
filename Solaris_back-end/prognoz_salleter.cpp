@@ -96,10 +96,11 @@ QMap<QString, QList<data_salleter>> prognoz_salleter::pos_salleter_all(int timeT
         {
             sputnik=dbf.get_satellite(id_salleter[i]);
             QList<data_salleter> position;
-            while(time0!=time || time0>=time){
+            while(time>time0){
                 position.append(get_data(sputnik.stl_a,sputnik.stl_e,sputnik.stl_i,
                                          sputnik.stl_dolgota,sputnik.stl_ark_per,sputnik.stl_time_uts,sputnik.stl_name,time0));
                 time0=time0+step;
+
             }
             salleter.insert(sputnik.stl_name,position);
         }
@@ -121,10 +122,11 @@ QMap<QString, QList<data_salleter>> prognoz_salleter::pos_salleter_all(int timeT
         {
             sputnik=dbf.get_satellite(id_salleter[i]);
             QList<data_salleter> position;
-            while(time0!=time || time0>=time){
+            while(time>time0){
                 position.append(get_data(sputnik.stl_a,sputnik.stl_e,
                                          sputnik.stl_i,sputnik.stl_dolgota,sputnik.stl_ark_per,sputnik.stl_time_uts,sputnik.stl_name,time0));
                 time0=time0+step;
+
             }
             salleter.insert(sputnik.stl_name,position);
         }
@@ -162,7 +164,7 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter(int timeT0, 
 
     sputnik=dbf.get_satellite(name);
     QList<data_salleter> position;
-    while(time0!=time || time0>=time){
+    while(time>=time0){
         position.append(get_data(sputnik.stl_a,sputnik.stl_e,sputnik.stl_i,
                                  sputnik.stl_dolgota,sputnik.stl_ark_per,sputnik.stl_time_uts,sputnik.stl_name,time0));
         time0=time0+step;
@@ -181,7 +183,7 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::pos_salleter(int timeT0, 
 
     sputnik=dbf.get_satellite(name);
     QList<data_salleter> position;
-    while(time0!=time || time0>=time){
+    while(time>time0){
         position.append(get_data(sputnik.stl_a,sputnik.stl_e,sputnik.stl_i,
                                  sputnik.stl_dolgota,sputnik.stl_ark_per,sputnik.stl_time_uts,sputnik.stl_name,time0));
         time0=time0+step;
@@ -220,7 +222,7 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(int tim
         {
             sputnik=dbf.get_satellite(namesalleter[i]);
             QList<data_salleter> position;
-            while(time0!=time || time0>=time){
+            while(time>time0){
                 position.append(get_data(sputnik.stl_a,sputnik.stl_e,sputnik.stl_i,
                                          sputnik.stl_dolgota,sputnik.stl_ark_per,sputnik.stl_time_uts,sputnik.stl_name,time0));
                 time0=time0+step;
@@ -244,7 +246,7 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(int tim
         {
             sputnik=dbf.get_satellite(namesalleter[i]);
             QList<data_salleter> position;
-            while(time0!=time || time0>=time){
+            while(time>=time0){
                 position.append(get_data(sputnik.stl_a,sputnik.stl_e,sputnik.stl_i,
                                          sputnik.stl_dolgota,sputnik.stl_ark_per,sputnik.stl_time_uts,sputnik.stl_name,time0));
                 time0=time0+step;
@@ -261,7 +263,6 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(int tim
     int koll_sputnik;
     satellite sputnik;
     koll_sputnik=dbf.count_record_satellite();
-    if (koll_sputnik!=0 && koll_sputnik>=namesalleter.count()){
         for (int i=0;i<namesalleter.count();i++)
         {
             sputnik=dbf.get_satellite(namesalleter[i]);
@@ -270,7 +271,7 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(int tim
                                      sputnik.stl_dolgota,sputnik.stl_ark_per,sputnik.stl_time_uts,sputnik.stl_name,time));
             salleter.insert(sputnik.stl_name,position);
         }
-    }
+
     return salleter;
 }
 

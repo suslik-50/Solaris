@@ -391,7 +391,7 @@ int functiondb::count_record_satellite()
     else
     {
         query.next();
-        qDebug() << "[!] Количество спутников = " << query.value(0).toInt() << endl;
+
     }
 
     int count;
