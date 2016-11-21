@@ -359,9 +359,25 @@ void TcpSocketThread::disconnected()
 
 void TcpSocketThread::raschet(QMap<QString, QList<data_salleter> > data)
 {
+     keyWord="prognoz";
+
+     foreach (QString key, data.keys()) {
+           QList<data_salleter> newdata;
+           qDebug()<<key;
+           newdata=data.value(key);
+           for(int i=0;i<newdata.count();i++){
+               qDebug()<<newdata[i].battary.a<<"a";
+               qDebug()<<newdata[i].battary.b<<"b";
+               qDebug()<<newdata[i].battary.time<<"time";
+               qDebug()<<newdata[i].position.name<<"name";
+              qDebug()<<newdata[i].position.x<<"x";
+           }
+     }
+
+
     qDebug()<<"расчеты закончены";
     qDebug()<<data.count();
-    //какимто раком разобрать и отправить в seket
+
     // socket->write(data);
 }
 
