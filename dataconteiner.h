@@ -17,6 +17,7 @@ public:
 
 signals:
     void getDatadreain();
+
 public slots:
     void getData(QMap<QString, solar_battery_salleter> data_sbs);
     void slot();

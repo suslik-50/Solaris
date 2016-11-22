@@ -83,6 +83,17 @@ public slots :
     int get_count_record_positon_salleter();
     void clean_record_positon_salleter();
     void remove_record_positon_salleter(QString name);
+    //модклирование
+    void prognoz1(int time0,int time);
+    void prognoz2(int time0,int time,int step);
+    void prognoz3(int time);
+    void prognoz4(int time0,int time,QString name);
+    void prognoz5(int time0,int time,QString name,int step);
+    void prognoz6(QString name,int time);
+    void prognoz7(int timeTT0, int time_endd, QList<QString> Namesalleter);
+    void prognoz8(int timeTT0, int time_endd, int stepp, QList<QString> Namesalleter);
+    void prognoz9(int time,QList<QString> namesalleter);
+    void raschet(QMap<QString,QList<data_salleter> > data);
 
 signals:
     void qdebug_sun_signal(bool y_t); // сигнал для включения выключения дебага потока для солнца
@@ -97,5 +108,6 @@ signals:
     void stop_salleter_signal();
     void start_all_salleter_signal();
     void start_salleter_signal();
+    void data(QMap<QString,QList<data_salleter> > data);
 };
 #endif // MAIN_MODULE_H

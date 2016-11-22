@@ -10,9 +10,9 @@
 #include <function_cornes.h>
 #include <QMap>
 #include <functiondb.h>
-class prognoz_salleter:public QThread
+class prognoz_salleter
 {
-    Q_OBJECT
+
 private: functiondb dbf;
 private: QList<int>id_salleter;
 private:QList<QString> namesalleter;
@@ -61,11 +61,18 @@ private: QMap<QString,QList<data_salleter>> grup_pos_salleter( int timeT0, int t
     //расчет местоположения группы спутников на время time
 private: QMap<QString,QList<data_salleter>> grup_pos_salleter( int time,QList<QString> namesalleter);
 
-public:void run();
-
+public:
+    QMap<QString,QList<data_salleter>>  process();
+/*
 // возращение данных
 signals:
-    void  data(QMap<QString,QList<data_salleter>>);
+    void data(QMap<QString,QList<data_salleter>>);
+    void finishd();
+    */
+
+public:
+    QMap<QString,QList<data_salleter>> DATA;
+
 };
 
 #endif // PROGNOZ_SALLETER_H

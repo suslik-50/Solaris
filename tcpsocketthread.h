@@ -29,7 +29,8 @@ private slots:
     void sendTabelData();
     void readyRead();
     void disconnected();
-    void raschet(QMap<QString, QList<data_salleter>>  data);
+    void raschet(QMap<QString, QList<data_salleter> > data);
+    void proverka();
 
 private:
     QTcpSocket *socket;
@@ -42,6 +43,9 @@ private:
     void byteArr(qTableData list, bool b);
     void pars(QString com);
     void sendSetting();
+
+    QMap<QString, QList<data_salleter> > DATA;
+    //prognoz_salleter *prognoz;
 };
 
 #endif // TCPSOCKETTHREAD_H

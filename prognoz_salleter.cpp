@@ -272,10 +272,10 @@ QMap<QString, QList<data_salleter> > prognoz_salleter::grup_pos_salleter(int tim
             salleter.insert(sputnik.stl_name,position);
         }
 
-    return salleter;
+        return salleter;
 }
 
-void prognoz_salleter::run()
+QMap<QString,QList<data_salleter>>  prognoz_salleter::process()
 {
     QMap<QString,QList<data_salleter>> salleter;
     if (type_ras==1) salleter=pos_salleter_all(timeT0, time_end);
@@ -287,7 +287,8 @@ void prognoz_salleter::run()
     if (type_ras==7) salleter=grup_pos_salleter(timeT0,time_end,namesalleter);
     if (type_ras==8) salleter=grup_pos_salleter(timeT0,time_end,step,namesalleter);
     if (type_ras==9) salleter=grup_pos_salleter(time,namesalleter);
-    emit data(salleter);
+    return salleter;
 }
+
 
 

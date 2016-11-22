@@ -1,4 +1,5 @@
 #include "main_module.h"
+#include "prognoz_salleter.h"
 
 main_module::main_module(potoc_sun &sun_p, drain_parametrs_solar_battery &drain_p,drain_position_salleter & position)
 {
@@ -463,5 +464,65 @@ void main_module::remove_record_positon_salleter(QString name)
 {
 
     position_salleter_potoc->deletedata(name);
+}
+
+void main_module::prognoz1(int time0, int time)
+{
+    prognoz_salleter *prognoz =new  prognoz_salleter(time0,time);
+    emit data(prognoz->process());
+}
+
+void main_module::prognoz2(int time0, int time, int step)
+{
+    prognoz_salleter *prognoz =new  prognoz_salleter(time0,time,step);
+    emit data(prognoz->process());
+}
+
+void main_module::prognoz3(int time)
+{
+    prognoz_salleter *prognoz =new  prognoz_salleter(time);
+    emit data(prognoz->process());
+}
+
+void main_module::prognoz4(int time0, int time, QString name)
+{
+    prognoz_salleter *prognoz =new  prognoz_salleter(time0,time,name);
+    emit data(prognoz->process());
+}
+
+void main_module::prognoz5(int time0, int time, QString name, int step)
+{
+    prognoz_salleter *prognoz =new  prognoz_salleter(time0,time,name,step);
+    emit data(prognoz->process());
+}
+
+void main_module::prognoz6(QString name, int time)
+{
+    prognoz_salleter *prognoz =new  prognoz_salleter(time,name);
+    emit data(prognoz->process());
+}
+
+void main_module::prognoz7(int timeTT0, int time_endd, QList<QString> Namesalleter)
+{
+    prognoz_salleter *prognoz =new  prognoz_salleter(timeTT0,time_endd,Namesalleter);
+    emit data(prognoz->process());
+}
+
+void main_module::prognoz8(int timeTT0, int time_endd, int stepp, QList<QString> Namesalleter)
+{
+    prognoz_salleter *prognoz =new  prognoz_salleter(timeTT0,time_endd,stepp,Namesalleter);
+    emit data(prognoz->process());
+}
+
+void main_module::prognoz9(int time, QList<QString> namesalleter)
+{
+    prognoz_salleter *prognoz =new  prognoz_salleter(time,namesalleter);
+    emit data(prognoz->process());
+}
+
+
+void main_module::raschet(QMap<QString, QList<data_salleter>> data1)
+{
+    emit data(data1);
 }
 

@@ -10,6 +10,7 @@ TcpSocketThread::TcpSocketThread(int ID, main_module *main_constructor, DataCont
     main = main_constructor;
     dc = dc_constructor;
       qRegisterMetaType<QMap<QString,QList<data_salleter>>>("R");
+      connect(main, SIGNAL(data(QMap<QString,QList<data_salleter>>)),this , SLOT(raschet(QMap<QString,QList<data_salleter>>)), Qt::DirectConnection);
 }
 
 
@@ -29,9 +30,9 @@ void TcpSocketThread::run()
 
     qDebug() << socketDescriptor << " Client connected";
 
-//    QTimer *timer = new QTimer(0);
-//    connect(timer, SIGNAL(timeout()), this, SLOT(sendTabelData()), Qt::DirectConnection);
-//    timer->start(1000);
+    QTimer *timer = new QTimer(0);
+    connect(timer, SIGNAL(timeout()), this, SLOT(sendTabelData()), Qt::DirectConnection);
+    timer->start(1000);
 
     sendSetting();
 
@@ -46,271 +47,22 @@ void TcpSocketThread::sendTabelData()
 
 void TcpSocketThread::pars(QString com)
 {
-   QStringList shortList = com.split(' ');
-    if (shortList.first()=="prognoz"){
-        //расчет всех местоположения спутников от начального времни timeT0 , до конечного time_end шаг по умолчанию 1 секунда
-        //пример команды
-        //prognoz pos_salleter_all 123456 678910
-        if (shortList[1]=="pos_salleter_all"){
-            if (shortList.count()==4){
-                int timeT0;//'timeT0=123456
-                int time_end; //time_end=678910
-                if(shortList[2].toInt()){
-                    timeT0=shortList[2].toInt();
-                    if (shortList[3].toInt()){
-                        time_end=shortList[3].toInt();
-                        prognoz_salleter *prognoz =new  prognoz_salleter(timeT0,time_end);
-                        connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)), Qt::DirectConnection);
-                        prognoz->start();
-                    }
-                    else{
-                        //time_end не double
-                        QByteArray otvet;
-                        otvet="time_end не double";
-                        keyWord = "config";
-                        //byteArr(otvet, true);
-                        return;
-                    }
-                }
-                else{
-                    //timeT0 не double
-                    QByteArray otvet;
-                    otvet="time_T0 не double";
-                    keyWord = "config";
-                    //  byteArr(otvet, true);
-                    return;
-                }
-            }
-        }
-
-
-
-
-        //расчет всех местоположения спутников от начального времни timeT0 , до конечного time_end шаг задается step
-        //пример команды
-        //prognoz pos_salleter_all 123456 678910 3
-        if (shortList[1]=="pos_salleter_all"){
-            if (shortList.count()==5){
-                int timeT0; //timeT0=123456
-                int time_end; //time_end=678910
-                int step; //step=3
-                if(shortList[2].toInt()){
-                    timeT0=shortList[2].toInt();
-                    if (shortList[3].toInt()){
-                        time_end=shortList[3].toInt();
-                        if (shortList[4].toInt()){
-                            step=shortList[4].toInt();
-                            prognoz_salleter *prognoz=new  prognoz_salleter(timeT0,time_end,step);
-                            connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)), Qt::DirectConnection);
-                            prognoz->start();
-                            return;
-                        }
-                        else{
-                            //step int ошибка
-                            return;
-                        }
-                    }
-                    else{
-                        //time_end ошибка
-                        return;
-                    }
-                }
-                else{
-                    //timeT0 ошибка
-                    return;
-                }
-            }
-        }
-
-        //расчет всех местоположения спутников на время time
-        //прмер команды
-        //prognoz pos_salleter_all 123456
-
-        if (shortList[1]=="pos_salleter_all"){
-            if (shortList.count()==3){
-                if (shortList[2].toInt()){
-                    int time; // time=123456
-                    time=shortList[2].toInt();
-                    prognoz_salleter *prognoz=new  prognoz_salleter(time);
-                    connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)), Qt::DirectConnection);
-                    prognoz->start();
-                    return;
-                }
-                else{
-                    //time ошибка
-                    return;
-                }
-            }
-        }
-
-
-
-        //расчет местоположения спутника от начального времни timeT0 , до конечного time_end шаг по умолчанию 1 секунда
-        // пример команды
-        // prognoz pos_salleter 12345 678910 salleter1
-        if (shortList[1]=="pos_salleter"){
-            int timeT0; //timeT0=12345
-            int time_end; //time_end=678910
-            QString name; //name=salleter1;
-            if (shortList.count()==5){
-                if (shortList[2].toInt()){
-                    timeT0=shortList[2].toInt();
-                    if (shortList[3].toInt()){
-                        time_end=shortList[3].toInt();
-                        // проверка на существование спутника вбд
-                        name=shortList[4];
-                        prognoz_salleter *prognoz=new  prognoz_salleter(timeT0,time_end,name);
-                        connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)), Qt::DirectConnection);
-                        prognoz->start();
-                        return;
-                    }
-                    else{
-                        //time_end ошибка
-                        return;
-                    }
-                }
-                else{
-                    //time ошибка
-                    return;
-                }
-            }
-        }
-
-
-        //расчет местоположения спутника от начального времни timeT0 , до конечного time_end шаг задается step
-        // пример команды
-        // prognoz pos_salleter 12345 678910  1 salleter2
-        if (shortList[1]=="pos_salleter")
-        {
-            if (shortList.count()==6){
-                int timeT0; //timeT0=12345
-                int time_end; //time_end=678910
-                QString name; //name=salleter2;
-                int step; //step=1;
-                if (shortList[2].toInt()){
-                    timeT0=shortList[2].toInt();
-                    if (shortList[3].toInt()){
-                        time_end=shortList[3].toInt();
-                        if (shortList[4].toInt()){
-                            step=shortList[4].toInt();
-                            name=shortList[5];
-                            prognoz_salleter *prognoz=new  prognoz_salleter(timeT0,time_end,name,step);
-                            connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)), Qt::DirectConnection);
-                            prognoz->start();
-                            return;
-                        }
-                        else{
-                            //step ошибка
-                            return;
-                        }
-                    }
-                    else{
-                        // time_end ошибка
-                        return;
-                    }
-                }
-                else{
-                    //timeT0 ошибка
-                    return;
-                }
-            }
-        }
-
-
-
-        //расчет местоположения спутника на время time
-        // пример команды
-        // prognoz pos_salleter 12345 salleter2
-        if (shortList[1]=="pos_salleter")
-        {
-            if (shortList.count()==4){
-                int time;
-                QString name;
-                if (shortList[2].toInt()){
-                    time=shortList[2].toInt();
-                    //проверка на существование спутиника
-                    name=shortList[3];
-                    prognoz_salleter *prognoz=new  prognoz_salleter(time,name);
-                    connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)), Qt::DirectConnection);
-                    prognoz->start();
-                    return;
-                }
-                else{
-                    //time ошибка
-                    return;
-                }
-            }
-        }
-
-        //расчет для нескольких спутнкиков имена спутников задаются в QList<QString>
-        //пример команды
-        //prognoz grup_pos_salleter 12345 678910 1 sputnik1 sputnik2 sputnik3
-        //или prognoz grup_pos_salleter 12345 678910 sputnik1 sputnik2 sputnik3
-        //или prognoz grup_pos_salleter 12345 sputnik1 sputnik2 sputnik3
-        if (shortList[1]=="grup_pos_salleter")
-        {
-            if (shortList.count()>=5){
-                int  timeT0; //timeT0=12345
-                int  time_end; //time_end=678910
-                int  step;
-                QList<QString> namesalleter;//<-sputnik1 sputnik2 sputnik3
-                // prognoz grup_pos_salleter 12345 678910 1 sputnik1 sputnik2 sputnik3
-                if (shortList[2].toInt() && shortList[3].toInt() &&shortList[4].toInt()){
-                    timeT0=shortList[2].toInt();
-                    time_end=shortList[3].toInt();
-                    step=shortList[4].toInt();
-                    //перед добавление в QList спутников проверять на существование таких  в бд
-                    for(int i=5;i<shortList.count();i++){
-                        namesalleter.append(shortList[i]);
-                    }
-                    prognoz_salleter *prognoz=new  prognoz_salleter(timeT0,time_end,step,namesalleter);
-                    connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)), Qt::DirectConnection);
-
-                    prognoz->start();
-                    return;
-                }else
-                {
-                    // prognoz grup_pos_salleter 12345 678910 sputnik1 sputnik2 sputnik3
-                    if (shortList[2].toInt() && shortList[3].toInt())
-                    {
-                        timeT0=shortList[2].toInt();
-                        time_end=shortList[3].toInt();
-                        for(int i=4;i<shortList.count();i++){
-                            namesalleter.append(shortList[i]);
-                        }
-                        prognoz_salleter *prognoz=new  prognoz_salleter(timeT0,time_end,namesalleter);
-                        QObject::connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)));
-
-                        prognoz->start();
-                        return;
-                    }
-                    else
-                    {
-                        // prognoz grup_pos_salleter 12345 sputnik1 sputnik2 sputnik3
-                        if (shortList[2].toInt())
-                        {
-                            timeT0=shortList[2].toInt();
-                            for(int i=3;i<shortList.count();i++){
-                                namesalleter.append(shortList[i]);
-                            }
-                            //перед добавление в QList спутников проверять на существование таких  в бд
-                            prognoz_salleter *prognoz = new  prognoz_salleter(timeT0,namesalleter);
-                            connect(prognoz,SIGNAL(data(QMap<QString,QList<data_salleter> >)),this,SLOT(raschet(QMap<QString,QList<data_salleter> >)), Qt::DirectConnection);
-                            prognoz->start();
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     command_parser parser_cmd(*main);
     QStringList list;
     list.append(parser_cmd.command(com));
     keyWord = "config";
 
-    //byteArr(list, true);
+    qDebug() << list;
+    QByteArray  arrBlock;
+    QDataStream out(&arrBlock, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_4_5);
+
+    out << quint16(0) << keyWord << list;
+
+    out.device()->seek(0);
+    out << quint16(arrBlock.size() - sizeof(quint16));
+
+    socket->write(arrBlock);
 }
 
 void TcpSocketThread::sendSetting()
@@ -323,7 +75,16 @@ void TcpSocketThread::sendSetting()
     list.append(QString::number(main->get_telnet_port()));
     list.append(QString::number(main->get_tcp_port()));
 
-    //byteArr(list, true);
+    QByteArray  arrBlock;
+    QDataStream out(&arrBlock, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_4_5);
+
+    out << quint16(0) << keyWord << list;
+
+    out.device()->seek(0);
+    out << quint16(arrBlock.size() - sizeof(quint16));
+
+    socket->write(arrBlock);
 }
 
 void TcpSocketThread::readyRead()
@@ -360,21 +121,19 @@ void TcpSocketThread::disconnected()
 
 void TcpSocketThread::raschet(QMap<QString, QList<data_salleter> > data)
 {
-    /*qProgniz prognoz;
-
-    keyWord="prognoz";
+    keyWord = "prognoz";
+    qProgniz prognoz;
 
      foreach (QString key, data.keys()) {
            QList<data_salleter> newdata;
-           //qDebug()<<key;
            newdata=data.value(key);
            for(int i=0;i<newdata.count();i++)
            {
-               qDebug()<<newdata[i].battary.a<<"a";
-               qDebug()<<newdata[i].battary.b<<"b";
-               qDebug()<<newdata[i].battary.time<<"time";
-               qDebug()<<newdata[i].position.name<<"name";
-               qDebug()<<newdata[i].position.x<<"x";
+//               qDebug()<<newdata[i].battary.a<<"a";
+//               qDebug()<<newdata[i].battary.b<<"b";
+//               qDebug()<<newdata[i].battary.time<<"time";
+//               qDebug()<<newdata[i].position.name<<"name";
+//               qDebug()<<newdata[i].position.x<<"x";
                prognoz.b_name.append(data[key][i].battary.name);
                prognoz.b_a.append(QString::number(data[key][i].battary.a));
                prognoz.b_b.append(QString::number(data[key][i].battary.b));
@@ -391,28 +150,34 @@ void TcpSocketThread::raschet(QMap<QString, QList<data_salleter> > data)
            }
      }
 
-    qDebug()<<"расчеты закончены";
-
     QByteArray  arrBlock;
     QDataStream out(&arrBlock, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_5);
 
-    out << quint16(0) << keyWord << QString("ddadadad");
+    out << quint16(0) << keyWord << prognoz ;
     out.device()->seek(0);
     out << quint16(arrBlock.size() - sizeof(quint16));
 
-    socket->write(arrBlock);*/
+    socket->write(arrBlock);
+}
 
+void TcpSocketThread::proverka()
+{
+    keyWord = "12";
     QByteArray  arrBlock;
     QDataStream out(&arrBlock, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_5);
-    out << QString("dfdf");
+    out << quint16(0) << keyWord;
+
+    out.device()->seek(0);
+    out << quint16(arrBlock.size() - sizeof(quint16));
+
     socket->write(arrBlock);
 }
 
 void TcpSocketThread::byteArr(qTableData list, bool b)
 {
-     QByteArray  arrBlock;
+    QByteArray  arrBlock;
     QDataStream out(&arrBlock, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_5);
 
@@ -441,8 +206,6 @@ void TcpSocketThread::byteArr(qTableData list, bool b)
     {
         out << quint16(0) << keyWord << list;
     }
-
-
 
     out.device()->seek(0);
     out << quint16(arrBlock.size() - sizeof(quint16));
